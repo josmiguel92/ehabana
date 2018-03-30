@@ -1,0 +1,17 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+
+{% block body %}
+    <h1>Editar Tapa</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Editar" class="btn btn-primary" />
+        <a href="{{ path('dash_tapa_index') }}" class="btn btn-default">Regresar a la Galería</a>
+
+    {{ form_end(edit_form) }}
+
+  {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-danger" style="float: right;">
+            {{ form_end(delete_form) }}
+
+{% endblock %}

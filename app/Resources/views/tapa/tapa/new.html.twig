@@ -1,0 +1,17 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Tapas{% endblock %}
+
+{% block body %}
+    <h1>Añadir Tapa</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-primary" value="Añadir" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_tapa_index') }}" class="btn btn-default">Regresar a la lista de Tapas</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Tapas{% endblock %}
+
+{% block body %}
+    <h1>Tapa: {{ tapa.name }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tapa.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ tapa.name }}</td>
+            </tr>
+            <tr>
+                <th>Nombre(Eng)</th>
+                <td>{{ tapa.nameen }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>{{ tapa.price }}</td>
+            </tr>
+            <tr>
+                <th>Ingredientes</th>
+                <td>{{ tapa.ingredients }}</td>
+            </tr>
+            <tr>
+                <th>IngredientesEng)</th>
+                <td>{{ tapa.ingredientsen }}</td>
+            </tr>
+            <tr>
+                <th>Imagen</th>
+                <td><a href="{{ asset(tapa.WebPath) }}">{{ tapa.path }}</a>
+                </td>
+            </tr>
+            <tr>
+            
+            <th></th>
+            <td>
+                <img src="{{ asset(tapa.WebPath) }}" height="100"></td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn btn-default" href="{{ path('dash_tapa_index') }}">Regresar a la lista de Tapas</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" href="{{ path('dash_tapa_edit', { 'id': tapa.id }) }}">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input class="btn btn-danger" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

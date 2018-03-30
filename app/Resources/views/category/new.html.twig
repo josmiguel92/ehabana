@@ -1,0 +1,15 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Bebidas{% endblock %}
+
+{% block body %}
+    <h1>Agregar categoria de bebidas</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Guardar"  class="btn btn-primary"/>
+        <input type="reset" value="Vaciar campos" class="btn btn-warning"/>
+        <a href="{{ path('dash_category_index') }}"  class="btn btn-default">Regresar a la lista</a>
+    {{ form_end(form) }}
+
+ 
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Galeria{% endblock %}
+
+{% block body %}
+    <h1>Agregar Imagen a la galería</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Añadir" class="btn btn-primary"/>
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_imagen_index') }}" class="btn btn-default">Regresar a la galería</a>
+        </li>
+    </ul>
+{% endblock %}

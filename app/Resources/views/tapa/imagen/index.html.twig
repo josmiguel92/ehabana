@@ -1,0 +1,44 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Galeria{% endblock %}
+
+{% block body %}
+    <h1>Imágenes en la galería <a href="{{ path('dash_imagen_new') }}" class="btn btn-primary btn-sm" style="float: right">Añadir Imágen</a></h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Imágen</th>
+                <th>Detalles</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for imagen in imagens %}
+            <tr>
+                <td><a href="{{ path('dash_imagen_show', { 'id': imagen.id }) }}">{{ imagen.id }}</a></td>
+                <td>{{ imagen.nombre }}</td>
+                <td class="col-sm-4 col-md-3"><a href="{{ asset(imagen.WebPath) }}" class="thumbnail"><img src="{{ asset(imagen.WebPath) }}" height="150"></a></td>
+                <td><p>{{ imagen.detalles }}</p></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_imagen_show', { 'id': imagen.id }) }}">Mostrar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dash_imagen_edit', { 'id': imagen.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_imagen_new') }}" class="btn btn-primary">Añadir Imágen</a>
+        </li>
+    </ul>
+{% endblock %}

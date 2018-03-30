@@ -1,0 +1,22 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Galeria{% endblock %}
+
+{% block body %}
+    <h1>Editar Imagen</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Editar" class="btn btn-primary" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+             <a href="{{ path('dash_imagen_index') }}" class="btn btn-default">Regresar a la Galería</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

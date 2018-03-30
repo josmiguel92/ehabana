@@ -1,0 +1,45 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Tapas{% endblock %}
+
+{% block body %}
+    <h1>Todas las Tapas</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Nombre(Eng)</th>
+                
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tapa in tapas %}
+            <tr>
+                <td><a href="{{ path('dash_tapa_show', { 'id': tapa.id }) }}">{{ tapa.id }}</a></td>
+                <td>{{ tapa.name }}</td>
+                <td>{{ tapa.nameen }}</td>
+                <td><a href="{{ asset(tapa.getWebPath()) }}"><img src="{{ asset(tapa.getWebPath()) }}" height="100"></a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_tapa_show', { 'id': tapa.id }) }}">Mostrar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dash_tapa_edit', { 'id': tapa.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn btn-primary" href="{{ path('dash_tapa_new') }}">Añadir una nueva tapa</a>
+        </li>
+    </ul>
+{% endblock %}

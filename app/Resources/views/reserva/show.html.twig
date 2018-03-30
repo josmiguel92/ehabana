@@ -1,0 +1,68 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+
+{% block body %}
+    <h1>Reserva #{{ reserva.id }}</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Fecha de registro</th>
+            <td>{% if reserva.fechaalta %}{{ reserva.fechaalta|date('Y-M-d H:i:s') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Fecha de reserva</th>
+            <td>{{ reserva.datereserva | date("Y-M-d (H:i)") }}</td>
+        </tr>
+        <tr style="color: #566473">
+            <th>Token</th>
+            <td>{{ reserva.token }}</td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td>{{ reserva.nombre }}</td>
+        </tr>
+        <tr>
+            <th>Cantidad de Personas</th>
+            <td>{{ reserva.personas }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ reserva.email }}</td>
+        </tr>
+        <tr>
+            <th>Mensaje del usuario</th>
+            <td>{{ reserva.mensaje }}</td>
+        </tr>
+        <tr>
+            <th>Confirmado por el usuario</th>
+            <td>{% if reserva.confirmado %}Yes{% else %}No{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Reservado en el restaurant</th>
+            <td>{% if reserva.reservado %}Yes{% else %}No{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Cancelado por el usuario</th>
+            <td>{% if reserva.cancelado %}Yes{% else %}No{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Comentario de administraci&oacute;n</th>
+            <td>{{ reserva.comentario }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_reserva_index') }}" class="btn btn-default">Regresar a la lista</a>
+        </li>
+        <li>
+            <a href="{{ path('dash_reserva_edit', { 'id': reserva.id }) }}" class="btn btn-default">Editar</a>
+        </li>
+        <li style="float: right">
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Eliminar" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Galeria{% endblock %}
+
+{% block body %}
+    <h1>Imágen</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ imagen.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ imagen.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Path</th>
+                <td>{{ imagen.WebPath }}</td>
+            </tr>
+
+             <tr>
+                <th>Imágen</th>
+                <td><img src="{{asset(imagen.WebPath) }}" height="350"></td>
+            </tr>
+            <tr>
+                <th>Detalles</th>
+                <td>{{ imagen.detalles }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_imagen_index') }}" class="btn btn-default">Regresar a la Galería</a>
+        </li>
+        <li>
+            <a href="{{ path('dash_imagen_edit', { 'id': imagen.id }) }}" class="btn btn-primary">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

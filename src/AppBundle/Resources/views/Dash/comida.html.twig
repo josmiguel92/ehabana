@@ -1,0 +1,32 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+      
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Editar menú del día</h2>
+          {% for item in daily %}
+          <p>{{item}}</p>
+          {% else %}
+          <p>No hay especialidades para hoy.</p>
+          {% endfor %}
+          <p><a class="btn btn-primary" href="{{path('dash_daily_index')}}" role="button">Ver detalles &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+          <h2>Añadir una Tapa</h2>
+          {% for item in tapas %}
+          <p>{{item}}</p>
+          {% else %}
+          <p>No hay tapas definidas.</p>
+          {% endfor %}
+          <p><a class="btn btn-primary" href="{{ path('dash_tapa_new')}}" role="button">Añadir tapa &raquo;</a>
+          <a class="btn btn-default" href="{{ path('dash_tapa_index')}}" role="button">Ver detalles &raquo;</a></p>
+       </div>
+        
+      </div>
+{% endblock %}

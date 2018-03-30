@@ -1,0 +1,40 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+
+{% block body %}
+    <h1>Lista de Opiniones</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Mensaje</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for opinion in opinions %}
+            <tr>
+                <td><a href="{{ path('dash_opinion_show', { 'id': opinion.id }) }}">{{ opinion.id }}</a></td>
+                <td>{{ opinion.name }}</td>
+                <td>{{ opinion.email }}</td>
+                <td>{{ opinion.inputDate }}</td>
+                <td>{{ opinion.inputTime }}</td>
+                <td>{{ opinion.inputMessage }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_opinion_show', { 'id': opinion.id }) }}">Mostrar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Panel">
+    <meta name="author" content="Josué Aguilar">
+    <link rel="shortcut icon" href="{{ asset("favicon.ico") }}">
+
+    <title>Elizalde's AdminPanel - {% block title %}Home{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset("css/bootstrap.css") }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ asset("css/justified-nav.css") }}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ asset("js/html5shiv.js") }}"></script>
+      <script src="{{ asset("js/respond.min.js") }}"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="masthead">
+        <h3 class="text-muted">Elizalde's Restaurant</h3>
+        <ul class="nav nav-justified">
+          <li {% if page is defined and page == 'home' %}class="active"{% endif %}><a href="{{path('dash_home')}}">Home</a></li>
+          <li {% if page is defined and page == 'carteles' %}class="active"{% endif %}>
+            <a href="{{path('dash_cartel_index')}}">Carteles</a></li>
+          <li {% if page is defined and page == 'comida' %}class="active"{% endif %}><a href="{{path('dash_comida_index')}}">Comida</a></li>
+          <li {% if page is defined and page == 'drink' %}class="active"{% endif %}><a href="{{path('dash_drink_index')}}">Bebidas</a></li>
+          <li {% if page is defined and page == 'galery' %}class="active"{% endif %}><a href="{{path('dash_imagen_index')}}">Galería</a></li>
+          
+          <li {% if page is defined and page == 'config' %}class="active"{% endif %}><a href="{{path('dash_config_index')}}">Configuración</a></li>
+          <li {% if page is defined and page == 'opinion' %}class="active"{% endif %}><a href="{{path('dash_opinion_index')}}">Opiniones</a></li>
+            <li {% if page is defined and page == 'suscripcion' %}class="active"{% endif %}><a href="{{path('dash_suscripcion_index')}}">Suscripciones</a></li>
+
+            <li {% if page is defined and page == 'preguntas' %}class="active"{% endif %}><a href="{{path('dash_pregunta_index')}}">Preguntas</a></li>
+
+            <li class="{% if page is defined and page == 'reservar' %}active{% endif %}"><a
+                        href="{{ path('dash_reserva_index') }}" >Reservas</a>
+             </li>
+        </ul>
+      </div>
+
+      {% block body %}
+      {% endblock %}
+      
+
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; Elizalde's {{"now"|date("Y")}}</p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

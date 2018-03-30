@@ -1,0 +1,61 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<!-- Jumbotron -->
+{% if config is null %}
+<div class="jumbotron">
+
+  <h1>Realizar configuración Inicial</h1>
+  <p class="lead">No existe ningún contenido o configuración. Para continuar, puedes usar una configuración pre-establecida y modificarla luego o crear una por tus medios.</p>
+  <p><a class="btn btn-lg btn-success" href="{{path('dash_init_config')}}" role="button">Usar configuración pre-establecida</a></p>
+
+</div>
+{% endif %} 
+<!-- Example row of columns -->
+<div class="row">
+  <div class="col-lg-4 col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Editar menú del día</h2>
+        <p></p>
+        <p><a class="btn btn-primary" href="{{path('dash_daily_index')}}" role="button">Ver detalles &raquo;</a></p>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-lg-4 col-md-6">
+  <div class="panel panel-default">
+  <div class="panel-body">
+    <h2>Añadir una Tapa</h2>
+    <p></p>
+    <p><a class="btn btn-primary" href="{{ path('dash_tapa_new') }}" role="button">Añadir tapa &raquo;</a></p>
+  </div>
+</div>
+    
+  </div>
+  <div class="col-lg-4 col-md-6">
+  <div class="panel panel-default">
+  <div class="panel-body">
+     <h2>Añadir una bebida</h2>
+    <p>Aquí puede ediar el listado de bebidas. Este se divide en Secciones de la Carta. Puede crear tantas secciones de la carta como necesite. Se recomiendan 4 ó 7 secciones.</p>
+    <p><a class="btn btn-primary" href="{{path('dash_drink_new')}}" role="button">Añadir bebida &raquo;</a><a class="btn btn-default" href="{{path('dash_category_index')}}" role="button">Editar Secciones &raquo;</a></p>
+  </div>
+</div>
+   
+  </div>
+  <div class="col-lg-4 col-md-6">
+  <div class="panel panel-default">
+  <div class="panel-body">
+    <h2>Añadir imagen a la Galería</h2>
+    <p>Aquí puede agregar o eliminar las imagenes que se muestran en el apartado Galería de la web.</p>
+    <p><a class="btn btn-primary" href="{{path('dash_imagen_index')}}" role="button">Ver detalles &raquo;</a></p>
+  </div>
+</div>
+    
+  </div>
+</div>
+{% endblock %}

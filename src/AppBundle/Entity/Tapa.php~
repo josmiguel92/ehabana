@@ -1,0 +1,370 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Tapa
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="tapa")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TapaRepository")
+ */
+class Tapa
+{
+    private $temp;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Name", type="string", length=255)
+     */
+    private $name;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Name_en", type="string", length=255)
+     */
+    private $name_en;
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Price", type="decimal", precision=10, scale=2)
+     */
+    private $price;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Ingredients", type="text")
+     */
+    private $ingredients;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Ingredients_en", type="text")
+     */
+    private $ingredients_en;
+
+ 
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Tapa
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get Translated name
+     *
+     * @return string
+     */
+    public function getTransName($locale)
+    {
+        switch (strtolower($locale)) {
+            case 'en':
+                return $this->name_en;
+                break;
+            case 'es':
+                return $this->name;
+                break;
+            
+            default:
+                return $this->name;
+                break;
+        }
+
+    }
+
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     *
+     * @return Tapa
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set ingredients
+     *
+     * @param string $ingredients
+     *
+     * @return Tapa
+     */
+    public function setIngredients($ingredients)
+    {
+        $this->ingredients = $ingredients;
+
+        return $this;
+    }
+
+    /**
+     * Get ingredients
+     *
+     * @return string
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
+    }
+
+/**
+     * Get Translated Ingredients
+     *
+     * @return string
+     */
+    public function getTransIngredients($locale)
+    {
+        switch (strtolower($locale)) {
+            case 'en':
+                return $this->ingredients_en;
+                break;
+            case 'es':
+                return $this->ingredients;
+                break;
+            
+            default:
+                return $this->ingredients;
+                break;
+        }
+
+    }
+    
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        // check if we have an old image path
+        if (isset($this->path)) {
+            // store the old name to delete after the update
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $path;
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+        ? null
+        : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path
+        ? null
+        : $this->getUploadDir().'/'.$this->path;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // la ruta absoluta del directorio donde se deben
+        // guardar los archivos cargados
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // se deshace del __DIR__ para no meter la pata
+        // al mostrar el documento/imagen cargada en la vista.
+        return 'uploads/tapas';
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        // si hay un error al mover el archivo, move() automáticamente
+        // envía una excepción. This will properly prevent
+        // the entity from being persisted to the database on error
+        $this->getFile()->move($this->getUploadRootDir(), $this->path);
+
+        // check if we have an old image
+        if (isset($this->temp)) {
+            // delete the old image
+            @unlink($this->getUploadRootDir().'/'.$this->temp);
+            // clear the temp image path
+            $this->temp = null;
+        }
+        $this->file = null;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getFile()) {
+            // haz lo que quieras para generar un nombre único
+            $filename = sha1(uniqid(mt_rand(), true));
+            $this->path = $filename.'.'.$this->getFile()->guessExtension();
+        }
+    }
+
+     /**
+     * @ORM\PostRemove()
+     */
+     public function removeUpload()
+     {
+        if ($file = $this->getAbsolutePath()) {
+            @unlink($file);
+        }
+    }
+
+    /**
+     * Set nameEn
+     *
+     * @param string $nameEn
+     *
+     * @return Tapa
+     */
+    public function setNameEn($nameEn)
+    {
+        $this->name_en = $nameEn;
+
+        return $this;
+    }
+
+    /**
+     * Get nameEn
+     *
+     * @return string
+     */
+    public function getNameEn()
+    {
+        return $this->name_en;
+    }
+
+    /**
+     * Set ingredientsEn
+     *
+     * @param string $ingredientsEn
+     *
+     * @return Tapa
+     */
+    public function setIngredientsEn($ingredientsEn)
+    {
+        $this->ingredients_en = $ingredientsEn;
+
+        return $this;
+    }
+
+    /**
+     * Get ingredientsEn
+     *
+     * @return string
+     */
+    public function getIngredientsEn()
+    {
+        return $this->ingredients_en;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     *
+     * @return Tapa
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    public function __toString(){
+        return $this->name. "(".$this->price.")";
+    }
+}

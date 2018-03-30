@@ -1,0 +1,858 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+{{ parent() }}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA"
+        xmlns="http://www.w3.org/1999/html"></script>
+<script src="{{ asset("js/google_map.js") }}"></script>
+{% endblock javascripts %}
+{% block body %}
+<div id="fh5co-page" class="{% block pageclass %}{% endblock pageclass %}intro-effect-push">
+<header id="fh5co-header" role="banner">
+    <div class="container">
+        <div class="header-inner">
+            <a href="{{ path("homepage") }}"><img id="logo" src="{{ asset("images/logo_red.png") }}"></a>
+            <nav role="navigation" id="navbar-top" class="navbar navbar-default navbar-static">
+                <ul class="nav">
+                    <li><a href="#start">{% trans %}Start{% endtrans %}</a></li>
+                    <li><a href="#foods">{% trans %}Food{% endtrans %}</a></li>
+                    <li><a href="#drinks">{% trans %}Drinks{% endtrans %}</a></li>
+                    <li><a href="#about">{% trans %}About Us{% endtrans %}</a></li>
+                    <li><a href="#contact">{% trans %}Contact{% endtrans %}</a></li>
+                    <li><a href="#galery">{% trans %}galery{% endtrans %}</a></li>
+                    <li>
+                        <a href="#" class="btn btn-primary btn-outline btn-sm header-btn" id="BookingBtnTop" data-toggle="modal" data-target="#BookingModal">{% trans %}Reservar ahora{% endtrans %}</a>
+                    </li>
+                    <li>
+                        {% if config['social.fb'] is defined %}
+                            <a href="{{ config['social.fb'][locale] }}" class="offcanvas-social">
+                        <i class="icon-facebook"></i>
+                    </a>
+                        {% endif %}
+                        {#% if config['social.instagram'] is defined %}
+                            <a href="{{ config['social.instagram'][locale] }}" class="offcanvas-social">
+                        <i class="icon-instagram"></i>
+                    </a>
+                        {% endif %#}
+                        {% if config['social.tripadvisor'] is defined %}
+                            <a href="{{ config['social.tripadvisor'][locale] }}" class="offcanvas-social">
+                        <i class="icon-tripadvisor"></i>
+                    </a>
+                        {% endif %}
+                    </li>
+                    
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+    {% block header %}
+    <header class="header js-fullheight">
+        <div class="bg-img"><img src="{{ asset("images/table.jpg") }}" alt="Elizalde Habana"/></div>
+        <div id="locale-selector" class="animate-box"><a href="{{ path('homepage', {"_locale":"es"}) }}"><i
+                        class="hidden">ESP</i><img src="{{ asset("images/spain.png") }}" height="30em" width="45em">
+            </a> | <a href="{{ path("homepage", {"_locale":"en"}) }}"><i class="hidden">ENG</i><img
+                        src="{{ asset("images/uk.png") }}" height="30em" width="45em"></a></div>
+        <div class="title animate-box image" style="left: 0px;">
+
+            {# cambiar logo en casos especificos segun fecha #}
+            {% if 'now' | date('z') > 340 or 'now' | date('z') < 6 %}
+            <img src="{{ asset("images/signature_alternative_hat.png") }}" class="signature">
+            {% else %}
+            <img src="{{ asset("images/signature_alternative.png") }}" class="signature">
+            {% endif %}
+            {#
+
+            <h1>
+
+
+            {% if config['header.title'] is defined %}
+
+            {{ utils.breakLinesByBars( config['header.title'][locale] ) | nl2br }}
+            {% else %}
+            {% trans %}Bienvenidos al Restaurante-Bar Elizalde{% endtrans %}
+            {% endif %}</h1>
+            #}
+        </div>
+    </header>
+    <button class="trigger" data-info="Click to see the content"><span>Trigger</span></button>
+
+
+    {% endblock header %}
+
+    <div class="container" id="start">
+        {% block msg %}{% endblock msg %}
+    </div>
+
+
+
+<article class="content">
+    {% block hero %}
+    {% if carteles is not null %}
+    <div id="fh5co-hero" class="content js-fullheight">
+        <div class="flexslider">
+            <ul class="slides">
+            {% for cartel in carteles %}
+                <li class="js-fullheight" data-count="{{ loop.index }}">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 image-container full-image"
+                                 style="background: url({{ asset(cartel.getWebPath()) }})  50% 50% /100% no-repeat;height: calc(70vh - 5px);">
+
+                            </div>
+                            <div class="col-md-7" style="/*! margin-right: 20px; */padding-left: 3em;">
+                                <h2>{{ cartel.getTransTitle(locale) }}</h2>
+
+                                {#
+                                  {% if cartel.getMoreInfo(locale) %}
+                                    <a href="#" class="btn btn-primary btn-sm more-info-btn">+ Info</a>
+
+                                    <div class="col-md-12 more-info">
+                                    <div class="col-md-5 image-container">
+                                        <img src="{{ asset(cartel.getWebPath()) }}" >
+                                    </div>
+                                        <p>{{cartel.getTransAllResumen(locale) | nl2br}}</p>
+                                    </div>
+                                    {% endif %}
+                                  <p>{{cartel.getTransResumen(locale)}}</p> #}
+                                <p>{{ cartel.getTransAllResumen(locale) | nl2br }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+
+
+        </div>
+
+    </div>
+    {% endif %}
+    {% endblock hero %}
+    {% block sections %}
+    <a id="foods" class="section-link"></a>
+    <div id="fh5co-food-section" class="section" style="background-image:url({{ asset("/images/foods-section.jpg") }})" data-stellar-background-ratio="0.5">
+
+        <div class="container" style="">
+            <div class="row" >
+             <div class="col-md-6 fh5co-heading animate-box">
+                <h2>{% trans%}Food{% endtrans %}</h2>
+
+            </div>
+            <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box">
+                <h3>{% trans %}Menú del día{% endtrans %}</h3>
+            </div>
+            <div class="col-md-8 col-md-offset-2 animate-box">
+                <a class="item-grid text-center" id="daily-menu">
+                    <div class="v-align">
+                        <div class="v-align-middle">
+                        {% for item in daily %}
+                            <h3 class="title">{{item.getTransName(locale)}}{#<span class="price">$ {{item.price}}</span>#}</h3>
+                        {#    <h5 class="category">{{item.getTransDesc(locale)}}</h5> #}
+                        {% else %}
+                            <h3>No hay elementos para mostrar.</h3>
+                        {% endfor %}
+                           
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div id="fh5co-food-section" class="section tapas" style="background: white; " >
+        <div class="row">
+            <div class="col-md-12 text-center fh5co-heading animate-box">
+                <h2 id="tapas-title">Tapas</h2>
+            </div>
+
+
+            <div class="col-md-12" id="section-tapas-container" data-page="1">
+                {% for tapa in tapas %}
+                    {% if loop.index % 4 == 1 %} 
+                    <div class="row">
+                    {% endif %}
+                    {% if loop.index % 2 == 1 %} 
+                    <div class="col-md-6 col-xs-12">
+                    {% endif %}
+                    <div class="col-md-6 col-xs-12 animate-box" data-animate-effect="fadeInRight">
+                    <a href="#" class="item-grid text-center">
+                        <div class="image" style="background-image: url({{ asset(tapa.getWebPath) }})"></div>
+                        <div class="v-align">
+                            <div class="v-align-middle">
+                                <h3 class="title">
+                    
+                    
+                                {{tapa.getTransName(locale)}}{#<span class="price">${{tapa.getPrice}}</span>#}</h3>
+                                <h5 class="category">{{tapa.getTransIngredients(locale)}}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% if loop.index % 2 == 0 or loop.index == loop.last %} 
+                    </div>
+                {% endif %}
+
+                {% if loop.index % 4 == 0  or loop.index == loop.last %}
+                    </div>
+                {% endif %}
+                {% endfor %}
+
+
+                <nav class="nav navigation" id="tapas-nav">
+                    <a class="prev" href="#">
+                        <i class="icon-angle-double-left"></i>
+
+                    </a>
+                    <a class="next" href="#">
+                        <i class="icon-angle-double-right"></i>
+                    </a>
+                </nav>
+            </div>
+
+
+        </div>
+    </div>
+
+<a id="drinks" class="section-link"></a>
+<div id="fh5co-drinks-section"  class="section"  style="background-image:url({{ asset("/images/drinks-alternative1.jpg") }})"  data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="col-md-6 fh5co-heading animate-box">
+                <h2>{% trans%}Bebidas{% endtrans %}</h2>
+                <p>
+                {% if config['drinks.text'] is defined %}
+                    {{config['drinks.text'][locale]}}
+                {% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12">
+                {% for category in categories %}
+        
+                    <div class="col-md-4 animate-box drinks-menu">
+                        <div class="services">
+                            <div class="desc">
+                                <h3>{{category.getTransName(locale)}}</h3>
+                                {% for drink in category.drinks %}
+                                <p>{{drink.getTransName(locale)}}{#<span class="price-box">${{drink.price}}</span>#}</p>
+                                {% else %}
+                                <p>Nada que mostrar aquí</p>
+                                {% endfor %}
+                               
+                            </div>
+                        </div>
+                    </div>
+                
+                {% endfor %}
+                   
+                  
+
+                    
+                </div>
+
+            </div>
+
+            
+
+
+        </div>
+    </div>
+</div>
+
+<a id="about" class="section-link"></a>
+<div id="fh5co-we-section"  class="section" style="background: url({{ asset("images/wall.jpg") }})"  data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="col-md-6 fh5co-heading animate-box">
+                <h2>{% trans %}Nosotros{% endtrans %}</h2>
+            </div>
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+                <h3>{% trans %}Historia{% endtrans %}</h3>
+                <p style="text-align: left;">
+                {% if config['we.history'] is defined %}
+                    {{config['we.history'][locale] | nl2br }}
+                {% endif %}
+                </p>
+                    
+                </div>
+            </div>
+
+    {#      <div class="col-md-12">
+                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box">
+                    <h3>{% trans %}Nuestra familia{% endtrans %}</h3>
+                </div>
+            </div>
+    #}
+        <div class="col-md-12 animate-box text-center">
+            <h3>{% trans %}Nuestro equipo{% endtrans %}</h3>
+                <div class="person col-md-6  col-sm-6 col-xs-12">
+                    <div class="row"><img src="{{ asset("images/person1.jpg") }}" alt="Jaime Elizalde"></div>
+
+                    <span>Jaime Elizalde</span>
+                </div>
+                <div class="person col-md-6 col-sm-6  col-xs-12" style="margin-bottom: 2em">
+                    <div class="row"><img src="{{ asset("images/person2.jpg") }}" alt="Yanaisi Albite"></div>
+                    <span>Yanaisi Albite</span>
+                </div>
+
+        </div>
+        <div class="col-md-12 animate-box " style="padding-bottom: 2em"><img src="{{ asset("images/team.jpg") }}" style="width: 100%;"  data-stellar-ratio="0.5"></div>
+            
+            {#
+
+            <div class="col-md-12">
+                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box">
+                    <h3>{% trans %}Nuestra familia{% endtrans %}</h3>
+                </div>
+
+                <div class="col-md-12 animate-box text-center">
+                    <div class="person header">
+                        <div></div>
+                        <img src="{{ asset("images/person1.jpg") }}" alt="">
+                        <span>Lisandra Otero<br>Mesera</span>
+                    </div>
+
+                </div>
+                <div class="col-md-12 animate-box text-center">
+                    {% if personas[1] is defined %}
+                    <div class="person col-md-3 col-sm-4 col-xs-6">
+                        <img src="{{ asset("images/person1.jpg") }}" alt="{{personas[1].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[2] is defined %}
+                    <div class="person col-md-3  col-sm-4  col-xs-6">
+                        <img src="{{ asset("images/person1.jpg") }}" alt="{{personas[2].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[3] is defined %}
+                    <div class="person col-md-3  col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[3].getWebPath()) }}" alt="{{personas[3].nombre}}">
+                    </div>
+                    {% endif %}
+
+
+                </div>
+                <div class="col-md-12 animate-box text-center">
+                    {% if personas[4] is defined %}
+                    <div class="person col-md-3  col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[4].getWebPath()) }}" alt="{{personas[4].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[5] is defined %}
+                    <div class="person col-md-3  col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[5].getWebPath()) }}" alt="{{personas[5].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[6] is defined %}
+                    <div class="person col-md-3 col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[6].getWebPath()) }}" alt="{{personas[6].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[7] is defined %}
+                    <div class="person col-md-3 col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[7].getWebPath()) }}" alt="{{personas[7].nombre}}">
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-md-12 animate-box text-center">
+
+                    {% if personas[8] is defined %}
+                    <div class="person  col-md-3 col-md-3 col-xs-6">
+                        <img src="{{ asset(personas[8].getWebPath()) }}" alt="{{personas[8].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[9] is defined %}
+                    <div class="person col-md-3  col-xs-6">
+                        <img src="{{ asset(personas[9].getWebPath()) }}" alt="{{personas[9].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[10] is defined %}
+                    <div class="person col-md-3 col-xs-6">
+                        <img src="{{ asset(personas[10].getWebPath()) }}" alt="{{personas[10].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[11] is defined %}
+                    <div class="person col-md-3 col-xs-6">
+                        <img src="{{ asset(personas[11].getWebPath()) }}" alt="{{personas[11].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[12] is defined %}
+                    <div class="person col-md-3 col-xs-6">
+                        <img src="{{ asset(personas[12].getWebPath()) }}" alt="{{personas[12].nombre}}">
+                    </div>
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+            #}
+        </div>
+    </div>
+
+    <a id="contact" class="section-link"></a>
+    <div id="fh5co-contact-section"  class="section">
+        <div class="container">
+            <div class="row">
+                
+                <div id="map" class="animate-box" data-animate-effect="fadeIn"></div>
+
+                <div id="contact-footer">
+                    <span>
+                        <i class="icon-map"></i>
+                         {% if config['contact.address'] is defined %}
+                    {{config['contact.address'][locale]}}
+                    {% else %}
+                     {% trans %}Empedrado 521 entre Monserrate y Villegas{% endtrans %}. {% trans %}La Habana{% endtrans %}, Cuba.
+                {% endif %}
+                    </span>
+                    <span>
+                    {% if config['contact.telephone'] is defined %}
+                        <i class="icon-phone"></i><a href="tel://{{config['contact.telephone'][locale]}}"> 
+                        {{config['contact.telephone'][locale]}}</a>
+                    {% else %}
+                        <i class="icon-phone"></i><a href="tel://+53 7203 2807">+53 7203 2807</a>
+                    {%endif%}
+
+                        <i class="icon-envelope"></i><a href="mailto:{% if config['contact.email'] is defined %}{{config['contact.email'][locale]}}{% else %}{% trans %}info@restauranteelizaldehabana.com{% endtrans %}{% endif %}">{% if config['contact.email'] is defined %}
+            {{config['contact.email'][locale]}}
+            {% else %}
+            {% trans %}info@restauranteelizaldehabana.com{% endtrans %}
+            {% endif %}</a>
+                        <i class="icon-clock-o"></i>{% if config['contact.time'] is defined %}
+
+            {{config['contact.time'][locale]}}
+            {% else %}
+            {% trans %}12pm-12am{% endtrans %}
+            {% endif %}
+                    </span>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a id="galery" class="section-link"></a>
+    <div id="fh5co-galery-section" style="background-color: #000000">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="col-md-6 fh5co-heading animate-box">
+                    <h2>{% trans %}galery{% endtrans %}</h2>
+                  
+                </div>
+            </div>
+            <script type="text/javascript">
+                var imagesGalery = [
+                    {% for image in images %}
+                    "{{ asset(image.WebPath) }}",
+                    {% endfor %}];
+                var imagesGaleryTitles = [
+                    {% for image in images %}
+                    "{{image.getTransName(locale)}}",
+                    {% endfor %}];
+                var imagesGaleryDetails = [
+                    {% for image in images %}
+                    "{{image.getTransDetalles(locale)}}",
+                    {% endfor %}];
+            </script>
+            <div class="container images">
+
+                <div class="slide-imgwrap colection1 hidden">
+                    <div class="slide__img animate-box " data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=1 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=2 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=3 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                </div>
+                <div class="slide-imgwrap colection2 hidden">
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=4 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=5 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=6 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=7 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                </div>
+                <div class="slide-imgwrap colection3 current">
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=8 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=9 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=10 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=11 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                    <div class="slide__img animate-box" data-animate-effect="fadeInRight">
+                        <div class="slide__img-inner imageframe" data-toggle="modal" data-target="#imgModal" data-backdrop="false" data-imgid=12 style="opacity: 1; transform: translateX(0px) rotateZ(0deg);"></div>
+                    </div>
+                </div>
+            </div>
+            <svg class="hidden">
+                <defs>
+                    <symbol id="icon-arrow" viewBox="0 0 24 24">
+                        <title>arrow</title>
+                        <polygon points="6.3,12.8 20.9,12.8 20.9,11.2 6.3,11.2 10.2,7.2 9,6 3.1,12 9,18 10.2,16.8 "/>
+
+                    <symbol id="icon-prev" viewBox="0 0 100 50">
+                        <title>prev</title>
+                        <polygon points="5.4,25 18.7,38.2 22.6,34.2 16.2,27.8 94.6,27.8 94.6,22.2 16.2,22.2 22.6,15.8 18.7,11.8"/>
+                    </symbol>
+                    <symbol id="icon-next" viewBox="0 0 100 50">
+                        <title>next</title>
+                        <polygon points="81.3,11.8 77.4,15.8 83.8,22.2 5.4,22.2 5.4,27.8 83.8,27.8 77.4,34.2 81.3,38.2 94.6,25 "/>
+                    </symbol>
+                    <symbol id="icon-octicon" viewBox="0 0 24 24">
+                        <title>octicon</title>
+                        <path d="M12,2.2C6.4,2.2,1.9,6.7,1.9,12.2c0,4.4,2.9,8.2,6.9,9.6c0.5,0.1,0.7-0.2,0.7-0.5c0-0.2,0-0.9,0-1.7c-2.8,0.6-3.4-1.4-3.4-1.4C5.6,17.1,5,16.8,5,16.8C4.1,16.2,5,16.2,5,16.2c1,0.1,1.5,1,1.5,1c0.9,1.5,2.4,1.1,2.9,0.8c0.1-0.7,0.4-1.1,0.6-1.3c-2.2-0.3-4.6-1.1-4.6-5c0-1.1,0.4-2,1-2.7C6.5,8.8,6.2,7.7,6.7,6.4c0,0,0.8-0.3,2.8,1C10.3,7.2,11.1,7.1,12,7c0.9,0,1.7,0.1,2.5,0.3c1.9-1.3,2.8-1,2.8-1c0.5,1.4,0.2,2.4,0.1,2.7c0.6,0.7,1,1.6,1,2.7c0,3.9-2.4,4.7-4.6,5c0.4,0.3,0.7,0.9,0.7,1.9c0,1.3,0,2.4,0,2.8c0,0.3,0.2,0.6,0.7,0.5c4-1.3,6.9-5.1,6.9-9.6C22.1,6.7,17.6,2.2,12,2.2z" />
+                    </symbol>
+                    <!-- From Karen Menezes: https://www.smashingmagazine.com/2015/05/creating-responsive-shapes-with-clip-path/ -->
+                    <clipPath id="polygon-clip-rhomboid" clipPathUnits="objectBoundingBox">
+                        <polygon points="0 1, 0.3 0, 1 0, 0.7 1" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <nav class="slideshow__nav slideshow__nav--arrows animate-box" style="display: none">
+                <button  id="prev-slide" class="btn btn--arrow" aria-label="Previous slide"><svg onclick="javascript:alert('prev')" class="icon icon--prev"><use xlink:href="#icon-prev"></use></svg></button>
+                <button  id="next-slide" class="btn btn--arrow" aria-label="Next slide"><svg onclick="javascript:alert('next')" class="icon icon--next"><use xlink:href="#icon-next"></use></svg></button>
+            </nav>
+
+
+
+        </div>
+    </div>
+
+        <div id="video-galery">
+            <div class="container">
+                <div class="col-md-12 col-xs-12 animate-box">
+                    <video controls style="height: 90vh;width: 95vw;">
+                        <source src="{{ asset("videos/movie01.mp4") }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+<div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="imgModalLabel"></h4>
+      </div>
+      <div class="modal-body" id="imgModalBody">
+        <img src="" id="imgModalBodyImg">
+      </div>
+      <div class="modal-footer">
+      <p id="imgDetails"></p>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+        {% endblock sections %}
+        {% block cta %}
+        <div class="fh5co-cta" style="background-image: url({% block cta_background %}{{ asset("images/frontal-wide.jpg") }}{% endblock %});">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="col-md-12 text-center animate-box">
+                    {% block cta_content %}
+                    {#<h3>We Try To Update The Site Everyday</h3>#}
+                    <div class="col-md-4 col-md-offset-2">
+                        <a href="#" class="btn btn-primary btn-outline with-arrow btn-sm" data-toggle="modal" data-target="#BookingModal">{% trans %}Reservar ahora{% endtrans %}<i class="icon-arrow-right"></i></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#" class="btn btn-primary btn-outline with-arrow btn-sm" data-toggle="modal" data-target="#OpinionModal">{% trans %}Give us your opinion{% endtrans %}<i class="icon-arrow-right"></i></a>
+                    </div>
+                        <p>
+
+
+                        </p>
+                    {% endblock cta_content %}
+                </div>
+            </div>
+        </div>
+        <!-- Opinion Modal -->
+        <div class="modal fade" id="OpinionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">{% trans %}Give us your opinion{% endtrans %}</h4>
+                    </div>
+                    <form class="form-horizontal" role="form" action="{{ path('send_opinion')}}" method="POST"  enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <p>{% trans %}modal.opinion.text{% endtrans %}</p>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>{% trans %}About you{% endtrans %}</h4>
+
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-4 control-label">{% trans %}Name{% endtrans %}</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="inputName" name="inputName"
+                                                       required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="col-sm-4 control-label">{% trans %}Email{% endtrans %}</label>
+                                            <div class="col-sm-8">
+                                                <input type="email" class="form-control" id="inputEmail"
+                                                       name="inputEmail" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputDate" class="col-sm-4 control-label">{% trans %}Fecha de su visita{% endtrans %}</label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="inputDate" placeholder="12/31/2016" name="inputDate">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputTime" class="col-sm-4 control-label">{% trans %}Hora{% endtrans %}</label>
+                                            <div class="col-sm-8">
+                                                <input type="time" class="form-control" id="inputTime" placeholder="12:15 AM" name="inputTime">
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4>{% trans %}Message{% endtrans %}</h4>
+                                        <div class="form-group">
+                                            <textarea maxlength="300" name="inputMessage" required=""></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">{% trans %}Agrege su foto a nuestra Galería{% endtrans %}
+                                    <!-- MAX_FILE_SIZE must precede the file input field -->
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+                                    <input type="file" name="inputPhoto"> </div>
+                            </div>
+                            <div class="col-md-12">
+
+                                <hr>
+                                <label for="inputTime" class="col-md-12 control-label">{% trans %}No eres un robot, ¿cierto?{% endtrans %}</label>
+
+                                <div class="col-md-6">
+                                    <label style="font-weight: 300;">{{ pregunta.getTransQuestion(locale) }}</label>
+                                </div>
+                                <div class="col-md-6 human-answers">
+                                    <input type="hidden" name="inputhidden" value="{{ pregunta.id }}">
+                                    {% for value in pregunta.getTransListOptions(locale) %}
+                                        <input type="radio" name="answer" value="{{ value }}" id="radio_{{ value }}"
+                                               required="">
+                                        <label for="radio_{{ value }}">{{ value }}</label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+                            <button type="submit" class="btn btn-primary">{% trans %}Send{% endtrans %}</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Booking Modal -->
+            <div class="modal fade" id="BookingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">{% trans %}Hacer una reservación{% endtrans %}</h4>
+                        </div>
+                        <form class="form" role="form" action="{{ path('send_booking') }}" method="POST">
+                            <div class="modal-body">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-md-12 control-label">{% trans %}Name{% endtrans %}</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" id="inputName" name="inputName" required="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="col-md-12 control-label">{% trans %}Email{% endtrans %}</label>
+                                                <div class="col-md-12">
+                                                    <input type="email" required="" class="form-control" id="inputEmail" name="inputEmail">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputDate" class="col-md-12 control-label">{% trans %}Fecha{% endtrans %}</label>
+                                                <div class="col-md-12">
+                                                    <input type="date" class="form-control" id="inputDate" placeholder="12/31/2016" name="inputDate" required="">
+                                                </div>
+
+                                                <label for="inputDate" class="col-md-12 control-label">{% trans %}Hora{% endtrans %}</label>
+                                                <div class="col-md-12">
+                                                    <input type="time" class="form-control" id="inputTime" placeholder="12:15 AM" name="inputTime" required="">
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-12">
+                                                <label>{% trans %}Cantidad de comensales{% endtrans %}</label>
+                                                <input type="number" max="80" min="1" name="inputComensales"
+                                                       class="form-control" required="">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>{% trans %}Algo que desees dejar claro...{% endtrans %}</label>
+                                                <textarea type="text" name="inputMessage" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <hr>
+                                        <div class="form-group">
+                                            <label for="inputTime" class="col-md-12 control-label">
+                                                {% trans %}No eres un robot, ¿cierto?{% endtrans %}
+                                            </label>
+                                            <div class="col-md-6">
+                                                <label style="font-weight: 300;">{{ pregunta.getTransQuestion(locale) }}</label>
+                                            </div>
+                                            <div class="col-md-6 human-answers">
+                                                <input type="hidden" name="inputhidden" value="{{ pregunta.id }}">
+                                                {% for value in pregunta.getTransListOptions(locale) %}
+                                                    <input type="radio" name="answer" value="{{ value }}"
+                                                           id="radio_{{ value }}" required="">
+                                                    <label for="radio_{{ value }}">{{ value }}</label>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+                                <button type="submit" class="btn btn-primary">{% trans %}Send{% endtrans %}</button>
+                            </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.Booking modal -->
+        {% endblock cta %}
+
+</article>
+    
+        {% block footer %}
+        <footer id="fh5co-footer" role="contentinfo">
+
+            <div class="container">
+
+                <div class="col-md-6 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
+
+                    <div class="col-md-7">
+                        <h3 id="follow-us">{% trans %}Follow Us{% endtrans %}
+                            {% if config['social.fb'] is defined %}
+                                <a href="{{ config['social.fb'][locale] }}"><i class="icon-facebook"></i></a>
+                            {% endif %}
+                            {% if config['social.instagram'] is defined %}
+                                <a href="{{ config['social.instagram'][locale] }}"><i class="icon-instagram"></i></a>
+                            {% endif %}
+                            {% if config['social.tripadvisor'] is defined %}
+                                <a href="{{ config['social.tripadvisor'][locale] }}"><i
+                                            class="icon-tripadvisor"></i></a>
+                            {% endif %}
+                        </h3>
+
+                        <p>{% trans %}Búscanos en{% endtrans %} <a
+                                    href="https://www.alamesacuba.com/es/la-habana/restaurant/elizalde/"
+                                    target="_blank">A LA MESA</a></p>
+                    </div>
+                        <div class="col-md-5 hashtags">
+                            <ul>
+                            
+                            {% for hashtags in utils.explodeByComas(config['hashtags']['es'])%}
+                                <li><a href="https://www.facebook.com/hashtag/{{hashtags}}">#{{hashtags}}</a></li>
+                            {% endfor %}
+                               
+                            </ul>
+                            
+                        </div>
+                        
+
+
+                    </div>
+
+                    <div class="col-md-5 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
+                        <h3>{% trans %}Mantente en contacto{% endtrans %}</h3>
+                        <div class="row">
+                            <form class="form-horizontal" role="form" action="{{ path('getcontact') }}" method="POST">
+                              <div class="form-group">
+                                <label for="inputName" class="col-sm-3 control-label">{% trans %}Nombre{% endtrans %}</label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" id="inputName" name="inputName" required="">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail" class="col-sm-3 control-label">{% trans %}Email{% endtrans %}</label>
+                            <div class="col-sm-9">
+                                <input type="hidden" id="inputhidden0" name="inputhidden0" required=""
+                                       value="{{ inputhidden[0] }}">
+                                <input type="hidden" id="inputhidden1" name="inputhidden1" required=""
+                                       value="{{ inputhidden[1] }}">
+                                <input type="email" class="form-control" id="inputEmail" name="inputEmail" required="">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                          <button type="submit" class="btn btn-primary btn-outline with-arrow btn-sm">{% trans %}Send{% endtrans %}<i class="icon-arrow-right"></i></button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+
+
+
+      </div>
+
+
+      <div class="col-md-12 fh5co-copyright text-center">
+        <p>&copy; {{  "now"| date("Y") }} restauranteelizaldehabana.
+            {% trans %}La Habana{% endtrans %}, Cuba. {% trans %}All Rights Reserved{% endtrans %}.
+            <br><span>&lt; made with <i class="icon-heart"></i> by <a href="http://habana.tech/" target="_blank">habana.tech</a>  /&gt;</span>
+        </p>
+        </div>
+
+    </div>
+</footer>
+{% endblock footer %}
+</div>
+
+{% endblock %}
+
+

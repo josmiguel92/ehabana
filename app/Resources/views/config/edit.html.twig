@@ -1,0 +1,17 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Configuración{% endblock %}
+
+{% block body %}
+    <h1>Editar configuración</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Editar" class="btn btn-primary" />
+    {{ form_end(edit_form) }}
+
+     <a href="{{ path('dash_config_index') }}" style="margin-top: 5px;" class="btn btn-default">Regresar a la lista</a>
+    
+{#    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete">
+    {{ form_end(delete_form) }}#}
+{% endblock %}

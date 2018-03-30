@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block pageclass %}error{% endblock %}
+{% block hero %}{% endblock hero %}
+{% block sections %}{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+
+        setTimeout(function redirect(){
+            window.location = "{{ path("homepage") }}";
+
+        }, 6000);
+
+
+    </script>{% endblock %}
+{% block bodyclass %}error-page{% endblock %}
+{% block body %}
+
+    <div id="error-section" class="js-fullheight"
+         style="background: url({{ asset('/images/home-wide.jpg') }}) 100% 100%/cover;">
+        <div class="container">
+            <div class="col-md-6 fh5co-heading animate-box">
+                <h2>{% trans %}Su reserva fue registrada...{% endtrans %}</h2>
+
+                <p>{% trans %}Muy pronto le confirmaremos por email. Si lo desea puede ponerse en contácto mediante el teléfono o el correo electrónico para arreglar los detalles.{% endtrans %}</p>
+
+                <p>{% trans %}Lo esperamos. Tenga usted un buen día.{% endtrans %}</p>
+
+                <p>{% trans %}Puede visitar nuestras páginas de Facebook o TripAdvisor en los siguientes enlaces:{% endtrans %}</p>
+
+
+                <a href="{{ fb.valueEs }}" class="btn btn-primary" target="_blank">Facebook <i
+                            class="icon-facebook"></i></a>
+
+                <a href="{{ tripadv.valueEs }}" class="btn btn-primary" target="_blank">TripAdvisor <i
+                            class="icon-tripadvisor"></i></a></p>
+
+                <hr>
+                <p><a href="{{ path("homepage") }}" class="btn btn-primary">{% trans %}Regresar al Inicio{% endtrans %} <i
+                                class="icon-arrow-right"></i></a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock body %}

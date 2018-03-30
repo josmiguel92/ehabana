@@ -1,0 +1,41 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Configuración{% endblock %}
+
+{% block body %}
+    <h1>Editar configuración</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ config.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ config.name }}</td>
+            </tr>
+            <tr>
+                <th>Valor(es)</th>
+                <td>{{ config.valueEs }}</td>
+            </tr>
+            <tr>
+                <th>Valor(en)</th>
+                <td>{{ config.valueEn }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_config_index') }}" class="btn btn-default">Regresar a la lista</a>
+        </li>
+        <li>
+            <a href="{{ path('dash_config_edit', { 'id': config.id }) }}" class="btn btn-primary">Editar</a>
+        </li>
+        <li>{#}
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar">
+            {{ form_end(delete_form) }}
+        </li>#}
+    </ul>
+{% endblock %}

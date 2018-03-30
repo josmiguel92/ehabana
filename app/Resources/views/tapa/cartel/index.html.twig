@@ -1,0 +1,42 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Carteles{% endblock %}
+
+{% block body %}
+    <h1>Lista de Carteles</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Titulo Ingles</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cartel in cartels %}
+            <tr>
+                <td><a href="{{ path('dash_cartel_show', { 'id': cartel.id }) }}">{{ cartel.id }}</a></td>
+                <td>{{ cartel.titulo }}</td>
+                <td>{{ cartel.tituloen }}</td>
+                <td class="col-sm-4 col-md-3"><a href="{{ asset(cartel.WebPath) }}" class="thumbnail"><img src="{{ asset(cartel.getWebPath()) }}" height="150"></a></td>
+
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_cartel_show', { 'id': cartel.id }) }}">Mostrar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dash_cartel_edit', { 'id': cartel.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('dash_cartel_new') }}">Agregar un nuevo Cartel</a>
+       
+{% endblock %}

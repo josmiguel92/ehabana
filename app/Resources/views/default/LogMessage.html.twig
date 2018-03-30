@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block pageclass %}error{% endblock %}
+{% block hero %}{% endblock hero %}
+{% block sections %}{% endblock %}
+{% block javascripts %}{% endblock %}
+{% block bodyclass %}error-page{% endblock %}
+{% block body %}
+
+<div id="error-section"  class="js-fullheight"  style="background: url({{ asset('/images/home-wide.jpg') }}) 100% 100%/cover;">
+    <div class="container">
+            <div class="col-md-6 fh5co-heading animate-box">
+                <h2>{% trans%}Ocurrió lo siguiente...{% endtrans %}</h2>
+                <p>{{message}}</p>
+    
+    
+    <hr>
+    <p><a href="{{ path("homepage") }}" class="btn btn-primary">Regresar al Inicio <i class="icon-arrow-right"></i></a>
+            </div>
+        
+    </div>
+</div>
+    
+{% endblock body %}

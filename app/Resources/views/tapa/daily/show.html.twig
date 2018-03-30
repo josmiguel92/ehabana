@@ -1,0 +1,50 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Menú diario{% endblock %}
+
+{% block body %}
+    <h1>Menú diario</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ daily.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ daily.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ daily.name }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ daily.price }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ daily.description }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ daily.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_daily_index') }}" class="btn btn-default" 
+        >Regresar al listado</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" href="{{ path('dash_daily_edit', { 'id': daily.id }) }}">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input class="btn btn-danger" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

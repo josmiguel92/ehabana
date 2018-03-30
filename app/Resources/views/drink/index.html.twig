@@ -1,0 +1,46 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Bebidas{% endblock %}
+
+{% block body %}
+    <h1>Lista de Bebidas <a href="{{ path('dash_drink_new') }}" class="btn btn-primary btn-sm" style="float:right;">Nueva bebida</a></h1>
+
+<div class="alert alert-info"><a href="{{path('dash_category_index')}}">Puede editar los segmentos o categorías en que se divide la carta de bebidas aquí.</a></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Name(ENG)</th>
+                <th>Precio</th>                
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for drink in drinks %}
+            <tr>
+                <td><a href="{{ path('dash_drink_show', { 'id': drink.id }) }}">{{ drink.id }}</a></td>
+                <td><a href="{{ path('dash_drink_show', { 'id': drink.id }) }}">{{ drink.nombre }}</a></td>
+                <td>{{ drink.name }}</td>
+                <td>{{ drink.price }}</td>
+                
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_drink_show', { 'id': drink.id }) }}">Mostrar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dash_drink_edit', { 'id': drink.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_drink_new') }}" class="btn btn-primary">Agregar bebida</a>
+        </li>
+    </ul>
+{% endblock %}

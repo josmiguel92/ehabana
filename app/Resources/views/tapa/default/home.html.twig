@@ -1,0 +1,613 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+{{ parent() }}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA"></script>
+<script src="{{ asset("js/google_map.js") }}"></script>
+{% endblock javascripts %}
+{% block body %}
+
+<div id="fh5co-page" class="{% block pageclass %}{% endblock pageclass %}intro-effect-push">
+<header id="fh5co-header" role="banner">
+    <div class="container">
+        <div class="header-inner">
+            <a href="{{ path("homepage") }}"><img id="logo" src="{{ asset("images/logo_red.png") }}"></a>
+            <nav role="navigation" id="navbar-top" class="navbar navbar-default navbar-static">
+                <ul class="nav">
+                    <li><a href="#start">{% trans %}Start{% endtrans %}</a></li>
+                    <li><a href="#foods">{% trans %}Food{% endtrans %}</a></li>
+                    <li><a href="#drinks">{% trans %}Drinks{% endtrans %}</a></li>
+                    <li><a href="#about">{% trans %}We{% endtrans %}</a></li>
+                    <li><a href="#contact">{% trans %}Contact{% endtrans %}</a></li>
+                    <li><a href="#galery">{% trans %}Galery{% endtrans %}</a></li>
+                    <li>
+                    <a href="{% if config['social.fb'] is defined %}{{config['social.fb'][locale]}}{% else %}#{%endif%}" class="offcanvas-social">
+                        <i class="icon-facebook"></i>
+                    </a>
+                        
+                    <a href="{% if config['social.instagram'] is defined %}{{config['social.instagram'][locale]}}{% else %}#{%endif%}" class="offcanvas-social">
+                        <i class="icon-instagram"></i>
+                    </a>
+                    <a href="{% if config['social.tripadvisor'] is defined %}{{config['social.tripadvisor'][locale]}}{% else %}#{%endif%}" class="offcanvas-social">
+                        <i class="icon-tripadvisor"></i>
+                    </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+    {% block header %}
+    <header class="header js-fullheight">
+        <div class="bg-img"><img src="{{ asset("images/slide_2.jpg") }}" alt="Background Image"/></div>
+        <div id="locale-selector"><a href="{{ path('homepage', {"_locale":"es"}) }}">ESP</a> | <a href="{{ path("homepage", {"_locale":"en"}) }}">ENG</a></div>
+        <div class="title">
+
+            <h1>
+            {% if config['header.title'] is defined %}
+
+            {{config['header.title'][locale]}}
+            {% else %}
+            {% trans %}Bienvenidos al Restaurante-Bar Elizalde{% endtrans %}
+            {% endif %}</h1>
+
+        </div>
+    </header>
+    <button class="trigger" data-info="Click to see the content"><span>Trigger</span></button>
+
+
+    {% endblock header %}
+
+    <div class="container" id="start">
+        {% block msg %}{% endblock msg %}
+    </div>
+
+
+
+<article class="content">
+    {% block hero %}
+    {% if carteles is not null %}
+    <div id="fh5co-hero" class="content js-fullheight">
+        <div class="flexslider">
+            <ul class="slides">
+            {% for cartel in carteles %}
+                <li class="gradient-{{ loop.index }} js-fullheight" data-count="{{loop.index}}">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="col-md-12 text-center slider-text">
+                            <div class="slider-text-inner">
+                                <h2>{{cartel.getTransTitle(locale)}}</h2>
+                                <div class="row">
+                                    <div class="col-md-12 image-container">
+                                        <img src="{{ asset(cartel.getWebPath()) }}">
+                                    </div>
+                                    <div class="col-md-12 first-info">
+                                        <p>{{cartel.getTransResumen(locale)}}</p>
+                                    </div>
+                                    {% if cartel.getMoreInfo(locale) %}
+                                    <a href="#" class="btn btn-primary btn-sm more-info-btn">+ Info</a>
+
+                                    <div class="col-md-12 more-info">
+                                        <p>{{cartel.getMoreInfo(locale)}}</p>
+                                    </div>
+                                    {% endif %}
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+
+
+        </div>
+
+    </div>
+    {% endif %}
+    {% endblock hero %}
+    {% block sections %}
+    <a id="foods" class="section-link"></a>
+    <div id="fh5co-food-section" class="section" style="background-color: beige;">
+
+        <div class="container">
+            <div class="row" style="background-image:url({{ asset("/uploads/files/food-eating-potatoes-beer-8313.jpg") }})">
+             <div class="col-md-6 fh5co-heading animate-box">
+                <h2>{% trans%}Food{% endtrans %}</h2>
+
+            </div>
+            <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box">
+                <h3>{% trans %}Menú del día{% endtrans %}</h3>
+            </div>
+            <div class="col-md-8 col-md-offset-2 animate-box">
+                <a class="item-grid text-center" id="daily-menu">
+                    <div class="v-align">
+                        <div class="v-align-middle">
+                        {% for item in daily %}
+                            <h3 class="title">{{item.getTransName(locale)}}<span class="price">$ {{item.price}}</span></h3>
+                            <h5 class="category">{{item.getTransDesc(locale)}}</h5>
+                        {% else %}
+                            <h3>No hay elementos para mostrar.</h3>
+                        {% endfor %}
+                           
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center fh5co-heading animate-box">
+                <h2>Tapas</h2>
+            </div>
+
+
+            <div class="col-md-12" id="section-tapas-container" data-page="1">
+                {% for tapa in tapas %}
+                    {% if loop.index % 4 == 1 %} 
+                    <div class="row">
+                    {% endif %}
+                    {% if loop.index % 2 == 1 %} 
+                    <div class="col-md-6 col-xs-12">
+                    {% endif %}
+                <div class="col-md-6 col-xs-6 animate-box" data-animate-effect="fadeInRight">
+                    <a href="#" class="item-grid text-center">
+                        <div class="image" style="background-image: url({{ asset(tapa.getWebPath) }})"></div>
+                        <div class="v-align">
+                            <div class="v-align-middle">
+                                <h3 class="title">
+                    
+                    
+                                {{tapa.getTransName(locale)}}<span class="price">${{tapa.getPrice}}</span></h3>
+                                <h5 class="category">{{tapa.getTransIngredients(locale)}}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% if loop.index % 2 == 0 or loop.index == loop.last %} 
+                    </div>
+                {% endif %}
+
+                {% if loop.index % 4 == 0  or loop.index == loop.last %}
+                    </div>
+                {% endif %}
+                {% endfor %}
+
+
+                <nav class="nav navigation" id="tapas-nav">
+                    <a class="prev" href="#">
+                        <i class="icon-angle-double-left"></i>
+
+                    </a>
+                    <a class="next" href="#">
+                        <i class="icon-angle-double-right"></i>
+                    </a>
+                </nav>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<a id="drinks" class="section-link"></a>
+<div id="fh5co-drinks-section"  class="section"  style="background-image:url({{ asset("/uploads/files/pexels-photo-132737.jpg") }})">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="col-md-6 fh5co-heading animate-box">
+                <h2>{% trans%}Bebidas{% endtrans %}</h2>
+                <p>
+                {% if config['drinks.text'] is defined %}
+                    {{config['drinks.text'][locale]}}
+                {% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12">
+                {% for category in categories%}
+                {% if loop.index == 4 %}
+                    <div class="col-md-12">
+                {% endif %}
+                    <div class="col-md-4 animate-box drinks-menu {% if loop.index == 4 %}col-md-push-4{% endif %}">
+                        <div class="services">
+                            <div class="desc">
+                                <h3>{{category.getTransName(locale)}}</h3>
+                                {% for drink in category.drinks %}
+                                <p>{{drink.getTransName(locale)}}<span class="price-box">${{drink.price}}</span></p>
+                                {% else %}
+                                <p>No hay bebidas en este segmento</p>
+                                {% endfor %}
+                               
+                            </div>
+                        </div>
+                    </div>
+                {% if loop.index == 4 %}
+                    </div>
+                {% endif %}
+                {% endfor %}
+                   
+                  
+
+                    
+                </div>
+
+            </div>
+
+            
+
+
+        </div>
+    </div>
+</div>
+
+<a id="about" class="section-link"></a>
+<div id="fh5co-we-section"  class="section" style="background: url({{ asset("uploads/files/black-and-white-alcohol-bar-barkeeper.jpg") }}) 0 0 /200% no-repeat">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="col-md-6 fh5co-heading animate-box">
+                <h2>{% trans %}Nosotros{% endtrans %}</h2>
+            </div>
+            <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box">
+                <h3>{% trans %}Historia{% endtrans %}</h3>
+                <p>
+                {% if config['we.history'] is defined %}
+                    {{config['we.history'][locale]}}
+                {% endif %}
+                </p>
+                    
+                </div>
+            </div>
+            {#
+            <hr>
+            <div class="col-md-12">
+                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box">
+                    <h3>{% trans %}Nuestra familia{% endtrans %}</h3>
+                </div>
+
+                <div class="col-md-12 animate-box text-center">
+                    <div class="person header">
+                        <div></div>
+                        <img src="{{ asset("images/person1.jpg") }}" alt="">
+                        <span>Lisandra Otero<br>Mesera</span>
+                    </div>
+
+                </div>
+                <div class="col-md-12 animate-box text-center">
+                    {% if personas[1] is defined %}
+                    <div class="person col-md-3 col-sm-4 col-xs-6">
+                        <img src="{{ asset("images/person1.jpg") }}" alt="{{personas[1].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[2] is defined %}
+                    <div class="person col-md-3  col-sm-4  col-xs-6">
+                        <img src="{{ asset("images/person1.jpg") }}" alt="{{personas[2].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[3] is defined %}
+                    <div class="person col-md-3  col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[3].getWebPath()) }}" alt="{{personas[3].nombre}}">
+                    </div>
+                    {% endif %}
+
+
+                </div>
+                <div class="col-md-12 animate-box text-center">
+                    {% if personas[4] is defined %}
+                    <div class="person col-md-3  col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[4].getWebPath()) }}" alt="{{personas[4].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[5] is defined %}
+                    <div class="person col-md-3  col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[5].getWebPath()) }}" alt="{{personas[5].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[6] is defined %}
+                    <div class="person col-md-3 col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[6].getWebPath()) }}" alt="{{personas[6].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[7] is defined %}
+                    <div class="person col-md-3 col-sm-4  col-xs-6">
+                        <img src="{{ asset(personas[7].getWebPath()) }}" alt="{{personas[7].nombre}}">
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-md-12 animate-box text-center">
+
+                    {% if personas[8] is defined %}
+                    <div class="person  col-md-3 col-md-3 col-xs-6">
+                        <img src="{{ asset(personas[8].getWebPath()) }}" alt="{{personas[8].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[9] is defined %}
+                    <div class="person col-md-3  col-xs-6">
+                        <img src="{{ asset(personas[9].getWebPath()) }}" alt="{{personas[9].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[10] is defined %}
+                    <div class="person col-md-3 col-xs-6">
+                        <img src="{{ asset(personas[10].getWebPath()) }}" alt="{{personas[10].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[11] is defined %}
+                    <div class="person col-md-3 col-xs-6">
+                        <img src="{{ asset(personas[11].getWebPath()) }}" alt="{{personas[11].nombre}}">
+                    </div>
+                    {% endif %}
+                    {% if personas[12] is defined %}
+                    <div class="person col-md-3 col-xs-6">
+                        <img src="{{ asset(personas[12].getWebPath()) }}" alt="{{personas[12].nombre}}">
+                    </div>
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+            #}
+        </div>
+    </div>
+
+    <a id="contact" class="section-link"></a>
+    <div id="fh5co-contact-section"  class="section">
+        <div class="container">
+            <div class="row" style="background-color: #7799cc">
+                <div id="contact-head">
+                    <div class="col-md-6 fh5co-heading animate-box"  data-animate-effect="fadeInUp"><h2>{% trans %}Contact{% endtrans %}</h2></div>
+                </div>
+                <div id="map" class="animate-box" data-animate-effect="fadeIn"></div>
+
+                <div id="contact-footer">
+                    <span>
+                        <i class="icon-map"></i>
+                         {% if config['contact.address'] is defined %}
+                    {{config['contact.address'][locale]}}
+                    {% else %}
+                     {% trans %}Empedrado 521 entre Monserrate y Villegas{% endtrans %}. {% trans %}La Habana{% endtrans %}, Cuba.
+                {% endif %}
+                    </span>
+                    <span>
+                    {% if config['contact.telephone'] is defined %}
+                        <i class="icon-phone"></i><a href="tel://{{config['contact.telephone'][locale]}}"> 
+                        {{config['contact.telephone'][locale]}}</a>
+                    {% else %}
+                        <i class="icon-phone"></i><a href="tel://+53 7203 2807">+53 7203 2807</a>
+                    {%endif%}
+
+                        <i class="icon-envelope"></i><a href="mailto:{% if config['contact.email'] is defined %}{{config['contact.email'][locale]}}{% else %}{% trans %}info@restauranteelizaldehabana.com{% endtrans %}{% endif %}">{% if config['contact.email'] is defined %}
+            {{config['contact.email'][locale]}}
+            {% else %}
+            {% trans %}info@restauranteelizaldehabana.com{% endtrans %}
+            {% endif %}</a>
+                        <i class="icon-clock-o"></i>{% if config['contact.time'] is defined %}
+
+            {{config['contact.time'][locale]}}
+            {% else %}
+            {% trans %}12pm-12am{% endtrans %}
+            {% endif %}
+                    </span>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a id="galery" class="section-link"></a>
+    <div id="fh5co-galery-section">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box">
+                    <h2>{% trans %}galery{% endtrans %}</h2>
+                    <h3 style="color: #000000; font-size: 3em;"><i class="icon-camera-retro"></i></h3>
+                </div>
+            </div>
+            <div class="col-md-12 images">
+            <script type="text/javascript">
+                var imagesGalery = [
+                {% for image in images %}
+                "{{image.WebPath}}",
+                {% endfor %}];
+            </script>
+                <div class="col-md-4 animate-box imageframe" >
+                    <div class="services">
+
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-4 animate-box  imageframe"  >
+                    <div class="services">
+
+                    </div>
+                </div>
+                <div class="col-md-4 animate-box imageframe" >
+                    <div class="services">
+
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-4 animate-box imageframe">
+                    <div class="services">
+
+                    </div>
+                </div>
+                <div class="animate-box floating-image imageframe" >
+                    <div class="services">
+                                <!--<i class="icon-line-chart"></i>
+                                <div class="desc">
+                                    <h3></h3>
+                                    <p></p>
+                                </div>
+                            -->
+                        </div>
+                    </div>
+                    <div class="col-md-12 animate-box imageframe">
+                        <div class="services">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 animate-box imageframe" >
+                        <div class="services">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% endblock sections %}
+        {% block cta %}
+        <div class="fh5co-cta" style="background-image: url({% block cta_background %}{{ asset("images/slide_2.jpg") }}{% endblock %});">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="col-md-12 text-center animate-box">
+                    {% block cta_content %}
+                    {#<h3>We Try To Update The Site Everyday</h3>#}
+                    <p><a href="#" class="btn btn-primary btn-outline with-arrow btn-sm" data-toggle="modal" data-target="#OpinionModal">{% trans %}Give us your opinion{% endtrans %}<i class="icon-arrow-right"></i></a></p>
+                    {% endblock cta_content %}
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="OpinionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">{% trans %}Give us your opinion{% endtrans %}</h4>
+                    </div>
+                    <form class="form-horizontal" role="form">
+                        <div class="modal-body">
+                            <p>{% trans %}modal.opinion.text{% endtrans %}</p>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>{% trans %}About you{% endtrans %}</h4>
+
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-4 control-label">{% trans %}Name{% endtrans %}</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="inputName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="col-sm-4 control-label">{% trans %}Email{% endtrans %}</label>
+                                            <div class="col-sm-8">
+                                                <input type="email" class="form-control" id="inputEmail">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputDate" class="col-sm-4 control-label">{% trans %}Fecha de su visita{% endtrans %}</label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="inputDate" placeholder="12/31/2016">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputTime" class="col-sm-4 control-label">{% trans %}Hora{% endtrans %}</label>
+                                            <div class="col-sm-8">
+                                                <input type="time" class="form-control" id="inputTime" placeholder="12:15 AM">
+                                            </div>                                            
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4>{% trans %}Message{% endtrans %}</h4>
+                                        <div class="form-group">
+                                            <textarea maxlength="300"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+                            <button type="submit" class="btn btn-primary">{% trans %}Send{% endtrans %}</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        {% endblock cta %}
+
+</article>
+    
+        {% block footer %}
+        <footer id="fh5co-footer" role="contentinfo">
+
+            <div class="container">
+
+                <div class="col-md-6 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
+
+                    <div class="col-md-7">
+                        <h3 id="follow-us">{% trans %}Follow Us{% endtrans %}<a href="{% if config['social.fb'] is defined %}{{config['social.fb'][locale]}}{% else %}#{%endif%}"><i class="icon-facebook"></i></a>
+                            <a href="{% if config['social.instagram'] is defined %}{{config['social.instagram'][locale]}}{% else %}#{%endif%}"><i class="icon-instagram"></i></a></h3>
+                        </div>
+                        <div class="col-md-5 hashtags">
+                            <ul>
+                            
+                            {% for hashtags in utils.explodeByComas(config['hashtags']['es'])%}
+                                <li><a href="https://www.facebook.com/hashtag/{{hashtags}}">#{{hashtags}}</a></li>
+                            {% endfor %}
+                               
+                            </ul>
+                            
+                        </div>
+                        
+
+
+                    </div>
+
+                    <div class="col-md-5 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0">
+                        <h3>{% trans %}Suscribete a nuestro boletín{% endtrans %}</h3>
+                        <div class="row">
+                            <form class="form-horizontal" role="form">
+                              <div class="form-group">
+                                <label for="inputName" class="col-sm-3 control-label">{% trans %}Nombre{% endtrans %}</label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" id="inputName">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail" class="col-sm-3 control-label">{% trans %}Email{% endtrans %}</label>
+                            <div class="col-sm-9">
+                              <input type="email" class="form-control" id="inputEmail">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                          <button type="submit" class="btn btn-primary btn-outline with-arrow btn-sm">{% trans %}Send{% endtrans %}<i class="icon-arrow-right"></i></button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+
+
+
+      </div>
+
+
+      <div class="col-md-12 fh5co-copyright text-center">
+        <p>&copy; {{  "now"| date("Y") }} restauranteelizaldehabana.
+            {% trans %}La Habana{% endtrans %}, Cuba. {% trans %}All Rights Reserved{% endtrans %}. 
+            <br><span>Designed with <i class="icon-heart"></i> by <a href="#" target="_blank">Jo&Lisi Corp</a></span></p>
+        </div>
+
+    </div>
+</footer>
+{% endblock footer %}
+</div>
+
+{% endblock %}
+
+

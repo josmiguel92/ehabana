@@ -1,0 +1,47 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Menú diario{% endblock %}
+
+{% block body %}
+{#
+{% if dailies| length > 5 %}
+<div class="alert alert-warning">Es posible que los elementos del menú no se muestren correctamente debido a que son muchos. Se recomiendan no más de 5.</div>
+{% endif %}
+#}
+    <h1>Menú diario</h1>
+    {% if dailies is empty %}
+    <p>No hay elementos. Deberá añadir alguno. Se recomiendan no más de 5 elementos.</p>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Nombre(Eng)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for daily in dailies %}
+            <tr>
+                <td><a href="{{ path('dash_daily_show', { 'id': daily.id }) }}">{{ daily.nombre }}</a></td>
+                <td>{{ daily.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_daily_show', { 'id': daily.id }) }}">Mostrar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dash_daily_edit', { 'id': daily.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_daily_new') }}" class="btn btn-primary">Añadir elemento</a>
+        </li>
+    </ul>
+{% endblock %}

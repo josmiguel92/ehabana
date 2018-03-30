@@ -1,0 +1,47 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Configuración{% endblock %}
+
+{% block body %}
+    <h1>Configuración</h1>
+<div class="well well-lg"><p>Aquí puede encontrar configuración sensible. Los valores definen los textos mostrados en la pagina inicial.</p>
+<p>Los valores de <i>header.title, drinks.text, we.history</i> deben ser configurados  por primera vez.</p></div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Valor en Español</th>
+                <th>Valor en Ingles</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for config in configs %}
+            <tr>
+                <td><a href="{{ path('dash_config_show', { 'id': config.id }) }}">{{ config.id }}</a></td>
+                <td>{{ config.name }}</td>
+                <td>{{ config.valueEs }}</td>
+                <td>{{ config.valueEn }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_config_show', { 'id': config.id }) }}">Mostrar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dash_config_edit', { 'id': config.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn btn-default" href="{{ path('dash_config_new') }}">Crear un nuevo valor</a>
+        </li>
+    </ul>
+{% endblock %}

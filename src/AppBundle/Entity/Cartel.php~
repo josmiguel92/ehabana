@@ -1,0 +1,418 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Cartel
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="cartel")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CartelRepository")
+ */
+class Cartel
+{
+    private $temp;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titulo", type="string", length=255)
+     */
+    private $titulo;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titulo_en", type="string", length=255)
+     */
+    private $titulo_en;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="resumen", type="text")
+     */
+    private $resumen;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="more", type="text", nullable=true)
+     */
+    private $more;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="resumen_en", type="text")
+     */
+    private $resumen_en;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="more_en", type="text", nullable=true)
+     */
+    private $more_en;
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+    /**
+     * Get Translated title
+     *
+     * @return string
+     */
+    public function getTransTitle($locale)
+    {
+        switch (strtolower($locale)) {
+            case 'en':
+                return $this->titulo_en;
+                break;
+            case 'es':
+                return $this->titulo;
+                break;
+            
+            default:
+                return $this->titulo;
+                break;
+        }
+
+    }
+
+    /**
+     * Get Translated Resumen
+     *
+     * @return string
+     */
+    public function getTransResumen($locale)
+    {
+        switch (strtolower($locale)) {
+            case 'en':
+                return $this->resumen_en;
+                break;
+            case 'es':
+                return $this->resumen;
+                break;
+            
+            default:
+                return $this->resumen;
+                break;
+        }
+
+    }
+      /**
+     * Get Translated More
+     *
+     * @return string
+     */
+    public function getTransMore($locale)
+    {
+        switch (strtolower($locale)) {
+            case 'en':
+                return $this->more_en;
+                break;
+            case 'es':
+                return $this->more;
+                break;
+            
+            default:
+                return $this->more;
+                break;
+        }
+
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    
+
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     *
+     * @return Cartel
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    /**
+     * Set resumen
+     *
+     * @param string $resumen
+     *
+     * @return Cartel
+     */
+    public function setResumen($resumen)
+    {
+        $this->resumen = $resumen;
+
+        return $this;
+    }
+
+    /**
+     * Get resumen
+     *
+     * @return string
+     */
+    public function getResumen()
+    {
+        return $this->resumen;
+    }
+
+    /**
+     * Set more
+     *
+     * @param string $more
+     *
+     * @return Cartel
+     */
+    public function setMore($more)
+    {
+        $this->more = $more;
+
+        return $this;
+    }
+
+    /**
+     * Get more
+     *
+     * @return string
+     */
+    public function getMore()
+    {
+        return $this->more;
+    }
+
+        public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        // check if we have an old image path
+        if (isset($this->path)) {
+            // store the old name to delete after the update
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $path;
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+        ? null
+        : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path
+        ? null
+        : $this->getUploadDir().'/'.$this->path;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // la ruta absoluta del directorio donde se deben
+        // guardar los archivos cargados
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // se deshace del __DIR__ para no meter la pata
+        // al mostrar el documento/imagen cargada en la vista.
+        return 'uploads/cartel';
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        // si hay un error al mover el archivo, move() automáticamente
+        // envía una excepción. This will properly prevent
+        // the entity from being persisted to the database on error
+        $this->getFile()->move($this->getUploadRootDir(), $this->path);
+
+        // check if we have an old image
+        if (isset($this->temp)) {
+            // delete the old image
+            @unlink($this->getUploadRootDir().'/'.$this->temp);
+            // clear the temp image path
+            $this->temp = null;
+        }
+        $this->file = null;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getFile()) {
+            // haz lo que quieras para generar un nombre único
+            $filename = sha1(uniqid(mt_rand(), true));
+            $this->path = $filename.'.'.$this->getFile()->guessExtension();
+        }
+    }
+
+     /**
+     * @ORM\PostRemove()
+     */
+     public function removeUpload()
+     {
+        if ($file = $this->getAbsolutePath()) {
+            @unlink($file);
+        }
+    }
+
+ /**
+     * Set path
+     *
+     * @param string $path
+     *
+     * @return Tapa
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set tituloEn
+     *
+     * @param string $tituloEn
+     *
+     * @return Cartel
+     */
+    public function setTituloEn($tituloEn)
+    {
+        $this->titulo_en = $tituloEn;
+
+        return $this;
+    }
+
+    /**
+     * Get tituloEn
+     *
+     * @return string
+     */
+    public function getTituloEn()
+    {
+        return $this->titulo_en;
+    }
+
+    /**
+     * Set resumenEn
+     *
+     * @param string $resumenEn
+     *
+     * @return Cartel
+     */
+    public function setResumenEn($resumenEn)
+    {
+        $this->resumen_en = $resumenEn;
+
+        return $this;
+    }
+
+    /**
+     * Get resumenEn
+     *
+     * @return string
+     */
+    public function getResumenEn()
+    {
+        return $this->resumen_en;
+    }
+
+    /**
+     * Set moreEn
+     *
+     * @param string $moreEn
+     *
+     * @return Cartel
+     */
+    public function setMoreEn($moreEn)
+    {
+        $this->more_en = $moreEn;
+
+        return $this;
+    }
+
+    /**
+     * Get moreEn
+     *
+     * @return string
+     */
+    public function getMoreEn()
+    {
+        return $this->more_en;
+    }
+}

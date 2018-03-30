@@ -1,0 +1,48 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Bebidas{% endblock %}
+
+{% block body %}
+    <h1>Categorias de la lista de Bebidas</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ category.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ category.name }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ category.nombre }}</td>
+            </tr>
+
+            <tr>
+                <th>Drinks</th>
+                <td>
+                    <ul>
+                    {% for drink in category.drinks%}
+                    <li>{{ drink.nombre }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_category_index') }}" class="btn btn-primary">Regresar a la lista</a>
+        </li>
+        <li>
+            <a href="{{ path('dash_category_edit', { 'id': category.id }) }}" class="btn btn-default">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

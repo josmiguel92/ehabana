@@ -1,0 +1,69 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+
+{% block body %}
+    <h1>Lista de reservaciones</h1>
+    <h3 style="float: right;"><a href="{{ path('dash_reserva_index') }}">Todas</a> | <a href="{{ path('dash_reserva_pendientes') }}">Pendientes</a> | <a href="{{ path('dash_reserva_pasadas') }}">Pasadas</a></h3>
+
+    <table class="table table-striped">
+        <thead>
+        <tr style="position: st">
+            <th>Id</th>
+            <th>Fecha de Alta</th>
+            <th>Fecha de reserva</th>
+            <th>Nombre</th>
+            <th>Cant. Personas</th>
+            <th>Mensaje</th>
+            <th>Confirmado</th>
+            <th>Reservado</th>
+            <th>Cancelado</th>
+            <th>Comentario</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reserva in reservas %}
+            <tr class="{% if reserva.confirmado %}success{% endif %}">
+                <td><a href="{{ path('dash_reserva_show', { 'id': reserva.id }) }}">{{ reserva.id }}</a></td>
+                <td>{% if utils.getDaysInterval(reserva.fechaalta)|abs < 30 %}
+                        <abbr title="{{ reserva.fechaalta|date("Y-M-d (H:i)") }}">
+                            {{ utils.getDateReference(reserva.fechaalta) }}</abbr>
+                        {% else %}{{ reserva.fechaalta|date("Y-M-d (H:i)") }}
+                        {% endif %}</td>
+                <td   class="{% if utils.getDaysInterval(reserva.datereserva) < 11 %}yellow{% endif %}
+                {% if utils.getDaysInterval(reserva.datereserva) < 7 %}pink{% endif %}
+                {% if utils.getDaysInterval(reserva.datereserva) < 3 %}red{% endif %}
+                {% if utils.getDaysInterval(reserva.datereserva) < 0 %}gray{% endif %}
+
+
+                             ">
+                    {% if utils.getDaysInterval(reserva.datereserva)|abs < 30 %}
+                    <abbr title="{{ reserva.datereserva  | date("Y-M-d (H:i)") }}">{{ utils.getDateReference(reserva.datereserva) }} [{{ reserva.datereserva  | date("l d/m (h:i)") }}]</abbr>
+                    {% else %}{{ reserva.datereserva  | date("Y-M-d (H:i)") }}
+                    {% endif %}</td>
+                <td><a href="mailto:{{ reserva.email }}">{{ reserva.nombre }}</a></td>
+                <td>{{ reserva.personas }}</td>
+                <td>{{ reserva.mensaje }}</td>
+                <td>{% if reserva.confirmado %}Confirmado{% else %}A&uacute;n no{% endif %}</td>
+                <td>{% if reserva.reservado %}Reservado{% else %}No<a href="{{ path('dash_reserva_reserve', { 'id': reserva.id }) }}"
+                                                                 class="btn btn-sm btn-warning">Reservar</a>{% endif %}</td>
+                <td>{% if reserva.cancelado %}Si{% else %}No{% endif %}</td>
+                <td>{{ reserva.comentario }}</td>
+                <td>
+                        <a href="{{ path('dash_reserva_show', { 'id': reserva.id }) }}"
+                               class="btn btn-sm btn-primary">Ver</a>
+
+                            <a href="{{ path('dash_reserva_edit', { 'id': reserva.id }) }}"
+                               class="btn btn-sm btn-default">Editar</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- <ul>
+        <li>
+            <a href="{{ path('dash_reserva_new') }}" class="btn btn-default">Crear una nueva</a>
+        </li>
+    </ul> -->
+{% endblock %}

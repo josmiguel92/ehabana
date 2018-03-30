@@ -1,0 +1,44 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Personas{% endblock %}
+
+{% block body %}
+    <h1>Persona list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Pos</th>
+                <th>Path</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for persona in personas %}
+            <tr>
+                <td><a href="{{ path('dash_persona_show', { 'id': persona.id }) }}">{{ persona.id }}</a></td>
+                <td>{{ persona.nombre }}</td>
+                <td>{{ persona.pos }}</td>
+                <td>{{ persona.path }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_persona_show', { 'id': persona.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dash_persona_edit', { 'id': persona.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_persona_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

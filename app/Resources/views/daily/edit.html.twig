@@ -1,0 +1,16 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Menú diario{% endblock %}
+{% block body %}
+    <h1>Editar elemento del menú diario</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+        <a href="{{ path('dash_daily_index') }}" class="btn btn-default">Regresar a la lista</a>
+        
+    {{ form_end(edit_form) }}
+ {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-danger" style="float: right;">
+            {{ form_end(delete_form) }}
+   
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Carteles{% endblock %}
+
+{% block body %}
+    <h1>Cartel</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cartel.id }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ cartel.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Titulo (Eng)</th>
+                <td>{{ cartel.tituloen }}</td>
+            </tr>
+            <tr>
+                <th>Resumen</th>
+                <td>{{ cartel.resumen }}</td>
+            </tr>
+            <tr>
+                <th>Resumen (Eng)</th>
+                <td>{{ cartel.resumenen }}</td>
+            </tr>
+         
+            <tr>
+                <th>Imágen</th>
+                <td><a href="{{ asset(cartel.getWebPath() ) }}">{{ cartel.path }}</a></td>
+                <td><img src="{{ asset(cartel.getWebPath() ) }}" height="40"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn btn-default" href="{{ path('dash_cartel_index') }}">Regresar a listado de Carteles</a>
+        </li>
+        <li>
+            <a class="btn btn-primary" href="{{ path('dash_cartel_edit', { 'id': cartel.id }) }}">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-danger"  value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

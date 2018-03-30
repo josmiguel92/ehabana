@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="0">
+                <source>Elizalde's Restaurant-Bar</source>
+                <target>Elizalde's Restaurant-Bar</target>
+            </trans-unit>
+            <trans-unit id="start">
+                <source>Start</source>
+                <target>Start</target>
+            </trans-unit>
+            <trans-unit id="food">
+                <source>Food</source>
+                <target>Food</target>
+            </trans-unit>
+            <trans-unit id="drinks">
+                <source>Drinks</source>
+                <target>Drinks</target>
+            </trans-unit>
+            <trans-unit id="we">
+                <source>We</source>
+                <target>About</target>
+            </trans-unit>
+            <trans-unit id="contact">
+                <source>Contact</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="galery">
+                <source>galery</source>
+                <target>Galery</target>
+            </trans-unit>
+            <trans-unit id="email">
+                <source>Email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="havana">
+                <source>La Habana</source>
+                <target>Havana</target>
+            </trans-unit>
+            <trans-unit id="address">
+                <source>Empedrado 521 entre Monserrate y Villegas</source>
+                <target>Empedrado street 521 between Monserrate and Villegas</target>
+            </trans-unit>
+            <trans-unit id="boletin.suscription">
+                <source>Suscribete a nuestro boletín</source>
+                <target>Receive our newsletter</target>
+            </trans-unit>
+            <trans-unit id="follow.us">
+                <source>Suscribete a nuestro boletín</source>
+                <target>Receive our newsletter</target>
+            </trans-unit>
+            <trans-unit id="label.follow.us">
+                <source>Follow Us</source>
+                <target>Follow Us</target>
+            </trans-unit>
+            <trans-unit id="button.give.opinion">
+                <source>Give us your opinion</source>
+                <target>Give us your opinion</target>
+            </trans-unit>
+            <trans-unit id="button.send">
+                <source>Send</source>
+                <target>Send</target>
+            </trans-unit>
+            <trans-unit id="title.welcome">
+                <source>Bienvenidos al Restaurante-Bar Elizalde</source>
+                <target>Welcome to Elizalde's Restaurant-Bar</target>
+            </trans-unit>
+            <trans-unit id="title.name">
+                <source>Restaurante-bar Elizalde</source>
+                <target>Elizalde's Restaurant-Bar</target>
+            </trans-unit>
+            <trans-unit id="title.our.family">
+                <source>Nuestra familia</source>
+                <target>Our Family</target>
+            </trans-unit>
+            <trans-unit id="title.our.teams">
+                <source>Nuestro equipo</source>
+                <target>Our Team</target>
+            </trans-unit>
+            <trans-unit id="title.menu.diario">
+                <source>Menú del día</source>
+                <target>Daily Menu</target>
+            </trans-unit>
+            <trans-unit id="title.bebidas">
+                <source>Bebidas</source>
+                <target>Drinks</target>
+            </trans-unit>
+            <trans-unit id="title.nosotros">
+                <source>Nosotros</source>
+                <target>About Us</target>
+            </trans-unit>
+            <trans-unit id="we.us">
+                <source>About Us</source>
+                <target>About Us</target>
+            </trans-unit>
+            <trans-unit id="label.copyright">
+                <source>All Rights Reserved</source>
+                <target>All Rights reserved</target>
+            </trans-unit>
+            <trans-unit id="modal.opinion.text">
+                <source>modal.opinion.text</source>
+                <target>We wish to be part of you, we are very interested to hear what you think. Let us know about your opinion and experiences in our restaurant-bar.</target>
+            </trans-unit>
+            <trans-unit id="label.about.you">
+                <source>About you</source>
+                <target>About you</target>
+            </trans-unit>
+            <trans-unit id="label.name">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="label.message">
+                <source>Message</source>
+                <target>Message</target>
+            </trans-unit>
+            <trans-unit id="label.close">
+                <source>Close</source>
+                <target>Close</target>
+            </trans-unit>
+            <trans-unit id="title.history">
+                <source>Historia</source>
+                <target>History</target>
+            </trans-unit>
+            <trans-unit id="label.date.of.visit">
+                <source>Fecha de su visita</source>
+                <target>Date of visit</target>
+            </trans-unit>
+            <trans-unit id="label.photo">
+                <source>Agrege su foto a nuestra Galería</source>
+                <target>Add your photos to our galery</target>
+            </trans-unit>
+            <trans-unit id="label.date">
+                <source>Fecha</source>
+                <target>Date</target>
+            </trans-unit>
+            <trans-unit id="label.name.nombre">
+                <source>Nombre</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="label.time">
+                <source>Hora</source>
+                <target>Time</target>
+            </trans-unit>
+            <trans-unit id="get.in.touch">
+                <source>Mantente en contacto</source>
+                <target>Get in touch</target>
+            </trans-unit>
+            <trans-unit id="get.booking">
+                <source>Reservar ahora</source>
+                <target>Make a reservation</target>
+            </trans-unit>
+            <trans-unit id="get.booking.title">
+                <source>Hacer una reservación</source>
+                <target>Make a reservation now</target>
+            </trans-unit>
+            
+            <trans-unit id="are.u.human">
+                <source>No eres un robot, ¿cierto?</source>
+                <target>You are human, don't you?</target>
+            </trans-unit>
+            <trans-unit id="guest.number">
+                <source>Cantidad de comensales</source>
+                <target>How many guest?</target>
+            </trans-unit>
+            <trans-unit id="booking.comment">
+                <source>Algo que desees dejar claro...</source>
+                <target>Something you want to clarify...</target>
+            </trans-unit>
+            <trans-unit id="booking.message.title">
+                <source>Su reserva fue registrada...</source>
+                <target>Your reservation was registered</target>
+            </trans-unit>
+            <trans-unit id="booking.message.contact">
+                <source>Muy pronto le confirmaremos por email. Si lo desea puede ponerse en contácto mediante el teléfono o el correo electrónico para arreglar los detalles.</source>
+                <target>We'll confirm it to your email very soon. You can get in touch over email or telephone in order to arrange the details.</target>
+            </trans-unit>
+            <trans-unit id="booking.message.wainting">
+                <source>Lo esperamos. Tenga usted un buen día.</source>
+                <target>We are waiting for you. Have a nice day!</target>
+            </trans-unit>
+
+            <trans-unit id="booking.message.social">
+                <source>Puede visitar nuestras páginas de Facebook o TripAdvisor en los siguientes enlaces:</source>
+                <target>You can visit our profiles on Facebook or TripAdvisor by following this links:</target>
+            </trans-unit>
+            <trans-unit id="button.goto.home">
+                <source>Regresar al Inicio</source>
+                <target>Come back to Home</target>
+            </trans-unit>
+            <trans-unit id="find.us">
+                <source>Búscanos en</source>
+                <target>Find us at</target>
+            </trans-unit>
+            <trans-unit id="opinion.message">
+                <source>Muchas gracias por su opinión...</source>
+                <target>Thanks for your opinion!</target>
+            </trans-unit>
+
+
+        </body>
+    </file>
+</xliff>

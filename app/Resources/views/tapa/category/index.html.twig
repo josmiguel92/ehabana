@@ -1,0 +1,44 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Bebidas{% endblock %}
+
+{% block body %}
+    <h1>Categorias de la lista de Bebidas</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Name(Eng)</th>
+                
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td><a href="{{ path('dash_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                <td>{{ category.nombre }}</td>
+                <td>{{ category.name }}</td>
+                
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dash_category_show', { 'id': category.id }) }}">Mostrar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dash_category_edit', { 'id': category.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dash_category_new') }}" class="btn btn-primary">Crear una categoría</a>
+        </li>
+    </ul>
+{% endblock %}

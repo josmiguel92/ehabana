@@ -1,0 +1,27 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+{% block title %}Carteles{% endblock %}
+
+{% block body %}
+    <h1>Cartel: <small>{{ cartel.titulo }} <i>[{{ cartel.tituloen }}]</i></small></h1>
+
+    <div class="row">
+        <div class="col-md-9">
+            <pre>{{ cartel.resumen | raw}}</pre>
+            <hr>
+            <pre>{{ cartel.resumenen }}</pre>
+        </div>
+        <div class="col-md-3">
+            <img src="{{ asset(cartel.getWebPath() ) }}" style="width: 100%; float: right" class="image thumbnail">
+            <a class="btn btn-primary" href="{{ path('dash_cartel_edit', { 'id': cartel.id }) }}">Editar</a>
+            <a class="btn btn-default" href="{{ path('dash_cartel_index') }}">Lista de Carteles</a>
+            <hr>
+            {{ form_start(delete_form) }}
+            <input type="submit" class="btn btn-danger"  value="Eliminar">
+            {{ form_end(delete_form) }}
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

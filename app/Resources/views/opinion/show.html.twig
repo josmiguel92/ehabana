@@ -1,0 +1,39 @@
+{% extends "AppBundle:Dash:base.html.twig" %}
+
+{% block body %}
+    <h1>Opinion #{{ opinion.id }}</h1>
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ opinion.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ opinion.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ opinion.email }}</td>
+            </tr>
+            <tr>
+                <th>Inputdate</th>
+                <td>{{ opinion.inputDate }}</td>
+            </tr>
+            <tr>
+                <th>Inputtime</th>
+                <td>{{ opinion.inputTime }}</td>
+            </tr>
+            <tr>
+                <th>Inputmessage</th>
+                <td>{{ opinion.inputMessage }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ul>
+        <li>
+            <a href="{{ path('dash_opinion_index') }}">Regresar a la lista</a>
+        </li>
+    </ul>
+
+{% endblock %}

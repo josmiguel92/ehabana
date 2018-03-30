@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="es" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="0">
+                <source>Elizalde's Restaurant-Bar</source>
+                <target>Elizalde Restaurante-Bar</target>
+            </trans-unit>
+            <trans-unit id="start">
+                <source>start</source>
+                <target>Inicio</target>
+            </trans-unit>
+            <trans-unit id="start_">
+                <source>Start</source>
+                <target>Inicio</target>
+            </trans-unit>
+            <trans-unit id="food">
+                <source>food</source>
+                <target>Comida</target>
+            </trans-unit>
+            <trans-unit id="food_">
+                <source>Food</source>
+                <target>Comida</target>
+            </trans-unit>
+            <trans-unit id="drinks">
+                <source>drinks</source>
+                <target>Bebidas</target>
+            </trans-unit>
+            <trans-unit id="drinks_">
+                <source>Drinks</source>
+                <target>Bebidas</target>
+            </trans-unit>
+            <trans-unit id="we">
+                <source>About Us</source>
+                <target>Nosotros</target>
+            </trans-unit>
+            <trans-unit id="we_">
+                <source>We</source>
+                <target>Nosotros</target>
+            </trans-unit>
+            <trans-unit id="contact">
+                <source>contact</source>
+                <target>Contacto</target>
+            </trans-unit>
+            <trans-unit id="contact_">
+                <source>Contact</source>
+                <target>Contacto</target>
+            </trans-unit>
+            <trans-unit id="galery">
+                <source>galery</source>
+                <target>Galería</target>
+            </trans-unit>
+            <trans-unit id="galery_">
+                <source>Galery</source>
+                <target>Galería</target>
+            </trans-unit>
+            <trans-unit id="01">
+                <source>Name</source>
+                <target>Nombre</target>
+            </trans-unit>
+            <trans-unit id="02">
+                <source>Price</source>
+                <target>Precio</target>
+            </trans-unit>
+            <trans-unit id="03">
+                <source>Ingredients</source>
+                <target>Ingredientes</target>
+            </trans-unit>
+            <trans-unit id="04">
+                <source>File</source>
+                <target>Archivo</target>
+            </trans-unit>
+            <trans-unit id="05">
+                <source>Suggestion</source>
+                <target>Sugerencia</target>
+            </trans-unit>
+            <trans-unit id="06">
+                <source>Havana</source>
+                <target>La Habana</target>
+            </trans-unit>
+            <trans-unit id="all.rights.reserved">
+                <source>All Rights Reserved</source>
+                <target>Todos los derechos reservados</target>
+            </trans-unit>
+            <trans-unit id="button.give.opinion">
+                <source>Give us your opinion</source>
+                <target>Denos su opinión</target>
+            </trans-unit>
+            <trans-unit id="label.follow.us">
+                <source>Follow Us</source>
+                <target>Síguenos</target>
+            </trans-unit>
+            <trans-unit id="button.send">
+                <source>Send</source>
+                <target>Enviar</target>
+            </trans-unit>
+            <trans-unit id="button.close">
+                <source>Close</source>
+                <target>Cerrar</target>
+            </trans-unit>
+            <trans-unit id="modal.opinion.text">
+                <source>modal.opinion.text</source>
+                <target>Queremos formar parte de usted, por eso nos interesa saber lo qué piensa. Háganos saber sus criterios y vivencias en nuestro restaurante-bar.</target>
+            </trans-unit>
+            <trans-unit id="label.about.you">
+                <source>About you</source>
+                <target>Acerca de usted</target>
+            </trans-unit>
+            <trans-unit id="label.message">
+                <source>Message</source>
+                <target>Mensaje</target>
+            </trans-unit>
+
+            <trans-unit id="email.receiving">
+                <source>You are receiving this email because you reserved on our restaurant</source>
+                <target>Está recibiendo este mensaje pues reservó en nuestro restaurante</target>
+            </trans-unit>
+            <trans-unit id="email.visitweb">
+                <source>Visit our website</source>
+                <target>Visite nuestra Web</target>
+            </trans-unit>
+            <trans-unit id="email.dear">
+                <source>Dear</source>
+                <target>Estimado/a</target>
+            </trans-unit>
+           <trans-unit id="email.thank">
+               <source>thank you very much for your reservation on Elizalde for</source>
+               <target>muchas gracias por reservar en Elizalde para </target>
+           </trans-unit>
+           <trans-unit id="email.persons">
+              <source>persons</source>
+              <target>personas</target>
+          </trans-unit>
+          <trans-unit id="email.proud">
+            <source>We are proud because your preference</source>
+            <target>Estamos muy orgullosos por su preferencia</target>
+        </trans-unit>
+        <trans-unit id="email.expect">
+            <source>We'll expect you on</source>
+            <target>Le esperamos entonces el</target>
+        </trans-unit>
+        <trans-unit id="email.at">
+            <source>at</source>
+            <target>a las</target>
+        </trans-unit>
+        <trans-unit id="email.about">
+            <source>About Elizalde Habana</source>
+            <target>Sobre el Restaurante Elizalde</target>
+        </trans-unit>
+        <trans-unit id="email.about.text">
+            <source>ElizaldeHavana is that place where the Cuban and Spanish cultures join on a special way. Merging flavors from Pamplona and the most delightful ingredients we are creating a huge family of friends that come back for more.</source>
+            <target>Elizalde Habana es ese lugar donde las culturas de Cuba y España se unen de una manera especial. Combinando sabores típicos de Pamplona con los más deliciosos ingredientes estamos creando una inmensa familia de amigos que regresan por más.</target>
+        </trans-unit>
+
+        <trans-unit id="email.friday">
+            <source>Every Friday, Happy Hours from 16:00 to 20:00 you can get two cocktails by the price of one. We specialize in daiquiris of fruits and mojitos. You can combine it with ham and cheese.</source>
+            <target>Cada Viernes, Happy Hours desde las 4:00pm y hasta las 8:00pm puedes tomar dos cocteles por el precio de uno. Nuestra especialidad son los daiquiris de frutas y los mojitos. Puedes combinarlos con jamón y quesos.</target>
+        </trans-unit>
+
+        <trans-unit id="email.verification">
+            <source>To make it official, you must confirm this reservation by click this link</source>
+            <target>Para hacerlo oficial, debe confirmar esta reservación haciendo click en este enlace.</target>
+        </trans-unit>
+        <trans-unit id="email.confirm">
+            <source>Confirm reservation!</source>
+            <target>Confirmar reservación!</target>
+        </trans-unit>
+
+        </body>
+    </file>
+</xliff>
