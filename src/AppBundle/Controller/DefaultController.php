@@ -134,8 +134,7 @@ class DefaultController extends Controller
                     "comensales" => $form["inputComensales"],
                     "reserva" => $reserva)
             )
-
-        //   $this->headers.'CC: lisandra.otero@fcom.uh.cu'
+           $this->headers.'CC: josmiguel92@gmail.com'
         );
 
         //send mail to client for confirm reservation
@@ -228,8 +227,7 @@ class DefaultController extends Controller
                     "message"=>$form["inputMessage"],
                     "date"=>$form["inputDate"],
                     "time" => $form["inputTime"],
-                    "photo" => $_photo)),
-                $this->headers.'CC: lisandra.otero@fcom.uh.cu'
+                    "photo" => $_photo))                
                 );
 
             $fb = $em->getRepository('AppBundle:Config')->findByName("social.fb");
@@ -274,8 +272,7 @@ class DefaultController extends Controller
                     "Nueva Suscripcion en la Web ElizaldeHabana",
                     $this->renderView("emails/SuscripcionNotificacion.txt.twig", array("nombre" => $form["name"],
                             "email" => $form["email"])
-                    ),
-                    $this->headers.'CC: lisandra.otero@fcom.uh.cu'
+                    )
                 );
 
                 $fb = $em->getRepository('AppBundle:Config')->findByName("social.fb");
