@@ -133,7 +133,7 @@ class DefaultController extends Controller
                 "time" => $form["inputTime"],
                     "comensales" => $form["inputComensales"],
                     "reserva" => $reserva)
-            )
+            ),
            $this->headers.'CC: josmiguel92@gmail.com'
         );
 
