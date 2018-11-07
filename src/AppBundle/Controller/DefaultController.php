@@ -124,7 +124,7 @@ class DefaultController extends Controller
 
             //send mail to administration for make reservation
         mail("elizaldebarrestaurante@gmail.com",
-            "Reservación mediante la Web ElizaldeHabana",
+            $reserva->getId(). "- Reservación mediante la Web ElizaldeHabana",
             $this->renderView("emails/ReservaNotificacion.txt.twig", array(
                 "nombre" => $form["name"],
                 "email" => $form["email"],
