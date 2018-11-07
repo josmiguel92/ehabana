@@ -2,6 +2,8 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
+date_default_timezone_set('America/Havana');
+
 /**
  * @var Composer\Autoload\ClassLoader
  */
