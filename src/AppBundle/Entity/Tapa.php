@@ -46,13 +46,6 @@ class Tapa
     /**
      * @var string
      *
-     * @ORM\Column(name="Price", type="decimal", precision=10, scale=2)
-     */
-    private $price;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="Ingredients", type="text")
      */
     private $ingredients;
@@ -122,32 +115,7 @@ class Tapa
 
     }
 
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return Tapa
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
+/**
      * Set ingredients
      *
      * @param string $ingredients
