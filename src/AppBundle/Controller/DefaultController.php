@@ -67,6 +67,54 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/alternate/{_locale}", defaults={"_locale": "es"}, requirements={
+     * "_locale": "en|es|fr"
+     * }, name="homepage_")
+     */
+    public function _indexAction(Request $request, $_locale)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $carteles = $em->getRepository('AppBundle:Cartel')
+            ->createQueryBuilder("c")
+            ->orderBy("c.id", "DESC")
+            ->getQuery()->getResult();
+
+        $tapas = $em->getRepository('AppBundle:Tapa')->findAll();
+        $personas = $em->getRepository('AppBundle:Persona')->findAll();
+        $daily = $em->getRepository('AppBundle:Daily')->findAll();
+        $images = $em->getRepository('AppBundle:Imagen')->findByActive(true);
+        $allQuestions = $em->getRepository('AppBundle:Pregunta')
+            ->createQueryBuilder("c")->orderBy("c.id", "ASC")
+            ->getQuery()->getResult();
+        $pregunta = $allQuestions[rand(0, count($allQuestions)-1)];
+        $drinkscat = $em->getRepository('AppBundle:Category')
+            ->createQueryBuilder('k')
+            ->orderBy('k.position', 'ASC')
+            ->getQuery()->getResult();
+
+        $config_ = $em->getRepository('AppBundle:Config')->findAll();
+
+        $config = [];
+        foreach ($config_ as $key => $value) {
+            $config[$value->getName()]['es'] = $value->getValueEs();
+            $config[$value->getName()]['en'] = $value->getValueEn();
+        }
+        return $this->render('@App/Front/index.html.twig', [
+            "carteles"=>$carteles,
+            "tapas"=>$tapas,
+            "config" => $config,
+            "categories" => $drinkscat,
+            "personas"=>$personas,
+            'daily'=>$daily,
+            'images'=>$images,
+            'pregunta'=>$pregunta,
+            "locale" => $_locale,
+            'inputhidden' => [uniqid(), date("Ymd")]
+        ]);
+    }
+
+    /**
      * @Route("/{_locale}/confirmreservation/{token}", defaults={"_locale": "es"}, requirements={
      * "_locale": "en|es|fr"
      * }, name="confirmreservation")

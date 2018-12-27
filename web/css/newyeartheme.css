@@ -1,0 +1,286 @@
+/* by Josue. HabanaTech. 2018 */
+body {
+    font-family: "Raleway", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #7f7f7f;
+    background: #fff;
+    height: 100%;
+    position: relative;
+}
+
+a {
+    color: #27E1CE;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+a:hover, a:active, a:focus {
+    color: #27E1CE;
+    outline: none;
+}
+
+p {
+    margin-bottom: 30px;
+}
+.intro p{
+    color: #fff;
+}
+.fp-controlArrow.fp-prev {
+    border-width: 30px 15px 30px 0 !important;
+    border-color: transparent #808c7c80 transparent !important;
+}
+.fp-controlArrow.fp-next {
+    border-width: 30px 0 30px 15px !important;
+    border-color: transparent #808c7c80 transparent !important;
+}
+h1, h2, h3, h4, h5, h6, figure {
+    color: #000;
+    font-family: "Raleway", Arial, sans-serif;
+    font-weight: 400;
+    margin: 0 0 30px 0;
+}
+a,a:hover, a:active, a:focus {
+    color: #EC3237;
+}
+.btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
+    background: #EC3237 !important;
+    color: #fff;
+}
+.btn-primary.btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #EC3237;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background: #EC3237 !important;
+    border-color: #EC3237 !important;
+}
+.hidden{display: none}
+#header{
+    position:fixed;
+    height: 60px;
+    display:block;
+    width: 100%;
+    background: #333;
+    z-index:9;
+    text-align:center;
+    color: #f2f2f2;
+    padding: 0;
+    top:0px;
+}
+#header_menu{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    align-items: center;
+}
+#header_menu li{
+    flex: 1 1 0px;
+}
+.header_menu_logo img {
+    height: 60px;
+}
+.header_menu_logo{
+    flex: 3 1 auto !important;
+}
+.header_menu_btn{
+    flex: 2 1 auto !important;
+}
+.header_menu_btn a{
+    text-decoration: none !important;
+}
+.header_menu_social, .header_menu_lang{
+    flex: 0.2 1 auto !important;
+}
+#header_menu li a {
+    color: #fff !important;
+    font-size: .9em;
+    text-transform: uppercase;
+    padding: 10px;
+    text-decoration: none;
+    background-image: linear-gradient(#EC3237, rgba(255, 37, 26, 0.73));
+    background-position: 0% 100%;
+
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size cubic-bezier(.18,.89,.32,1.28) .4s;
+}
+
+#header_menu li.link a:hover,
+#header_menu li.header_menu_social a:hover {
+ background-size: 100% 2px;
+}
+.intro_grid{
+    display: grid;
+    grid-gap: 1.5vw;
+    min-height: 95vh;
+    padding: 1.5vw;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: 50vh 30vh;
+    grid-template-areas: "hero_left hero_rigth" "small1 small2";
+    position: absolute;
+    top: 0;
+    width: 95vw;
+}
+.intro_grid div:nth-child(3) h1{
+    font-size: 3.5em;
+    color: #ec3237;
+    font-weight: 600;
+    text-shadow: 1px 1px white;
+    text-align: left;
+}
+.section_news_slide_grid{
+    display: grid;
+    grid-gap: 1.5vw;
+    height: calc(90% - 60px);
+    padding: 1.5vw;
+    grid-template-columns: 2.5fr 1.2fr;
+    grid-template-rows: 20% 80%;
+    grid-template-areas: "news_image news_title" "news_image news_text";
+    position: absolute;
+    top: 60px;
+    width: 90vw;
+}
+.news_item_title{grid-area: news_title}
+.news_item_image{grid-area: news_image;
+    max-width: 70vw;
+overflow: hidden}
+.news_item_text{grid-area: news_text}
+
+.news_item_image img{
+    height: 100%;
+    transition: all ease-in-out .5s;
+}
+.news_item_image img:hover
+{
+    transform: scale(1.05);
+}
+.food_main_grid{
+    display: grid;
+    height: calc(80vh - 60px);
+    width: 90vw;
+    top: 60px;
+    position: relative;
+    margin: 0 auto;
+    grid-template-columns: 5vw 1fr 5vw 1.5fr;
+    grid-gap: 0;
+}
+.food_grid_divider{
+    clip-path: polygon(0% 0%, 100% 0%, 20% 100%, 0% 100%);
+    background: #fff;
+}
+.food_grid_divider_inverted{
+    clip-path: polygon(80% 0%, 120% 0%, 120% 100%, 0% 100%);
+    background: #fffa;
+}
+.food_daily_menu {
+    background-image: linear-gradient(to left,#fff,#fffa);
+}.food_daily_menu ul{
+   list-style: none;
+}
+:root{
+    --gap: 2vmin;
+    --radio: calc(100vmin / 3);
+    --width: calc(var(--radio) * .866);
+    --height: var(--radio);
+}
+.section_food_slide_grid{
+    display: grid;
+    max-width: 100vmin;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 1vmin;
+    padding-left: 1vmin;
+    margin: .5rem auto;
+    top: -5%;
+    position: relative;
+}
+.food_tapa_item{
+    transition: all ease .5s;
+    width: calc(var(--width));
+    height: calc(var(--height));
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%,50% 100%,0% 75%, 0% 25%);
+}
+.food_tapa_item:hover{
+ /*   clip-path: circle(50% at 54% 50%);
+    transition: clip ease;*/
+
+}
+
+.food_tapa_item:nth-of-type(1) {
+    grid-column: 2 / span 2;
+    grid-row: 1;
+}
+.food_tapa_item:nth-of-type(2) {
+    grid-column: 4 / span 2;
+    grid-row: 1;
+}
+
+.food_tapa_item:nth-of-type(3) {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+}
+
+.food_tapa_item:nth-of-type(4) {
+    grid-column: 3 / span 2;
+    grid-row: 2;
+}
+.food_tapa_item:nth-of-type(5) {
+    grid-column: 5 / span 2;
+    grid-row: 2;
+}
+.food_tapa_item:nth-of-type(6) {
+    grid-column: 2 / span 2;
+    grid-row: 3;
+}
+.food_tapa_item:nth-of-type(7) {
+    grid-column: 4 / span 2;
+    grid-row: 3;
+}
+.food_tapa_item:nth-of-type(-n+2) {
+margin-bottom: calc(var(--height) * -.2);
+}
+.food_tapa_item:nth-of-type(n+6):nth-of-type(-n+7) {
+margin-top: calc(var(--height) * -.2);
+}
+
+.food_tapa_item_image{
+    position: relative;
+    height: 100%;
+}
+.food_tapa_item_image img{
+    height: 100%;
+    min-width: 100%;
+}
+.tapas{
+    height: calc(100% - 60px);
+}
+.section.food{
+    background-color: rgb(255, 255, 255);
+
+    background-position: 0;
+
+    background-position-x: 0px;
+    background-position-y: center;
+
+    background-repeat: no-repeat;
+
+    background-size: contain;
+}
+
+.drinks_category{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 2em;
+    width: 90vw;
+    margin: 0 auto;
+}
+.drinks_category p{
+    padding: .5em;
+    background-color: #fffa;
+    color: #000;
+}
+.drinks_category_name{
+    text-shadow: #fff 1px 1px 2px;
+}
