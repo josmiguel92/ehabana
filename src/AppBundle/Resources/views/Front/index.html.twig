@@ -13,7 +13,7 @@
         <li data-menuanchor="contact"  class="link"><a href="#contact">{% trans %}Contact{% endtrans %}</a></li>
         <li data-menuanchor="gallery" class="link" ><a href="#gallery">{% trans %}galery{% endtrans %}</a></li>
         <li class="header_menu_btn">
-            <a href="#" class="btn btn-primary btn-outline btn-sm header-btn" id="BookingBtnTop" data-toggle="modal" data-target="#BookingModal">{% trans %}Reservar ahora{% endtrans %}</a>
+            <a href="#book/1" class="btn btn-primary btn-outline btn-sm header-btn" id="BookingBtnTop">{% trans %}Reservar ahora{% endtrans %}</a>
         </li>
         <li class="header_menu_social">
             {% if config['social.fb'] is defined %}
@@ -51,16 +51,15 @@
     </ul>
 </div>
 <div id="fullpage">
-    <div class="section Background" id="section0">
+    <div class="section Background fp-noscroll" id="section0">
         <div class="Background"
              style="position: relative;
-height: calc(100% - 60px);
-width: 100vw;
-vertical-align: bottom;
-top: 30px;
-padding: 0;
-
-">
+            height: calc(100% - 60px);
+            width: 100vw;
+            vertical-align: bottom;
+            top: 30px;
+            padding: 0;
+            margin: 0;">
             <canvas class="Background-canvas" style="height: calc(100vh - 60px) !important; width: 1350px !important; margin: 0; position: relative;" width="100"></canvas>
 
             <div class="intro_grid" style="display: grid; position: absolute; top: 0">
@@ -84,7 +83,10 @@ padding: 0;
                     <h1>{{ cartel.getTransTitle(locale) }}</h1>
                 </div>
                 <div class="news_item_image">
-                    <img data-src="{{ asset(cartel.getWebPath()) }}" alt="{{ cartel.getTransTitle(locale) }}">
+                    <a href="{{ asset(cartel.getWebPath()) }}" title="View Image" target="_blank">
+                        <img data-src="{{ asset(cartel.getWebPath()) }}" alt="{{ cartel.getTransTitle(locale) }}">
+                    </a>
+
                 </div>
                 <div class="news_item_text">
                     {{ cartel.getTransAllResumen(locale) | nl2br }}
@@ -117,7 +119,7 @@ padding: 0;
                     <div class="section_food_slide_grid">
                     {% for tapa in tapas %}
 
-                        <div class="food_tapa_item">
+                        <div class="food_tapa_item hexagono">
                             <div class="food_tapa_item_image">
                                 <img data-src="{{ asset(tapa.getWebPath) }}">
                             </div>
@@ -162,21 +164,177 @@ padding: 0;
         </div>
 
     </div>
+    <div class="section about fp-auto-height" id="section4"  style="background: url({{ asset("images/wall.jpg") }})" >
+        <div class="about_history_grid">
+            <h1 class="about_section_title">{% trans %}Historia{% endtrans %}</h1>
+                <p class="about_history_text">
+                    {% if config['we.history'] is defined %}
+                        {{config['we.history'][locale] | nl2br }}
+                    {% endif %}
+                </p>
+
+
+                <h2 class="about_team_title">{% trans %}Nuestro equipo{% endtrans %}</h2>
+                <div class="person about_person1">
+                    <div class="row hexagono">
+                        <img data-src="{{ asset("images/person1.jpg") }}" alt="Jaime Elizalde">
+                    </div>
+
+                    <span>Jaime Elizalde</span>
+                </div>
+                <div class="person about_person2 " style="margin-bottom: 2em">
+                    <div class="row hexagono">
+                        <img data-src="{{ asset("images/person2.jpg") }}" alt="Yanaisi Albite">
+                    </div>
+                    <span>Yanaisi Albite</span>
+                </div>
+
+            <div class="about_team_image">
+                <img data-src="{{ asset("images/team.jpg") }}">
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+    <div class="section contact fp-noscroll" id="section5">
+        <div class="contact_grid">
+            <div id="map" class="animate-box" data-animate-effect="fadeIn" style="background: brown"></div>
+            <div id="contact-footer">
+            <span>
+                <i class="icon-map"></i>
+                 {% if config['contact.address'] is defined %}
+                     {{config['contact.address'][locale]}}
+                 {% else %}
+                     {% trans %}Empedrado 521 entre Monserrate y Villegas{% endtrans %}. {% trans %}La Habana{% endtrans %}, Cuba.
+                 {% endif %}
+            </span>
+                <span>
+                <ul>
+                    <li>
+                         {% if config['contact.telephone'] is defined %}
+                             <i class="icon-phone"></i><a href="tel://{{config['contact.telephone'][locale]}}">
+                            {{config['contact.telephone'][locale]}}</a>
+                        {% else %}
+                             <i class="icon-phone"></i><a href="tel://+53 7203 2807">+53 7203 2807</a>
+                         {%endif%}
+                    </li>
+                    <li>
+                        <i class="icon-envelope"></i>
+                        {% if config['contact.email'] is defined %}
+                            <a href="mailto:{{config['contact.email'][locale]}}">{{config['contact.email'][locale]}}</a>
+                        {% else %}
+                            <a href="mailto:elizaldebarrestaurante@gmail.com ">elizaldebarrestaurante@gmail.com </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <i class="icon-clock-o"></i>
+                        {% if config['contact.time'] is defined %}
+                            {{config['contact.time'][locale]}}
+                        {% else %}
+                            {% trans %}12pm-12am{% endtrans %}
+                        {% endif %}
+                    </li>
+                </ul>
+
+
+
+
+                    </span>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="section gallery" id="section6"  style="" >
+        {% for image in images %}
+        <div class="slide" id="slide{{ loop.index }}">
+            <div class="gallery_image_grid">
+                <div class="gallery_image">
+                    <img data-src="{{ asset(image.WebPath) }}" alt="{{image.getTransName(locale)}}">
+                </div>
+                <div class="gallery_image_desc">
+                    <h3>{{image.getTransName(locale)}}</h3>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="section book fp-auto-height" id="section7" style="background-image: url({{ asset("images/frontal-wide.jpg") }}">
+        <div class="book_overlay"></div>
+        <div class="container booking">
+            {% block cta_content %}
+            <div class="slide" id="slide1">
+                <div class="book_btn_container">
+                    <a href="#book/1" class="btn btn-primary btn-outline btn-sm header-btn with-arrow">{% trans %}Reservar ahora{% endtrans %}<i class="icon-arrow-right"></i></a>
+
+                    <a href="{{ config['social.tripadvisor'][locale] }}" class="btn btn-primary btn-outline with-arrow btn-sm" target="_blank" rel="nofollow">{% trans %}Give us your opinion{% endtrans %}<i class="icon-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="slide booking_form_first" id="slide2">
+                <div class="nl_form">
+                    <form id="nl-form" class="nl-form">
+                        I feel to eat
+                        <select>
+                            <option value="1" selected>any food</option>
+                            <option value="2">Indian</option>
+                            <option value="3">French</option>
+                            <option value="4">Japanese</option>
+                            <option value="2">Italian</option>
+                        </select>
+                        <br />in a
+                        <select>
+                            <option value="1" selected>standard</option>
+                            <option value="2">fancy</option>
+                            <option value="3">hip</option>
+                            <option value="4">traditional</option>
+                            <option value="2">romantic</option>
+                        </select>
+                        restaurant
+                        <br />at
+                        <select>
+                            <option value="1" selected>anytime</option>
+                            <option value="1">7 p.m.</option>
+                            <option value="2">8 p.m.</option>
+                            <option value="3">9 p.m.</option>
+                        </select>
+                        in <input type="text" value="" placeholder="any city" data-subline="For example: <em>Los Angeles</em> or <em>New York</em>"/>
+                        <div class="nl-submit-wrap">
+                            <button class="nl-submit" type="submit">Find a restaurant</button>
+                        </div>
+                        <div class="nl-overlay"></div>
+                    </form>
+                </div>
+            </div>
+
+            {% endblock cta_content %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock body %}
 {% block javascripts %}
 {{ parent() }}
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
-        anchors: ['start','news', 'foods', 'drinks','about'],
-        sectionsColor: ['#312a19','#fff','#2792E1','#834'],
+        anchors: ['start','news', 'foods', 'drinks','about','contact', 'gallery','book'],
+        sectionsColor: ['#312a19','#fff','#2792E1','#834','#643','#fff', '#000'],
         css3: true,
         onLeave: function(origin, destination, direction) {
             if (destination.index === 2) {
                 destination.item.classList.add('load-background');
             }
-        }
+        },
+        slidesNavigation: true,
+        scrollOverflow: true,
     });
+</script>
+<script>
+    var nlform = new NLForm( document.getElementById( 'nl-form' ) );
 </script>
 {% endblock javascripts %}
 {% block stylesheets %}
