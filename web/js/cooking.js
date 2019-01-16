@@ -252,8 +252,9 @@
 	    },
 	    set width(v) {
 	      this.canvas.setAttribute('width', v * this.dpi);
-	      this.canvas.style.width = v + 'px';
-	      this._width = v;
+	      this.canvas.style.width = '100%';
+	     // this.canvas.style.width = v + 'px';
+	      this._width = '100vw';
 	    },
 	    get height() {
 	      return this._height;
@@ -354,7 +355,8 @@
 	
 	  var canvas = document.createElement("canvas");
 	  if (multiplier != 1) {
-	    canvas.style.width = width + 'px';
+	    canvas.style.width = '100vw';
+	   // canvas.style.width = width + 'px';
 	    canvas.style.height = height + 'px';
 	  }
 	  canvas.width = width * multiplier;

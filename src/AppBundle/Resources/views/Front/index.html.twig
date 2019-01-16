@@ -164,7 +164,7 @@
         </div>
 
     </div>
-    <div class="section about fp-auto-height" id="section4"  style="background: url({{ asset("images/wall.jpg") }})" >
+    <div class="section about" id="section4"  style="background: url({{ asset("images/wall.jpg") }})" >
         <div class="about_history_grid">
             <h1 class="about_section_title">{% trans %}Historia{% endtrans %}</h1>
                 <p class="about_history_text">
@@ -174,20 +174,31 @@
                 </p>
 
 
-                <h2 class="about_team_title">{% trans %}Nuestro equipo{% endtrans %}</h2>
-                <div class="person about_person1">
-                    <div class="row hexagono">
-                        <img data-src="{{ asset("images/person1.jpg") }}" alt="Jaime Elizalde">
-                    </div>
 
-                    <span>Jaime Elizalde</span>
+
+        </div>
+
+
+
+
+    </div>
+
+    <div class="section about" id="section5"  style="background: url({{ asset("images/wall.jpg") }})" >
+        <div class="about_history_grid">
+            <h2 class="about_team_title">{% trans %}Nuestro equipo{% endtrans %}</h2>
+            <div class="person about_person1">
+                <div class="row circle">
+                    <img data-src="{{ asset("images/person1.jpg") }}" alt="Jaime Elizalde">
                 </div>
-                <div class="person about_person2 " style="margin-bottom: 2em">
-                    <div class="row hexagono">
-                        <img data-src="{{ asset("images/person2.jpg") }}" alt="Yanaisi Albite">
-                    </div>
-                    <span>Yanaisi Albite</span>
+
+                <span>Jaime Elizalde</span>
+            </div>
+            <div class="person about_person2 " style="margin-bottom: 2em">
+                <div class="row circle">
+                    <img data-src="{{ asset("images/person2.jpg") }}" alt="Yanaisi Albite">
                 </div>
+                <span>Yanaisi Albite</span>
+            </div>
 
             <div class="about_team_image">
                 <img data-src="{{ asset("images/team.jpg") }}">
@@ -200,7 +211,8 @@
 
 
     </div>
-    <div class="section contact fp-noscroll" id="section5">
+
+    <div class="section contact" id="section6">
         <div class="contact_grid">
             <div id="map" class="animate-box" data-animate-effect="fadeIn" style="background: brown"></div>
             <div id="contact-footer">
@@ -249,7 +261,7 @@
         </div>
 
     </div>
-    <div class="section gallery" id="section6"  style="" >
+    <div class="section gallery" id="section7"  style="" >
         {% for image in images %}
         <div class="slide" id="slide{{ loop.index }}">
             <div class="gallery_image_grid">
@@ -264,7 +276,7 @@
         {% endfor %}
 
     </div>
-    <div class="section book fp-auto-height" id="section7" style="background-image: url({{ asset("images/frontal-wide.jpg") }}">
+    <div class="section book" id="section8" style="background-image: url({{ asset("images/frontal-wide.jpg") }}); background-attachment: fixed">
         <div class="book_overlay"></div>
         <div class="container booking">
             {% block cta_content %}
@@ -276,39 +288,37 @@
                 </div>
             </div>
             <div class="slide booking_form_first" id="slide2">
-                <div class="nl_form">
-                    <form id="nl-form" class="nl-form">
-                        I feel to eat
-                        <select>
-                            <option value="1" selected>any food</option>
-                            <option value="2">Indian</option>
-                            <option value="3">French</option>
-                            <option value="4">Japanese</option>
-                            <option value="2">Italian</option>
-                        </select>
-                        <br />in a
-                        <select>
-                            <option value="1" selected>standard</option>
-                            <option value="2">fancy</option>
-                            <option value="3">hip</option>
-                            <option value="4">traditional</option>
-                            <option value="2">romantic</option>
-                        </select>
-                        restaurant
-                        <br />at
-                        <select>
-                            <option value="1" selected>anytime</option>
-                            <option value="1">7 p.m.</option>
-                            <option value="2">8 p.m.</option>
-                            <option value="3">9 p.m.</option>
-                        </select>
-                        in <input type="text" value="" placeholder="any city" data-subline="For example: <em>Los Angeles</em> or <em>New York</em>"/>
-                        <div class="nl-submit-wrap">
-                            <button class="nl-submit" type="submit">Find a restaurant</button>
-                        </div>
-                        <div class="nl-overlay"></div>
-                    </form>
-                </div>
+                    <div class="nl_form">
+                        <form id="nl-form" class="nl-form">
+                            I want to book for
+                            <select>
+                                <option value="1">dinner</option>
+                                <option value="2" selected>lunch</option>
+                                <option value="3">drinks </option>
+                                <option value="4">whatever</option>
+                            </select>
+                            for
+                            <input type="text" value="2" placeholder="2" data-subline="How many persons?"/>
+                            people
+                            <br />on
+                            <input type="date" value="" placeholder="date" data-subline="For example: <em>Los Angeles</em> or <em>New York</em>"/>
+{#
+                            <select id="booking_day_select">
+                                {% for day in bookingsDays %}
+                                    <option value="{{ day.value }}">
+                                        {{ day.label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            #}
+                            in <input type="text" value="" placeholder="any city" data-subline="For example: <em>Los Angeles</em> or <em>New York</em>"/>
+                            <div class="nl-submit-wrap">
+                                <button class="nl-submit" type="submit">Book now</button>
+                            </div>
+                            <div class="nl-overlay"></div>
+                        </form>
+                    </div>
+
             </div>
 
             {% endblock cta_content %}
@@ -321,7 +331,7 @@
 {{ parent() }}
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
-        anchors: ['start','news', 'foods', 'drinks','about','contact', 'gallery','book'],
+        anchors: ['start','news', 'foods', 'drinks','about','about','contact', 'gallery','book'],
         sectionsColor: ['#312a19','#fff','#2792E1','#834','#643','#fff', '#000'],
         css3: true,
         onLeave: function(origin, destination, direction) {
@@ -330,7 +340,7 @@
             }
         },
         slidesNavigation: true,
-        scrollOverflow: true,
+       // scrollOverflow: true,
     });
 </script>
 <script>

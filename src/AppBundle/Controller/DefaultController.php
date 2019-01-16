@@ -100,6 +100,14 @@ class DefaultController extends Controller
             $config[$value->getName()]['es'] = $value->getValueEs();
             $config[$value->getName()]['en'] = $value->getValueEn();
         }
+
+        $bookingsDays = array();
+
+        for ($i=0; $i<6; $i++){
+            $date = new \DateTime("today + $i days");
+            $bookingsDays[] = ['label' => $date->format('d/M'),
+                            'value' => $date->format('d/M/Y')];
+        }
         return $this->render('@App/Front/index.html.twig', [
             "carteles"=>$carteles,
             "tapas"=>$tapas,
@@ -110,7 +118,8 @@ class DefaultController extends Controller
             'images'=>$images,
             'pregunta'=>$pregunta,
             "locale" => $_locale,
-            'inputhidden' => [uniqid(), date("Ymd")]
+            'inputhidden' => [uniqid(), date("Ymd")],
+            'bookingsDays' => $bookingsDays
         ]);
     }
 
