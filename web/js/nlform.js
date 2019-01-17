@@ -97,6 +97,10 @@
 			this.optionsList = document.createElement( 'ul' );
 			this.getinput = document.createElement( 'input' );
 			this.getinput.setAttribute( 'type', this.elOriginal.getAttribute( 'type' ));
+			if(this.elOriginal.getAttribute( 'type' ) == 'date' || this.elOriginal.getAttribute( 'type' ) == 'number'){
+                this.getinput.setAttribute( 'min', this.elOriginal.getAttribute( 'min' ));
+                this.getinput.setAttribute( 'max', this.elOriginal.getAttribute( 'max' ));
+			}
 			this.getinput.setAttribute( 'placeholder', this.elOriginal.getAttribute( 'placeholder' ) );
 			this.getinputWrapper = document.createElement( 'li' );
 			this.getinputWrapper.className = 'nl-ti-input';

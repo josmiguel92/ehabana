@@ -298,11 +298,21 @@
                                 <option value="4">whatever</option>
                             </select>
                             for
-                            <input type="text" value="2" placeholder="2" data-subline="How many persons?"/>
+                            <input type="number" value="" max="40" min="1" placeholder="2" data-subline="How many persons?"/>
                             people
                             <br />on
-                            <input type="date" value="" placeholder="date" data-subline="For example: <em>Los Angeles</em> or <em>New York</em>"/>
-{#
+                            <input type="date" value="" placeholder="some day"
+                                   {% if '2019-01-20'|date('w') > 0 and '2019-01-20'|date('w') < 6 %}
+                                   min="{{ '2019-01-20 + 1 day'|date('Y-m-d') }}"
+                                   {% else %}
+                                       min="{{ 'next monday'|date('Y-m-d') }}"
+                                   {% endif %}
+                                    max="{{ 'today + 40 days'|date('Y-m-d') }}"
+                                   data-subline="For example: <em>{{ '2019-01-20 + 5 day'|date('Y-m-d') }}</em>"/>
+                            at
+                            <input type="number" value="14" min="12" max="23" placeholder="14" data-subline="We are open from 12h to 24h">h.
+                            {#
+
                             <select id="booking_day_select">
                                 {% for day in bookingsDays %}
                                     <option value="{{ day.value }}">
@@ -311,9 +321,15 @@
                                 {% endfor %}
                             </select>
                             #}
-                            in <input type="text" value="" placeholder="any city" data-subline="For example: <em>Los Angeles</em> or <em>New York</em>"/>
+
+                            <br>
+                            <br>
+                            My name is <input type="text" value="" placeholder="John Doe" data-subline="Surely someone different from John Doe"/>,
+                            my email is <input type="email" value="" placeholder="me@gmail.com" data-subline="We'll contact you through this address"/>
+                            and <input type="textarea" value="" placeholder="i haven't anything more to say, see you that day" data-subline="Some details you want to clarify..."/>.
                             <div class="nl-submit-wrap">
-                                <button class="nl-submit" type="submit">Book now</button>
+                                <button id="nl-form-submit" type="submit" class="nl-submit btn btn-primary btn-outline btn-sm header-btn with-arrow">{% trans %}Reservar ahora{% endtrans %}<i class="icon-send"></i></button>
+
                             </div>
                             <div class="nl-overlay"></div>
                         </form>
@@ -344,7 +360,13 @@
     });
 </script>
 <script>
+    'use strict';
     var nlform = new NLForm( document.getElementById( 'nl-form' ) );
+    $('document').ready(function(){
+        $('#nl-form-submit').click(function(e){
+            console.log('2222')
+        });
+    })
 </script>
 {% endblock javascripts %}
 {% block stylesheets %}
