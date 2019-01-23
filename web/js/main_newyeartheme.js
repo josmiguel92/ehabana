@@ -61,6 +61,53 @@
         });
 
     $(document).ready(function() {
+
+        var myFullpage = new fullpage('#fullpage', {
+            anchors: ['start','news', 'foods', 'drinks','about','about','contact', 'gallery','book'],
+            sectionsColor: ['#312a19','#fff','#2792E1','#834','#643','#fff', '#000'],
+            css3: true,
+            onLeave: function(origin, destination, direction) {
+                if (destination.index === 2) {
+                    destination.item.classList.add('load-background');
+                }
+            },
+            slidesNavigation: true,
+            // scrollOverflow: true,
+        });
+
+        var nlform = new NLForm( document.getElementById( 'nl-form' ) );
+        $('document').ready(function(){
+            $('#nl-form-submit').click(function(e){
+                $('#nl-form input[data-form=booking]').each(
+                    function (index) {
+                        var element_name_temp = this.name+'-toggle';
+                        element_name_temp = element_name_temp.replace('[','').replace(']','')
+                        console.log(element_name_temp);
+                        var element_temp = document.getElementById(element_name_temp);
+                        console.log(element_temp)
+                        if(this.checkValidity())
+                        {
+                            element_temp.classList.add('form-ok')
+                            element_temp.classList.remove('form-error')
+                            element_temp.classList.remove('pulse')
+                            element_temp.classList.remove('animated')
+                            console.log(element_temp.classList)
+
+                        }
+                        else{
+                            element_temp.classList.add('form-error')
+                            element_temp.classList.add('pulse')
+                            element_temp.classList.add('animated')
+                            console.log(element_temp.classList)
+                        }
+
+
+                    }
+
+                )
+            });
+        })
+
         try{
             var value0 = $("#inputhidden0")[0].value;
             var value1 = $("#inputhidden1")[0].value;

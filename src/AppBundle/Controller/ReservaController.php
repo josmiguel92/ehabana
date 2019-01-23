@@ -23,6 +23,30 @@ class ReservaController extends Controller
      * @Route("/", name="dash_reserva_index")
      * @Method("GET")
      */
+    public function monthAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $reservas = $em->getRepository('AppBundle:Reserva')
+            ->createQueryBuilder("b")
+            ->where("b.datereserva > :yesterday")
+            ->andWhere("b.datereserva < :nextmonth")
+            ->setParameter("yesterday", new \DateTime('yesterday'))
+            ->setParameter("nextmonth", new \DateTime('today + 1 month'))
+            ->orderBy("b.datereserva", "ASC")
+            ->getQuery()->getResult();
+
+        return $this->render('reserva/month.html.twig', array(
+            'reservas' => $reservas,
+        ));
+    }
+
+    /**
+     * Lists all Reserva entities.
+     *
+     * @Route("/all", name="dash_reserva_all")
+     * @Method("GET")
+     */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();

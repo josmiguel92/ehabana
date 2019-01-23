@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Reserva
@@ -44,21 +46,28 @@ class Reserva
 
     /**
      * @var string
-     *
+     * @Assert\NotNull()
+     * @ORM\Column(name="interes", type="string", length=255)
+     */
+    private $interes;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
      * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
 
     /**
      * @var int
-     *
+     * @Assert\GreaterThanOrEqual(1)
      * @ORM\Column(name="personas", type="smallint")
      */
     private $personas;
 
     /**
      * @var string
-     *
+     * @Assert\Email()
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -357,14 +366,84 @@ class Reserva
         return $this->token;
     }
 
+    /**
+     * @return string
+     */
+    public function getInteres()
+    {
+        return $this->interes;
+    }
+
+    /**
+     * @param string $interes
+     * @return Reserva
+     */
+    public function setInteres($interes)
+    {
+        $this->interes = $interes;
+        return $this;
+    }
+
+    public function __toString()
+    {
+        $name = $this->nombre;
+        $fecha = $this->datereserva ?  $this->datereserva->format("Y-m-d H:i") : null;
+
+        $personas = $this->personas;
+        $id = $this->id;
+        return "[$id] - $name, $personas personas ($fecha)";
+    }
+
+
     function __construct()
     {
         $this->fechaalta = new \DateTime('now');
-        $this->token = md5("hl8spq:.2%y" .
-            $this->fechaalta->format('Y-m-d\TH:i:sO').
-            "hlkpq:.2%yt1#@#^jds56fg;jkl;sdf76");
+        $this->token = substr(uniqid(date("ymd")),0,11);
+
         $this->reservado = false;
         $this->confirmado = false;
 
+    }
+    function setDate($date)
+    {
+        if(!$this->datereserva)
+            $this->datereserva = new \DateTime();
+        else{
+            $temp_date = new \DateTime($date);
+            $year = $temp_date->format('Y');
+            $month = $temp_date->format('m');
+            $day = $temp_date->format('j');
+
+            $this->datereserva->setDate($year,$month,$day);
+        }
+    }
+    /**
+     * @param string $time
+     */
+    function setTime($time){
+        if(!$this->datereserva)
+            $this->datereserva = new \DateTime();
+
+        $this->datereserva->setTime($time, 0);
+        $this->datereserva->setTimezone(new \DateTimeZone('America/Havana'));
+
+
+    }
+
+    /**
+     * @return string
+     */
+    function getTime(){
+        if($this->datereserva)
+            return $this->datereserva->format('G');
+        else null;
+    }
+    /**
+     * @return string
+     */
+    function getDate(){
+        if($this->datereserva)
+            return $this->datereserva->format('m/d/Y');
+        else null;
     }
 }

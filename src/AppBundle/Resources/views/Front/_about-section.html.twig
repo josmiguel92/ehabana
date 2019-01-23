@@ -1,0 +1,48 @@
+
+<div class="section about" id="section4"  style="background: url({{ asset("images/wall.jpg") }})" >
+    <div class="about_history_grid">
+        <h1 class="about_section_title">{% trans %}Historia{% endtrans %}</h1>
+        <p class="about_history_text">
+            {% if config['we.history'] is defined %}
+                {{config['we.history'][locale] | nl2br }}
+            {% endif %}
+        </p>
+
+
+
+
+    </div>
+
+
+
+
+</div>
+
+<div class="section about" id="section5"  style="background: url({{ asset("images/wall.jpg") }})" >
+    <div class="about_history_grid">
+        <h2 class="about_team_title">{% trans %}Nuestro equipo{% endtrans %}</h2>
+        <div class="person about_person1">
+            <div class="row circle">
+                <img data-src="{{ asset("images/person1.jpg") }}" alt="Jaime Elizalde">
+            </div>
+
+            <span>Jaime Elizalde</span>
+        </div>
+        <div class="person about_person2 " style="margin-bottom: 2em">
+            <div class="row circle">
+                <img data-src="{{ asset("images/person2.jpg") }}" alt="Yanaisi Albite">
+            </div>
+            <span>Yanaisi Albite</span>
+        </div>
+
+        <div class="about_team_image">
+            <img data-src="{{ asset("images/team.jpg") }}">
+        </div>
+
+
+    </div>
+
+
+
+
+</div>

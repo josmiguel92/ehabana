@@ -46,8 +46,12 @@
             <td>{% if reserva.cancelado %}Yes{% else %}No{% endif %}</td>
         </tr>
         <tr>
-            <th>Comentario de administraci&oacute;n</th>
+            <th>Comentario</th>
             <td>{{ reserva.comentario }}</td>
+        </tr>
+        <tr>
+            <th>Inter&eacute;s</th>
+            <td>{{ reserva.interes }}</td>
         </tr>
         </tbody>
     </table>

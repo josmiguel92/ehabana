@@ -1,15 +1,18 @@
 Nueva reserva en ElizaldeHabana
      
-A nombre de {{ nombre }}.
+A nombre de {{ booking.nombre }}.
+Interes: {{ booking.interes }}
 
-Se requiere reservar para el próximo {{ date }} a las {{ time }}. 
-La cantidad de comensales es {{ comensales }}.
+Se requiere reservar para el próximo {{ booking.date }} a las {{ booking.time }}.
+
+La cantidad de comensales es {{ booking.personas }}.
                                     
 Requerimientos:
-  {{ message }}
+  {{ booking.mensaje }}
 --
-Puede ponerse en contacto con {{ nombre }} mediante el correo electrónico:
-{{ email }}
+Puede ponerse en contacto con {{ booking.nombre }} mediante el correo electrónico:
+
+{{ booking.email }}
 
 Saludos.
 ElizaldeHabana Web

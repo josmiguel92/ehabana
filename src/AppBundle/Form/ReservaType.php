@@ -15,16 +15,16 @@ class ReservaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fechaalta')
-            ->add('datereserva')
-            ->add('token')
-            ->add('nombre')
+            ->add('nombre',null)
             ->add('personas')
             ->add('email')
             ->add('mensaje')
-            ->add('confirmado')
-            ->add('reservado')
-            ->add('cancelado')
+            ->add('interes')
+
+            ->add('time')
+            ->add('date')
+
+
             ->add('comentario');
     }
 
@@ -36,5 +36,13 @@ class ReservaType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Reserva'
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'appbundle_booking';
     }
 }

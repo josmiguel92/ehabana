@@ -48,11 +48,11 @@
             </trans-unit>
             <trans-unit id="galery">
                 <source>galery</source>
-                <target>Galería</target>
+                <target>Galer&iacute;a</target>
             </trans-unit>
             <trans-unit id="galery_">
                 <source>Galery</source>
-                <target>Galería</target>
+                <target>Galer&iacute;a</target>
             </trans-unit>
             <trans-unit id="01">
                 <source>Name</source>
@@ -84,11 +84,11 @@
             </trans-unit>
             <trans-unit id="button.give.opinion">
                 <source>Give us your opinion</source>
-                <target>Denos su opinión</target>
+                <target>Denos su opini&oacute;n</target>
             </trans-unit>
             <trans-unit id="label.follow.us">
                 <source>Follow Us</source>
-                <target>Síguenos</target>
+                <target>S&iacute;guenos</target>
             </trans-unit>
             <trans-unit id="button.send">
                 <source>Send</source>
@@ -100,7 +100,7 @@
             </trans-unit>
             <trans-unit id="modal.opinion.text">
                 <source>modal.opinion.text</source>
-                <target>Queremos formar parte de usted, por eso nos interesa saber lo qué piensa. Háganos saber sus criterios y vivencias en nuestro restaurante-bar.</target>
+                <target>Queremos formar parte de usted, por eso nos interesa saber lo que piensa. H&aacute;ganos saber sus criterios y vivencias en nuestro restaurante-bar.</target>
             </trans-unit>
             <trans-unit id="label.about.you">
                 <source>About you</source>
@@ -113,7 +113,7 @@
 
             <trans-unit id="email.receiving">
                 <source>You are receiving this email because you reserved on our restaurant</source>
-                <target>Está recibiendo este mensaje pues reservó en nuestro restaurante</target>
+                <target>Est&aacute; recibiendo este mensaje pues reserv&oacute; en nuestro restaurante</target>
             </trans-unit>
             <trans-unit id="email.visitweb">
                 <source>Visit our website</source>
@@ -149,21 +149,21 @@
         </trans-unit>
         <trans-unit id="email.about.text">
             <source>ElizaldeHavana is that place where the Cuban and Spanish cultures join on a special way. Merging flavors from Pamplona and the most delightful ingredients we are creating a huge family of friends that come back for more.</source>
-            <target>Elizalde Habana es ese lugar donde las culturas de Cuba y España se unen de una manera especial. Combinando sabores típicos de Pamplona con los más deliciosos ingredientes estamos creando una inmensa familia de amigos que regresan por más.</target>
+            <target>Elizalde Habana es ese lugar donde las culturas de Cuba y España se unen de una manera especial. Combinando sabores t&iacute;picos de Pamplona con los m&aacute;s deliciosos ingredientes estamos creando una inmensa familia de amigos que regresan por m&aacute;s.</target>
         </trans-unit>
 
         <trans-unit id="email.friday">
             <source>Every Friday, Happy Hours from 16:00 to 20:00 you can get two cocktails by the price of one. We specialize in daiquiris of fruits and mojitos. You can combine it with ham and cheese.</source>
-            <target>Cada Viernes, Happy Hours desde las 4:00pm y hasta las 8:00pm puedes tomar dos cocteles por el precio de uno. Nuestra especialidad son los daiquiris de frutas y los mojitos. Puedes combinarlos con jamón y quesos.</target>
+            <target>Cada Viernes, Happy Hours desde las 4:00pm y hasta las 8:00pm puedes tomar dos cocteles por el precio de uno. Nuestra especialidad son los daiquiris de frutas y los mojitos. Puedes combinarlos con jam&oacute;n y quesos.</target>
         </trans-unit>
 
         <trans-unit id="email.verification">
             <source>To make it official, you must confirm this reservation by click this link</source>
-            <target>Para hacerlo oficial, debe confirmar esta reservación haciendo click en este enlace.</target>
+            <target>Para hacerlo oficial, debe confirmar esta reservaci&oacute;n haciendo click en este enlace.</target>
         </trans-unit>
         <trans-unit id="email.confirm">
             <source>Confirm reservation!</source>
-            <target>Confirmar reservación!</target>
+            <target>Confirmar reservaci&oacute;n!</target>
         </trans-unit>
 
         </body>

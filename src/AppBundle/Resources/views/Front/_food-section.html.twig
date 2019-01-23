@@ -1,0 +1,52 @@
+<div class="section food" id="section2">
+
+    <div class="food_main_grid">
+        {#
+        <div class="food_grid_divider_inverted"></div>
+        <div class="food_daily_menu">
+            <h1>{% trans %}Menú del día{% endtrans %}</h1>
+            <ul>
+                {% for item in daily %}
+                    <li class="title">{{item.getTransName(locale)}}{#<span class="price">$ {{item.price}}</span>#}
+        {#</li>
+                    {#    <h5 class="category">{{item.getTransDesc(locale)}}</h5> #}
+        {#            {% else %}
+                        <li>No hay elementos para mostrar.</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+            <div class="food_grid_divider"></div>
+            #}
+        <div class="tapas">
+
+            {% for tapa in tapas %}
+                {% if loop.index % 4 == 1 %}
+                    <div class="slide" id="slide{{ loop.index }}">
+                    <div class="section_food_slide_grid">
+
+                {% endif %}
+                <div class="food_tapa_item tapa{{ loop.index }}">
+                    <div class="food_tapa_item_image">
+                        <img data-src="{{ asset(tapa.getWebPath) }}">
+                    </div>
+                    <div class="food_tapa_item_title">
+                        <h3 class="food_tapa_item_title">{{tapa.getTransName(locale)}}</h3>
+                    </div>
+                    <div class="food_tapa_item_desc">
+                        <h5 class="category">{{tapa.getTransIngredients(locale)}}</h5>
+                    </div>
+                </div>
+
+                {% if loop.index % 4 == 0  or loop.index == loop.last %}
+
+                    </div>
+
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="section news" id="section1">
+    {% for cartel in carteles %}
+        <div class="slide" id="slide{{ loop.index }}">
+            <div class="section_news_slide_grid">
+                <div class="news_item_title">
+                    <h1>{{ cartel.getTransTitle(locale) }}</h1>
+                </div>
+                <div class="news_item_image">
+                    <a href="{{ asset(cartel.getWebPath()) }}" title="View Image" target="_blank">
+                        <img data-src="{{ asset(cartel.getWebPath()) }}" alt="{{ cartel.getTransTitle(locale) }}">
+                    </a>
+
+                </div>
+                <div class="news_item_text">
+                    {{ cartel.getTransAllResumen(locale) | nl2br }}
+                </div>
+
+            </div>
+        </div>
+    {% endfor %}
+
+</div>

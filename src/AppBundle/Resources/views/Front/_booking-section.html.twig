@@ -1,0 +1,56 @@
+<div class="section book" id="section8" style="background-image: url({{ asset("images/frontal-wide.jpg") }}); background-attachment: fixed">
+    <div class="book_overlay"></div>
+    <div class="container booking">
+        {% block cta_content %}
+            <div class="slide" id="slide1">
+                <div class="book_btn_container">
+                    <a href="#book/1" class="btn btn-primary btn-outline btn-sm header-btn with-arrow">{% trans %}Reservar ahora{% endtrans %}<i class="icon-arrow-right"></i></a>
+
+                    <a href="{{ config['social.tripadvisor'][locale] }}" class="btn btn-primary btn-outline with-arrow btn-sm" target="_blank" rel="nofollow">{% trans %}Give us your opinion{% endtrans %}<i class="icon-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="slide booking_form_first" id="slide2">
+                <div class="form-notification">
+                    <p id="form-notification-text"></p>
+                </div>
+                <div class="nl_form">
+                    <form id="nl-form" class="nl-form" method="post" action="{{ path('send_booking') }}">
+                        {% trans %}I want to book for{% endtrans %}
+                        <select data-form="booking" name="{{ bookingForm.interes.vars.full_name }}">
+                            <option value="Almuerzo">{% trans %}lunch{% endtrans %}</option>
+                            <option value="Cena" selected>{% trans %}dinner{% endtrans %}</option>
+                            <option value="Tragos">{% trans %}drinks{% endtrans %}</option>
+                            <option value="Merienda">{% trans %}a snack{% endtrans %}</option>
+                        </select>
+                        {% trans %}for{% endtrans %}
+                        <input data-form="booking" name="{{ bookingForm.personas.vars.full_name }}" type="number" value=2 max=40 min=1 placeholder="2" data-subline="{% trans %}How many persons?{% endtrans %}"/>
+                        {% trans %}people{% endtrans %}
+                        <br />on
+                        <input data-form="booking" name="{{ bookingForm.date.vars.full_name }}" type="date" required value="" placeholder="{% trans %}some day{% endtrans %}"
+                                {% if '2019-01-20'|date('w') > 0 and '2019-01-20'|date('w') < 6 %}
+                                    min="{{ '2019-01-20 + 1 day'|date('Y-m-d') }}"
+                                {% else %}
+                                    min="{{ 'next monday'|date('Y-m-d') }}"
+                                {% endif %}
+                               max="{{ 'today + 40 days'|date('Y-m-d') }}"
+                               data-subline="For example: <em>{{ '2019-01-20 + 5 day'|date('Y-m-d') }}</em>"/>
+                        {% trans %}at{% endtrans %}
+                        <input data-form="booking" name="{{ bookingForm.time.vars.full_name }}" required type="number" value="20" min="12" max="23" placeholder="20" data-subline="{% trans %}We are open from 12h to 24h{% endtrans %}">h.
+                        <br>
+                        <br>
+                        My name is <input data-form="booking" name="{{ bookingForm.nombre.vars.full_name }}" type="text" value="" required placeholder="John Doe" data-subline="{% trans %}Surely someone different from John Doe{% endtrans %}"/>,
+                        my email is <input data-form="booking" name="{{ bookingForm.email.vars.full_name }}" required type="email" value="" placeholder="me@gmail.com" data-subline="{% trans %}We'll contact you through this address{% endtrans %}"/>
+                        and <input data-form="booking" name="{{ bookingForm.comentario.vars.full_name }}" type="textarea" value="" placeholder="{% trans %}i haven't anything more to say{% endtrans %}" data-subline="{% trans %}Some details you want to clarify...{% endtrans %}"/>.
+                        <div class="nl-submit-wrap">
+                            <button name="booking-submit" id="nl-form-submit" type="submit" class="nl-submit btn btn-primary btn-outline btn-sm header-btn with-arrow">{% trans %}Reservar ahora{% endtrans %}<i class="icon-send"></i></button>
+                        </div>
+                        <div class="nl-overlay"></div>
+                        {{ form_widget(bookingForm._token)}}
+                    </form>
+                </div>
+
+            </div>
+
+        {% endblock cta_content %}
+    </div>
+</div>

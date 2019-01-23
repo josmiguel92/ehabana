@@ -311,7 +311,7 @@ a,a:hover, a:active, a:focus {
     align-items: center;
 }
 #header_menu li{
-    flex: 1 1 0px;
+    flex: 1 1 auto;
 }
 .header_menu_logo img {
     height: 60px;
@@ -320,7 +320,7 @@ a,a:hover, a:active, a:focus {
     flex: 3 1 auto !important;
 }
 .header_menu_btn{
-    flex: 2 1 auto !important;
+    flex: 2.5 1 auto !important;
 }
 .header_menu_btn a{
     text-decoration: none !important;
@@ -908,8 +908,9 @@ section.booking > ul:nth-child(2){
 .nl-form{
     position: absolute;
     top: calc(50%);
-    width: 100vw;
+    width: calc(100vw - .5em);
     transform: translateY(-50%);
+    padding: .25em;
 }
 .nl-overlay{
     transform: translateY(-50%);
@@ -933,4 +934,29 @@ section.booking > ul:nth-child(2){
 }
 .nl-form input[type=number]{
     -moz-appearance: textfield;
+}
+.form-notification{
+    min-height: 3em;
+    min-width: 30vw;
+    background: #0008;
+    position: absolute;
+    top: 15vh;
+    right: 2vw;
+    border: #ec3237 solid 2px;
+    border-radius: 2em;
+    display: none;
+}
+.book_btn_container{
+    margin: 0 10vh;
+    line-height: 5em;
+}
+.book_btn_container .btn{
+    display: inline;
+    margin: 1em;
+}
+#nl-form .form-ok{
+    color: #db665d;
+}
+#nl-form .form-error{
+    color: red;
 }

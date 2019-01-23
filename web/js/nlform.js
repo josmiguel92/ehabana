@@ -72,6 +72,7 @@
 			this.toggle = document.createElement( 'a' );
 			this.toggle.innerHTML = this.elOriginal.options[ this.elOriginal.selectedIndex ].innerHTML;
 			this.toggle.className = 'nl-field-toggle';
+			this.toggle.id = this.elOriginal.name.replace('[','').replace(']','') + '-toggle';
 			this.optionsList = document.createElement( 'ul' );
 			var ihtml = '';
 			Array.prototype.slice.call( this.elOriginal.querySelectorAll( 'option' ) ).forEach( function( el, i ) {
@@ -94,7 +95,8 @@
 			this.toggle = document.createElement( 'a' );
 			this.toggle.innerHTML = this.elOriginal.getAttribute( 'placeholder' );
 			this.toggle.className = 'nl-field-toggle';
-			this.optionsList = document.createElement( 'ul' );
+            this.toggle.id = this.elOriginal.name.replace('[','').replace(']','') + '-toggle';
+            this.optionsList = document.createElement( 'ul' );
 			this.getinput = document.createElement( 'input' );
 			this.getinput.setAttribute( 'type', this.elOriginal.getAttribute( 'type' ));
 			if(this.elOriginal.getAttribute( 'type' ) == 'date' || this.elOriginal.getAttribute( 'type' ) == 'number'){

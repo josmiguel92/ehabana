@@ -1,0 +1,15 @@
+<div class="section gallery" id="section7"  style="" >
+    {% for image in images %}
+        <div class="slide" id="slide{{ loop.index }}">
+            <div class="gallery_image_grid">
+                <div class="gallery_image">
+                    <img data-src="{{ asset(image.WebPath) }}" alt="{{image.getTransName(locale)}}">
+                </div>
+                <div class="gallery_image_desc">
+                    <h3>{{image.getTransName(locale)}}</h3>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>

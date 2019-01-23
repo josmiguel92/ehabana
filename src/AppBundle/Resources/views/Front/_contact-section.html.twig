@@ -1,0 +1,50 @@
+
+<div class="section contact" id="section6">
+    <div class="contact_grid">
+        <div id="map" class="animate-box" data-animate-effect="fadeIn" style="background: brown"></div>
+        <div id="contact-footer">
+            <span>
+                <i class="icon-map"></i>
+                 {% if config['contact.address'] is defined %}
+                     {{config['contact.address'][locale]}}
+                 {% else %}
+                     {% trans %}Empedrado 521 entre Monserrate y Villegas{% endtrans %}. {% trans %}La Habana{% endtrans %}, Cuba.
+                 {% endif %}
+            </span>
+            <span>
+                <ul>
+                    <li>
+                         {% if config['contact.telephone'] is defined %}
+                             <i class="icon-phone"></i><a href="tel://{{config['contact.telephone'][locale]}}">
+                            {{config['contact.telephone'][locale]}}</a>
+                        {% else %}
+                             <i class="icon-phone"></i><a href="tel://+53 7203 2807">+53 7203 2807</a>
+                         {%endif%}
+                    </li>
+                    <li>
+                        <i class="icon-envelope"></i>
+                        {% if config['contact.email'] is defined %}
+                            <a href="mailto:{{config['contact.email'][locale]}}">{{config['contact.email'][locale]}}</a>
+                        {% else %}
+                            <a href="mailto:elizaldebarrestaurante@gmail.com ">elizaldebarrestaurante@gmail.com </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <i class="icon-clock-o"></i>
+                        {% if config['contact.time'] is defined %}
+                            {{config['contact.time'][locale]}}
+                        {% else %}
+                            {% trans %}12pm-12am{% endtrans %}
+                        {% endif %}
+                    </li>
+                </ul>
+
+
+
+
+                    </span>
+
+        </div>
+    </div>
+
+</div>

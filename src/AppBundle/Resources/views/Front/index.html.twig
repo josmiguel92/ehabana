@@ -1,374 +1,106 @@
 {% extends '@App/Front/base.html.twig' %}
 {% block body %}
-<div id="header">
+    <div id="header">
 
 
-    <ul id="header_menu">
+        <ul id="header_menu">
 
-        <li class="header_menu_logo"><a href="{{ path("homepage") }}"><img id="logo" src="{{ asset("images/logo_red.png") }}"></a></li>
-        <li data-menuanchor="start" class="active link" ><a href="#start">{% trans %}Start{% endtrans %}</a></li>
-        <li data-menuanchor="foods" class="link" ><a href="#foods">{% trans %}Food{% endtrans %}</a></li>
-        <li data-menuanchor="drinks" class="link" ><a href="#drinks">{% trans %}Drinks{% endtrans %}</a></li>
-        <li data-menuanchor="about"  class="link"><a href="#about">{% trans %}About Us{% endtrans %}</a></li>
-        <li data-menuanchor="contact"  class="link"><a href="#contact">{% trans %}Contact{% endtrans %}</a></li>
-        <li data-menuanchor="gallery" class="link" ><a href="#gallery">{% trans %}galery{% endtrans %}</a></li>
-        <li class="header_menu_btn">
-            <a href="#book/1" class="btn btn-primary btn-outline btn-sm header-btn" id="BookingBtnTop">{% trans %}Reservar ahora{% endtrans %}</a>
-        </li>
-        <li class="header_menu_social">
-            {% if config['social.fb'] is defined %}
-                <a href="{{ config['social.fb'][locale] }}" class="offcanvas-social">
-                    <i class="icon-facebook"></i>
-                </a>
-            {% endif %}
-        </li>
-        <li class="header_menu_social">
-            {% if config['social.instagram'] is defined %}
-                <a href="{{ config['social.instagram'][locale] }}" class="offcanvas-social">
-            <i class="icon-instagram"></i>
-            </a>
-            {% endif %}
-        </li>
-        <li class="header_menu_social">
-            {% if config['social.tripadvisor'] is defined %}
-                <a href="{{ config['social.tripadvisor'][locale] }}" class="offcanvas-social">
-                    <i class="icon-tripadvisor"></i>
-                </a>
-            {% endif %}
-        </li>
-
-        <li class="header_menu_lang">
-            <a href="{{ path('homepage', {"_locale":"es"}) }}">
-                <i class="hidden">ESPAÑOL</i><img src="{{ asset("images/spain.png") }}"  height="25em" width="40em">
-            </a>
-        </li>
-
-        <li class="header_menu_lang">
-            <a href="{{ path("homepage", {"_locale":"en"}) }}">
-                <i class="hidden">ENGLISH</i><img src="{{ asset("images/uk.png") }}" height="25em" width="40em"></a>
-        </li>
-
-    </ul>
-</div>
-<div id="fullpage">
-    <div class="section Background fp-noscroll" id="section0">
-        <div class="Background"
-             style="position: relative;
-            height: calc(100% - 60px);
-            width: 100vw;
-            vertical-align: bottom;
-            top: 30px;
-            padding: 0;
-            margin: 0;">
-            <canvas class="Background-canvas" style="height: calc(100vh - 60px) !important; width: 1350px !important; margin: 0; position: relative;" width="100"></canvas>
-
-            <div class="intro_grid" style="display: grid; position: absolute; top: 0">
-                <div></div>
-                <div></div>
-
-                <div>
-                    <h1>Elizalde<br> Bar-Restaurante</h1>
-                </div>
-                <div></div>
-            </div>
-
-
-        </div>
-    </div>
-    <div class="section news" id="section1">
-        {% for cartel in carteles %}
-        <div class="slide" id="slide{{ loop.index }}">
-            <div class="section_news_slide_grid">
-                <div class="news_item_title">
-                    <h1>{{ cartel.getTransTitle(locale) }}</h1>
-                </div>
-                <div class="news_item_image">
-                    <a href="{{ asset(cartel.getWebPath()) }}" title="View Image" target="_blank">
-                        <img data-src="{{ asset(cartel.getWebPath()) }}" alt="{{ cartel.getTransTitle(locale) }}">
+            <li class="header_menu_logo"><a href="{{ path("homepage") }}"><img id="logo" src="{{ asset("images/logo_red.png") }}"></a></li>
+            <li data-menuanchor="start" class="active link" ><a href="#start">{% trans %}Start{% endtrans %}</a></li>
+            <li data-menuanchor="foods" class="link" ><a href="#foods">{% trans %}Food{% endtrans %}</a></li>
+            <li data-menuanchor="drinks" class="link" ><a href="#drinks">{% trans %}Drinks{% endtrans %}</a></li>
+            <li data-menuanchor="about"  class="link"><a href="#about">{% trans %}About Us{% endtrans %}</a></li>
+            <li data-menuanchor="contact"  class="link"><a href="#contact">{% trans %}Contact{% endtrans %}</a></li>
+            <li data-menuanchor="gallery" class="link" ><a href="#gallery">{% trans %}galery{% endtrans %}</a></li>
+            <li class="header_menu_btn">
+                <a href="#book/1" class="btn btn-primary btn-outline btn-sm header-btn" id="BookingBtnTop">{% trans %}Reservar ahora{% endtrans %}</a>
+            </li>
+            <li class="header_menu_social">
+                {% if config['social.fb'] is defined %}
+                    <a href="{{ config['social.fb'][locale] }}" class="offcanvas-social">
+                        <i class="icon-facebook"></i>
                     </a>
+                {% endif %}
+            </li>
+            <li class="header_menu_social">
+                {% if config['social.instagram'] is defined %}
+                    <a href="{{ config['social.instagram'][locale] }}" class="offcanvas-social">
+                <i class="icon-instagram"></i>
+                </a>
+                {% endif %}
+            </li>
+            <li class="header_menu_social">
+                {% if config['social.tripadvisor'] is defined %}
+                    <a href="{{ config['social.tripadvisor'][locale] }}" class="offcanvas-social">
+                        <i class="icon-tripadvisor"></i>
+                    </a>
+                {% endif %}
+            </li>
 
-                </div>
-                <div class="news_item_text">
-                    {{ cartel.getTransAllResumen(locale) | nl2br }}
-                </div>
+            <li class="header_menu_lang">
+                <a href="{{ path('homepage', {"_locale":"es"}) }}">
+                    <i class="hidden">ESPAÑOL</i><img src="{{ asset("images/spain.png") }}"  height="25em" width="40em">
+                </a>
+            </li>
 
-            </div>
-        </div>
-        {% endfor %}
+            <li class="header_menu_lang">
+                <a href="{{ path("homepage", {"_locale":"en"}) }}">
+                    <i class="hidden">ENGLISH</i><img src="{{ asset("images/uk.png") }}" height="25em" width="40em"></a>
+            </li>
 
+        </ul>
     </div>
-    <div class="section food" id="section2">
+    <div id="fullpage">
 
-        <div class="food_main_grid">
-            <div class="food_grid_divider_inverted"></div>
-            <div class="food_daily_menu">
-                <h1>{% trans %}Menú del día{% endtrans %}</h1>
-                <ul>
-                    {% for item in daily %}
-                        <li class="title">{{item.getTransName(locale)}}{#<span class="price">$ {{item.price}}</span>#}</li>
-                        {#    <h5 class="category">{{item.getTransDesc(locale)}}</h5> #}
-                    {% else %}
-                        <li>No hay elementos para mostrar.</li>
-                    {% endfor %}
-                </ul>
+        {#
+        <div class="section Background fp-noscroll" id="section0">
+            <div class="Background"
+                 style="position: relative;
+                height: calc(100% - 60px);
+                width: 100vw;
+                vertical-align: bottom;
+                top: 30px;
+                padding: 0;
+                margin: 0;">
+                <canvas class="Background-canvas" style="height: calc(100vh - 60px) !important; width: 1350px !important; margin: 0; position: relative;" width="100"></canvas>
 
-            </div>
-            <div class="food_grid_divider"></div>
-            <div class="tapas">
-                <div class="slide" id="slide{#{ loop.index }#}">
-                    <div class="section_food_slide_grid">
-                    {% for tapa in tapas %}
+                <div class="intro_grid" style="display: grid; position: absolute; top: 0">
+                    <div></div>
+                    <div></div>
 
-                        <div class="food_tapa_item hexagono">
-                            <div class="food_tapa_item_image">
-                                <img data-src="{{ asset(tapa.getWebPath) }}">
-                            </div>
-                            <div class="food_tapa_item_title">
-                                <h3 class="food_tapa_item_title">{{tapa.getTransName(locale)}}</h3>
-                            </div>
-                            <div class="food_tapa_item_desc">
-                                <h5 class="category">{{tapa.getTransIngredients(locale)}}</h5>
-                            </div>
-                        </div>
-
-                    {% endfor %}
-
-
+                    <div>
+                        <h1>Elizalde<br> Bar-Restaurante</h1>
                     </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section drinks_section" id="section3" style="background:url({{ asset("/images/drinks-wide.jpg") }}) 100% /100%">
-        <div class="intro">
-            <h1>{% trans%}Bebidas{% endtrans %}</h1>
-            {% for category in categories %}
-
-                <div class="slide" id="slide{{ loop.index }}">
-                    <h1 class="drinks_category_name">{{category.getTransName(locale)}}</h1>
-                    <div class="drinks_category">
-                        {% for drink in category.drinks %}
-                            <p>{{drink.getTransName(locale)}}{#<span class="price-box">${{drink.price}}</span>#}</p>
-                        {% else %}
-                            <p>Nada que mostrar aquí</p>
-                        {% endfor %}
-                    </div>
-
+                    <div></div>
                 </div>
 
-
-            {% endfor %}
-
-
-        </div>
-
-    </div>
-    <div class="section about" id="section4"  style="background: url({{ asset("images/wall.jpg") }})" >
-        <div class="about_history_grid">
-            <h1 class="about_section_title">{% trans %}Historia{% endtrans %}</h1>
-                <p class="about_history_text">
-                    {% if config['we.history'] is defined %}
-                        {{config['we.history'][locale] | nl2br }}
-                    {% endif %}
-                </p>
-
-
-
-
-        </div>
-
-
-
-
-    </div>
-
-    <div class="section about" id="section5"  style="background: url({{ asset("images/wall.jpg") }})" >
-        <div class="about_history_grid">
-            <h2 class="about_team_title">{% trans %}Nuestro equipo{% endtrans %}</h2>
-            <div class="person about_person1">
-                <div class="row circle">
-                    <img data-src="{{ asset("images/person1.jpg") }}" alt="Jaime Elizalde">
-                </div>
-
-                <span>Jaime Elizalde</span>
-            </div>
-            <div class="person about_person2 " style="margin-bottom: 2em">
-                <div class="row circle">
-                    <img data-src="{{ asset("images/person2.jpg") }}" alt="Yanaisi Albite">
-                </div>
-                <span>Yanaisi Albite</span>
-            </div>
-
-            <div class="about_team_image">
-                <img data-src="{{ asset("images/team.jpg") }}">
-            </div>
-
-
-        </div>
-
-
-
-
-    </div>
-
-    <div class="section contact" id="section6">
-        <div class="contact_grid">
-            <div id="map" class="animate-box" data-animate-effect="fadeIn" style="background: brown"></div>
-            <div id="contact-footer">
-            <span>
-                <i class="icon-map"></i>
-                 {% if config['contact.address'] is defined %}
-                     {{config['contact.address'][locale]}}
-                 {% else %}
-                     {% trans %}Empedrado 521 entre Monserrate y Villegas{% endtrans %}. {% trans %}La Habana{% endtrans %}, Cuba.
-                 {% endif %}
-            </span>
-                <span>
-                <ul>
-                    <li>
-                         {% if config['contact.telephone'] is defined %}
-                             <i class="icon-phone"></i><a href="tel://{{config['contact.telephone'][locale]}}">
-                            {{config['contact.telephone'][locale]}}</a>
-                        {% else %}
-                             <i class="icon-phone"></i><a href="tel://+53 7203 2807">+53 7203 2807</a>
-                         {%endif%}
-                    </li>
-                    <li>
-                        <i class="icon-envelope"></i>
-                        {% if config['contact.email'] is defined %}
-                            <a href="mailto:{{config['contact.email'][locale]}}">{{config['contact.email'][locale]}}</a>
-                        {% else %}
-                            <a href="mailto:elizaldebarrestaurante@gmail.com ">elizaldebarrestaurante@gmail.com </a>
-                        {% endif %}
-                    </li>
-                    <li>
-                        <i class="icon-clock-o"></i>
-                        {% if config['contact.time'] is defined %}
-                            {{config['contact.time'][locale]}}
-                        {% else %}
-                            {% trans %}12pm-12am{% endtrans %}
-                        {% endif %}
-                    </li>
-                </ul>
-
-
-
-
-                    </span>
 
             </div>
         </div>
 
-    </div>
-    <div class="section gallery" id="section7"  style="" >
-        {% for image in images %}
-        <div class="slide" id="slide{{ loop.index }}">
-            <div class="gallery_image_grid">
-                <div class="gallery_image">
-                    <img data-src="{{ asset(image.WebPath) }}" alt="{{image.getTransName(locale)}}">
-                </div>
-                <div class="gallery_image_desc">
-                    <h3>{{image.getTransName(locale)}}</h3>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+        #}
+{#
+        {{ include('@App/Front/_news-section.html.twig') }}
+
+#}
+        {{ include('@App/Front/_food-section.html.twig') }}
+{#
+        {{ include('@App/Front/_drinks-section.html.twig') }}
+
+        {{ include('@App/Front/_about-section.html.twig') }}
+
+        {{ include('@App/Front/_about-section.html.twig') }}
+
+        {{ include('@App/Front/_gallery-section.html.twig') }}
+
+        {{ include('@App/Front/_booking-section.html.twig') }}
+
+#}
 
     </div>
-    <div class="section book" id="section8" style="background-image: url({{ asset("images/frontal-wide.jpg") }}); background-attachment: fixed">
-        <div class="book_overlay"></div>
-        <div class="container booking">
-            {% block cta_content %}
-            <div class="slide" id="slide1">
-                <div class="book_btn_container">
-                    <a href="#book/1" class="btn btn-primary btn-outline btn-sm header-btn with-arrow">{% trans %}Reservar ahora{% endtrans %}<i class="icon-arrow-right"></i></a>
 
-                    <a href="{{ config['social.tripadvisor'][locale] }}" class="btn btn-primary btn-outline with-arrow btn-sm" target="_blank" rel="nofollow">{% trans %}Give us your opinion{% endtrans %}<i class="icon-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="slide booking_form_first" id="slide2">
-                    <div class="nl_form">
-                        <form id="nl-form" class="nl-form">
-                            I want to book for
-                            <select>
-                                <option value="1">dinner</option>
-                                <option value="2" selected>lunch</option>
-                                <option value="3">drinks </option>
-                                <option value="4">whatever</option>
-                            </select>
-                            for
-                            <input type="number" value="" max="40" min="1" placeholder="2" data-subline="How many persons?"/>
-                            people
-                            <br />on
-                            <input type="date" value="" placeholder="some day"
-                                   {% if '2019-01-20'|date('w') > 0 and '2019-01-20'|date('w') < 6 %}
-                                   min="{{ '2019-01-20 + 1 day'|date('Y-m-d') }}"
-                                   {% else %}
-                                       min="{{ 'next monday'|date('Y-m-d') }}"
-                                   {% endif %}
-                                    max="{{ 'today + 40 days'|date('Y-m-d') }}"
-                                   data-subline="For example: <em>{{ '2019-01-20 + 5 day'|date('Y-m-d') }}</em>"/>
-                            at
-                            <input type="number" value="14" min="12" max="23" placeholder="14" data-subline="We are open from 12h to 24h">h.
-                            {#
-
-                            <select id="booking_day_select">
-                                {% for day in bookingsDays %}
-                                    <option value="{{ day.value }}">
-                                        {{ day.label }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                            #}
-
-                            <br>
-                            <br>
-                            My name is <input type="text" value="" placeholder="John Doe" data-subline="Surely someone different from John Doe"/>,
-                            my email is <input type="email" value="" placeholder="me@gmail.com" data-subline="We'll contact you through this address"/>
-                            and <input type="textarea" value="" placeholder="i haven't anything more to say, see you that day" data-subline="Some details you want to clarify..."/>.
-                            <div class="nl-submit-wrap">
-                                <button id="nl-form-submit" type="submit" class="nl-submit btn btn-primary btn-outline btn-sm header-btn with-arrow">{% trans %}Reservar ahora{% endtrans %}<i class="icon-send"></i></button>
-
-                            </div>
-                            <div class="nl-overlay"></div>
-                        </form>
-                    </div>
-
-            </div>
-
-            {% endblock cta_content %}
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock body %}
-{% block javascripts %}
-{{ parent() }}
-<script type="text/javascript">
-    var myFullpage = new fullpage('#fullpage', {
-        anchors: ['start','news', 'foods', 'drinks','about','about','contact', 'gallery','book'],
-        sectionsColor: ['#312a19','#fff','#2792E1','#834','#643','#fff', '#000'],
-        css3: true,
-        onLeave: function(origin, destination, direction) {
-            if (destination.index === 2) {
-                destination.item.classList.add('load-background');
-            }
-        },
-        slidesNavigation: true,
-       // scrollOverflow: true,
-    });
-</script>
-<script>
-    'use strict';
-    var nlform = new NLForm( document.getElementById( 'nl-form' ) );
-    $('document').ready(function(){
-        $('#nl-form-submit').click(function(e){
-            console.log('2222')
-        });
-    })
-</script>
-{% endblock javascripts %}
+
 {% block stylesheets %}
     {{ parent() }}
 <style>
