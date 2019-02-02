@@ -256,7 +256,24 @@
                 <source>Some details you want to clarify...</source>
                 <target>Some details you want to clarify...</target>
             </trans-unit>
+            <trans-unit id="My.name.is">
+                <source>My name is</source>
+                <target>My name is</target>
+            </trans-unit>
 
+            <trans-unit id="my.emil.is">
+                <source>my email is</source>
+                <target>my email is</target>
+            </trans-unit>
+
+            <trans-unit id="on">
+                <source>on</source>
+                <target>on</target>
+            </trans-unit>
+            <trans-unit id="and">
+                <source>and</source>
+                <target>and</target>
+            </trans-unit>
 
         </body>
     </file>
