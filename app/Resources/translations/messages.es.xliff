@@ -178,13 +178,9 @@
             <source>dinner</source>
             <target>la cena</target>
         </trans-unit>
-        <trans-unit id="dinner">
+        <trans-unit id="snack">
             <source>a snack</source>
             <target>unas tapas</target>
-        </trans-unit>
-        <trans-unit id="for">
-            <source>for</source>
-            <target>para</target>
         </trans-unit>
         <trans-unit id="for">
             <source>for</source>
