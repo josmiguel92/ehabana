@@ -6,30 +6,30 @@
         <ul id="header_menu">
 
             <li class="header_menu_logo"><a href="{{ path("homepage") }}"><img id="logo" src="{{ asset("images/logo_red.png") }}"></a></li>
-            <li data-menuanchor="start" class="active link" ><a href="#start">{% trans %}Start{% endtrans %}</a></li>
-            <li data-menuanchor="foods" class="link" ><a href="#foods">{% trans %}Food{% endtrans %}</a></li>
-            <li data-menuanchor="drinks" class="link" ><a href="#drinks">{% trans %}Drinks{% endtrans %}</a></li>
-            <li data-menuanchor="about"  class="link"><a href="#about">{% trans %}About Us{% endtrans %}</a></li>
-            <li data-menuanchor="contact"  class="link"><a href="#contact">{% trans %}Contact{% endtrans %}</a></li>
-            <li data-menuanchor="gallery" class="link" ><a href="#gallery">{% trans %}galery{% endtrans %}</a></li>
+            <li data-menuanchor="start" class="active link offmenu" ><a href="#start">{% trans %}Start{% endtrans %}</a></li>
+            <li data-menuanchor="foods" class="link offmenu" ><a href="#foods">{% trans %}Food{% endtrans %}</a></li>
+            <li data-menuanchor="drinks" class="link offmenu" ><a href="#drinks">{% trans %}Drinks{% endtrans %}</a></li>
+            <li data-menuanchor="about"  class="link offmenu"><a href="#about">{% trans %}About Us{% endtrans %}</a></li>
+            <li data-menuanchor="contact"  class="link offmenu"><a href="#contact">{% trans %}Contact{% endtrans %}</a></li>
+            <li data-menuanchor="gallery" class="link offmenu" ><a href="#gallery">{% trans %}galery{% endtrans %}</a></li>
             <li class="header_menu_btn">
                 <a href="#book/1" class="btn btn-primary btn-outline btn-sm header-btn" id="BookingBtnTop">{% trans %}Reservar ahora{% endtrans %}</a>
             </li>
-            <li class="header_menu_social">
+            <li class="header_menu_social offmenu">
                 {% if config['social.fb'] is defined %}
                     <a href="{{ config['social.fb'][locale] }}" class="offcanvas-social">
                         <i class="icon-facebook"></i>
                     </a>
                 {% endif %}
             </li>
-            <li class="header_menu_social">
+            <li class="header_menu_social offmenu">
                 {% if config['social.instagram'] is defined %}
                     <a href="{{ config['social.instagram'][locale] }}" class="offcanvas-social">
                 <i class="icon-instagram"></i>
                 </a>
                 {% endif %}
             </li>
-            <li class="header_menu_social">
+            <li class="header_menu_social offmenu">
                 {% if config['social.tripadvisor'] is defined %}
                     <a href="{{ config['social.tripadvisor'][locale] }}" class="offcanvas-social">
                         <i class="icon-tripadvisor"></i>
@@ -37,22 +37,23 @@
                 {% endif %}
             </li>
 
-            <li class="header_menu_lang">
+            <li class="header_menu_lang offmenu">
                 <a href="{{ path('homepage', {"_locale":"es"}) }}">
                     <i class="hidden">ESPAÑOL</i><img src="{{ asset("images/spain.png") }}"  height="25em" width="40em">
                 </a>
             </li>
 
-            <li class="header_menu_lang">
+            <li class="header_menu_lang offmenu">
                 <a href="{{ path("homepage", {"_locale":"en"}) }}">
                     <i class="hidden">ENGLISH</i><img src="{{ asset("images/uk.png") }}" height="25em" width="40em"></a>
             </li>
+            <li class="header_menu_toggle"><i class="icon-bars">&nbsp;</i> </li>
 
         </ul>
     </div>
     <div id="fullpage">
 
-        {#
+        
         <div class="section Background fp-noscroll" id="section0">
             <div class="Background"
                  style="position: relative;
@@ -78,24 +79,22 @@
             </div>
         </div>
 
-        #}
-{#
         {{ include('@App/Front/_news-section.html.twig') }}
 
-#}
         {{ include('@App/Front/_food-section.html.twig') }}
-{#
+
         {{ include('@App/Front/_drinks-section.html.twig') }}
 
         {{ include('@App/Front/_about-section.html.twig') }}
 
-        {{ include('@App/Front/_about-section.html.twig') }}
+        {{ include('@App/Front/_contact-section.html.twig') }}
 
         {{ include('@App/Front/_gallery-section.html.twig') }}
 
         {{ include('@App/Front/_booking-section.html.twig') }}
 
-#}
+        {{ include('@App/Front/_footer-section.html.twig') }}
+
 
     </div>
 

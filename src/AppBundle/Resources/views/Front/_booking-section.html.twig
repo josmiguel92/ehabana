@@ -1,11 +1,11 @@
-<div class="section book" id="section8" style="background-image: url({{ asset("images/frontal-wide.jpg") }}); background-attachment: fixed">
+<div class="section book" id="section8" style="background: url({{ asset("images/frontal-wide.jpg") }}) 50% 50% / cover no-repeat; background-attachment: fixed">
     <div class="book_overlay"></div>
     <div class="container booking">
         {% block cta_content %}
             <div class="slide" id="slide1">
                 <div class="book_btn_container">
                     <a href="#book/1" class="btn btn-primary btn-outline btn-sm header-btn with-arrow">{% trans %}Reservar ahora{% endtrans %}<i class="icon-arrow-right"></i></a>
-
+                    <br>
                     <a href="{{ config['social.tripadvisor'][locale] }}" class="btn btn-primary btn-outline with-arrow btn-sm" target="_blank" rel="nofollow">{% trans %}Give us your opinion{% endtrans %}<i class="icon-arrow-right"></i></a>
                 </div>
             </div>

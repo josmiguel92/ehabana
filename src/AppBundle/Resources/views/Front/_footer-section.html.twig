@@ -1,0 +1,51 @@
+<div id="fh5co-footer" class="section footer" role="contentinfo">
+
+    <div class="container">
+
+        <div class="footer_grid_left_cell">
+
+            <div>
+                <h3 id="follow-us">{% trans %}Follow Us{% endtrans %}
+                    {% if config['social.fb'] is defined %}
+                        <a href="{{ config['social.fb'][locale] }}"><i class="icon-facebook"></i></a>
+                    {% endif %}
+                    {% if config['social.instagram'] is defined %}
+                        <a href="{{ config['social.instagram'][locale] }}"><i class="icon-instagram"></i></a>
+                    {% endif %}
+                    {% if config['social.tripadvisor'] is defined %}
+                        <a href="{{ config['social.tripadvisor'][locale] }}"><i
+                                    class="icon-tripadvisor"></i></a>
+                    {% endif %}
+                </h3>
+
+                <p>{% trans %}Búscanos en{% endtrans %} <a
+                            href="https://www.alamesacuba.com/es/la-habana/restaurant/elizalde/"
+                            target="_blank">A LA MESA</a></p>
+            </div>
+
+
+        </div>
+
+        <div class="footer_grid_right_cell">
+            <h3>{% trans %}Mantente en contacto{% endtrans %}</h3>
+            <ul>
+
+                {% for hashtags in utils.explodeByComas(config['hashtags']['es'])%}
+                    <li><a href="https://www.facebook.com/hashtag/{{hashtags}}">#{{hashtags}}</a></li>
+                {% endfor %}
+
+            </ul>
+
+
+        </div>
+
+
+        <div class="col-md-12 fh5co-copyright text-center">
+            <p>&copy; {{  "now"| date("Y") }} restauranteelizaldehabana.
+                {% trans %}La Habana{% endtrans %}, Cuba. {% trans %}All Rights Reserved{% endtrans %}.
+                <br><span>&lt; made with <i class="icon-heart"></i> by <a href="http://habana.tech/" target="_blank">habana.tech</a>  /&gt;</span>
+            </p>
+        </div>
+
+    </div>
+</div>

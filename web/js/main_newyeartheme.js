@@ -60,11 +60,35 @@
 
         });
 
+
+     $(".header_menu_toggle").click(function (e) {
+         e.preventDefault();
+         if($("#header_menu")[0].classList.contains('expanded'))
+         {
+             $("#header_menu")[0].classList.remove('expanded')
+             $(".header_menu_toggle i")[0].classList.add('icon-bars');
+             $(".header_menu_toggle i")[0].classList.remove('icon-close');
+         }
+         else{
+             $("#header_menu")[0].classList.add('expanded')
+             $(".header_menu_toggle i")[0].classList.remove('icon-bars');
+             $(".header_menu_toggle i")[0].classList.add('icon-close');
+         }
+
+     });
+
+     $('#header_menu.expanded a').click(function () {
+             $("#header_menu")[0].classList.remove('expanded')
+             $(".header_menu_toggle i")[0].classList.add('icon-bars');
+             $(".header_menu_toggle i")[0].classList.remove('icon-close');
+     })
+
+
     $(document).ready(function() {
 
         var myFullpage = new fullpage('#fullpage', {
-            anchors: ['start','news', 'foods', 'drinks','about','about','contact', 'gallery','book'],
-            sectionsColor: ['#312a19','#fff','#2792E1','#834','#643','#fff', '#000'],
+            anchors: ['start','news', 'foods', 'drinks','about','about','contact', 'gallery','book','footer'],
+            sectionsColor: ['#312a19','#fff','#2792E1','#834','#643','#fff', '#000', '#fff','#000','#333'],
             css3: true,
             onLeave: function(origin, destination, direction) {
                 if (destination.index === 2) {

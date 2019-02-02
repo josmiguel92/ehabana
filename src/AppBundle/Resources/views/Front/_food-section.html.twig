@@ -20,32 +20,35 @@
             #}
         <div class="tapas">
 
-            {% for tapa in tapas %}
-                {% if loop.index % 4 == 1 %}
-                    <div class="slide" id="slide{{ loop.index }}">
-                    <div class="section_food_slide_grid">
+        {% for tapa in tapas %}
+            {% if loop.index % 4 == 1 %}
+            <div class="slide" id="slide{{ (loop.index +3)/4 }}">
+                <div class="section_food_slide_grid">
 
-                {% endif %}
+            {% endif %}
                 <div class="food_tapa_item tapa{{ loop.index }}">
                     <div class="food_tapa_item_image">
                         <img data-src="{{ asset(tapa.getWebPath) }}">
                     </div>
-                    <div class="food_tapa_item_title">
-                        <h3 class="food_tapa_item_title">{{tapa.getTransName(locale)}}</h3>
+                    <div class="tapa_meta">
+                        <div class="food_tapa_item_title">
+                            <h3 class="food_tapa_item_title_text">{{tapa.getTransName(locale)}}</h3>
+                        </div>
+                        <div class="food_tapa_item_desc">
+                            <h5 class="category">{{tapa.getTransIngredients(locale)}}</h5>
+                        </div>
                     </div>
-                    <div class="food_tapa_item_desc">
-                        <h5 class="category">{{tapa.getTransIngredients(locale)}}</h5>
-                    </div>
+
                 </div>
 
-                {% if loop.index % 4 == 0  or loop.index == loop.last %}
+            {% if loop.index % 4 == 0  or loop.index == loop.last %}
 
-                    </div>
+                </div>
 
-                    </div>
+            </div>
 
-                {% endif %}
-            {% endfor %}
+            {% endif %}
+        {% endfor %}
 
         </div>
     </div>

@@ -18,12 +18,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponse;
 class DefaultController extends Controller
 {
     private $headers = "MIME-Version: 1.0\r\nContent-type: text/html; charset=utf-8\r\nFrom: web@restauranteelizaldehabana.com\r\nReply-To: elizaldebarrestaurante@gmail.com\r\n";
+
     /**
-     * @Route("/{_locale}", defaults={"_locale": "es"}, requirements={
+     * @Route("/alternate/{_locale}", defaults={"_locale": "es"}, requirements={
      * "_locale": "en|es|fr"
-     * }, name="homepage")
+     * }, name="homepage_")
      */
-    public function indexAction(Request $request, $_locale)
+    public function _indexAction(Request $request, $_locale)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -66,12 +67,14 @@ class DefaultController extends Controller
             ]);
     }
 
+
+
     /**
-     * @Route("/alternate/{_locale}", defaults={"_locale": "es"}, requirements={
+     * @Route("/{_locale}", defaults={"_locale": "es"}, requirements={
      * "_locale": "en|es|fr"
-     * }, name="homepage_")
+     * }, name="homepage")
      */
-    public function _indexAction(Request $request, $_locale)
+    public function indexAction(Request $request, $_locale)
     {
         $em = $this->getDoctrine()->getManager();
 
