@@ -214,14 +214,15 @@
             <source>We'll contact you through this address</source>
             <target>Nos pondremos en contácto por este emails</target>
         </trans-unit>
-        <trans-unit id=anything.more.to.say">
+        <trans-unit id="anything.more.to.say">
             <source>i haven't anything more to say</source>
             <target>nada más que agregar</target>
         </trans-unit>
-        <trans-unit id=Some.details.you.want">
+        <trans-unit id="Some.details.you.want">
             <source>Some details you want to clarify...</source>
             <target>Algún detalle que quieras dejar claro</target>
         </trans-unit>
+
 
         </body>
     </file>
