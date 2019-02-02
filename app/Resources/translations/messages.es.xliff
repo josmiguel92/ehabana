@@ -165,6 +165,63 @@
             <source>Confirm reservation!</source>
             <target>Confirmar reservación!</target>
         </trans-unit>
+        <trans-unit id="want.to.book.for">
+            <source>I want to book for</source>
+            <target>Quiero reservar para</target>
+        </trans-unit>
+        <trans-unit id="lunch">
+            <source>lunch</source>
+            <target>el almuerzo</target>
+        </trans-unit>
+
+        <trans-unit id="dinner">
+            <source>dinner</source>
+            <target>la cena</target>
+        </trans-unit>
+        <trans-unit id="dinner">
+            <source>a snack</source>
+            <target>unas tapas</target>
+        </trans-unit>
+        <trans-unit id="for">
+            <source>for</source>
+            <target>para</target>
+        </trans-unit>
+        <trans-unit id="for">
+            <source>for</source>
+            <target>para</target>
+        </trans-unit>
+        <trans-unit id="How.many.persons">
+            <source>How many persons?</source>
+            <target>¿Cuantas personas?</target>
+        </trans-unit>
+        <trans-unit id="people">
+            <source>people</source>
+            <target>personas</target>
+        </trans-unit>
+        <trans-unit id="some.day">
+            <source>some day</source>
+            <target>un día</target>
+        </trans-unit>
+        <trans-unit id="We.are.open.from.12h.to.24h">
+            <source>We are open from 12h to 24h</source>
+            <target>Estamos abiertos cada día, de 12h a 24h</target>
+        </trans-unit>
+        <trans-unit id="What's.your.name">
+            <source>What's your name?</source>
+            <target>¿Como te llamas?</target>
+        </trans-unit>
+        <trans-unit id="contact.you.through.this.address">
+            <source>We'll contact you through this address</source>
+            <target>Nos pondremos en contácto por este emails</target>
+        </trans-unit>
+        <trans-unit id=anything.more.to.say">
+            <source>i haven't anything more to say</source>
+            <target>nada más que agregar</target>
+        </trans-unit>
+        <trans-unit id=Some.details.you.want">
+            <source>Some details you want to clarify...</source>
+            <target>Algún detalle que quieras dejar claro</target>
+        </trans-unit>
 
         </body>
     </file>
