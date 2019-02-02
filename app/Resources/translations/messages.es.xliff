@@ -218,6 +218,22 @@
             <source>Some details you want to clarify...</source>
             <target>Algún detalle que quieras dejar claro</target>
         </trans-unit>
+        <trans-unit id="on.date">
+            <source>on</source>
+            <target>el</target>
+        </trans-unit>
+        <trans-unit id="my.name">
+            <source>My name is</source>
+            <target>Mi nombre es</target>
+        </trans-unit>
+        <trans-unit id="my.email">
+            <source>my email is</source>
+            <target>Mi email es</target>
+        </trans-unit>
+        <trans-unit id="and">
+            <source>and</source>
+            <target>y</target>
+        </trans-unit>
 
 
         </body>
