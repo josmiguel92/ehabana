@@ -218,7 +218,7 @@
             <source>Some details you want to clarify...</source>
             <target>Algún detalle que quieras dejar claro</target>
         </trans-unit>
-        <trans-unit id="on.date">
+        <trans-unit id="on">
             <source>on</source>
             <target>el</target>
         </trans-unit>
@@ -233,6 +233,10 @@
         <trans-unit id="and">
             <source>and</source>
             <target>y</target>
+        </trans-unit>
+        <trans-unit id="some.drinks">
+            <source>some drinks</source>
+            <target>unos tragos</target>
         </trans-unit>
 
 

@@ -19,13 +19,14 @@
                         <select data-form="booking" name="{{ bookingForm.interes.vars.full_name }}">
                             <option value="Almuerzo">{% trans %}lunch{% endtrans %}</option>
                             <option value="Cena" selected>{% trans %}dinner{% endtrans %}</option>
-                            <option value="Tragos">{% trans %}drinks{% endtrans %}</option>
+                            <option value="Tragos">{% trans %}some drinks{% endtrans %}</option>
                             <option value="Merienda">{% trans %}a snack{% endtrans %}</option>
                         </select>
                         {% trans %}for{% endtrans %}
                         <input data-form="booking" name="{{ bookingForm.personas.vars.full_name }}" type="number" value=2 max=40 min=1 placeholder="2" data-subline="{% trans %}How many persons?{% endtrans %}"/>
                         {% trans %}people{% endtrans %}
-                        <br />on
+                        <br />
+                        {% trans %}on{% endtrans %}
                         <input data-form="booking" name="{{ bookingForm.date.vars.full_name }}" type="date" required value="" placeholder="{% trans %}some day{% endtrans %}"
                                 {% if '2019-01-20'|date('w') > 0 and '2019-01-20'|date('w') < 6 %}
                                     min="{{ '2019-01-20 + 1 day'|date('Y-m-d') }}"
@@ -38,9 +39,9 @@
                         <input data-form="booking" name="{{ bookingForm.time.vars.full_name }}" required type="number" value="20" min="12" max="23" placeholder="20" data-subline="{% trans %}We are open from 12h to 24h{% endtrans %}">h.
                         <br>
                         <br>
-                        My name is <input data-form="booking" name="{{ bookingForm.nombre.vars.full_name }}" type="text" value="" required placeholder="John Doe" data-subline="{% trans %}What's your name?{% endtrans %}"/>,
-                        my email is <input data-form="booking" name="{{ bookingForm.email.vars.full_name }}" required type="email" value="" placeholder="me@gmail.com" data-subline="{% trans %}We'll contact you through this address{% endtrans %}"/>
-                        and <input data-form="booking" name="{{ bookingForm.comentario.vars.full_name }}" type="textarea" value="" placeholder="{% trans %}i haven't anything more to say{% endtrans %}" data-subline="{% trans %}Some details you want to clarify...{% endtrans %}"/>.
+                        {% trans %}My name is{% endtrans %} <input data-form="booking" name="{{ bookingForm.nombre.vars.full_name }}" type="text" value="" required placeholder="John Doe" data-subline="{% trans %}What's your name?{% endtrans %}"/>,
+                        {% trans %}my email is{% endtrans %} <input data-form="booking" name="{{ bookingForm.email.vars.full_name }}" required type="email" value="" placeholder="me@gmail.com" data-subline="{% trans %}We'll contact you through this address{% endtrans %}"/>
+                        {% trans %}and{% endtrans %} <input data-form="booking" name="{{ bookingForm.comentario.vars.full_name }}" type="textarea" value="" placeholder="{% trans %}i haven't anything more to say{% endtrans %}" data-subline="{% trans %}Some details you want to clarify...{% endtrans %}"/>.
                         <div class="nl-submit-wrap">
                             <button name="booking-submit" id="nl-form-submit" type="submit" class="nl-submit btn btn-primary btn-outline btn-sm header-btn with-arrow">{% trans %}Reservar ahora{% endtrans %}<i class="icon-send"></i></button>
                         </div>

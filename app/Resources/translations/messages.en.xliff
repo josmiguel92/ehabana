@@ -196,6 +196,66 @@
                 <source>Muchas gracias por su opinión...</source>
                 <target>Thanks for your opinion!</target>
             </trans-unit>
+            <trans-unit id="want.to.book">
+                <source>I want to book for</source>
+                <target>I want to book for</target>
+            </trans-unit>
+            <trans-unit id="to.lunch">
+                <source>lunch</source>
+                <target>lunch</target>
+            </trans-unit>
+            <trans-unit id="to.dinner">
+                <source>dinner</source>
+                <target>dinner</target>
+            </trans-unit>
+            <trans-unit id="some.drinks">
+                <source>some drinks</source>
+                <target>some drinks</target>
+            </trans-unit>
+            <trans-unit id="a.snack">
+                <source>a snack</source>
+                <target>a snack</target>
+            </trans-unit>
+            <trans-unit id="for">
+                <source>for</source>
+                <target>for</target>
+            </trans-unit>
+            <trans-unit id="How.many.persons">
+                <source>How many persons?</source>
+                <target>How many persons?</target>
+            </trans-unit>
+            <trans-unit id="people">
+                <source>people</source>
+                <target>people</target>
+            </trans-unit>
+            <trans-unit id="some day">
+                <source>some day</source>
+                <target>some day</target>
+            </trans-unit>
+            <trans-unit id="at">
+                <source>at</source>
+                <target>at</target>
+            </trans-unit>
+            <trans-unit id="we.are.open">
+                <source>We are open from 12h to 24h</source>
+                <target>We are open from 12h to 24h</target>
+            </trans-unit>
+            <trans-unit id="Whats.your.name">
+                <source>What's your name?</source>
+                <target>What's your name?</target>
+            </trans-unit>
+            <trans-unit id="contact.you.through.this.address">
+                <source>We'll contact you through this address</source>
+                <target>We'll contact you through this address</target>
+            </trans-unit>
+            <trans-unit id="anything.more.to.say">
+                <source>i haven't anything more to say</source>
+                <target>i haven't anything more to say</target>
+            </trans-unit>
+            <trans-unit id="Some.details.you.want.to.clarify">
+                <source>Some details you want to clarify...</source>
+                <target>Some details you want to clarify...</target>
+            </trans-unit>
 
 
         </body>
