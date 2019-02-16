@@ -164,37 +164,59 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
-            $em->persist($booking);
-            $em->flush();
-        }
 
 
-            //send mail to administration for make reservation
-        mail("elizaldebarrestaurante@gmail.com",
-            $booking->getId(). "- Reservación mediante la Web ElizaldeHabana",
-            $this->renderView("emails/ReservaNotificacion.txt.twig", array(
-                "booking" => $booking)
-            ),
-           $this->headers.'CC: josmiguel92@gmail.com'
-        );
 
-        //send mail to client for confirm reservation
-        $subject = $_locale == 'es' ? "Confirme su reserva en Restaurante Elizalde" : "Confirming reservation in ElizaldeHabana Restaurant";
-        mail($booking->getEmail(), $subject,
-            $this->renderView("emails/ReservationClientNotification.html.twig", array(
-                "subject" => $subject,
-                "booking" => $booking
-                ))
-            , $this->headers);
+                // Build POST request:
+                $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+                $recaptcha_secret = '6Lcv75EUAAAAAFcrQCv22pDMPUayTW8I2wPW2Xc4';
+                $recaptcha_response = $bookingForm->get('recaptchaResponse')->getData();
+                
+
+                // Make and decode POST request:
+                $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+                $recaptcha = json_decode($recaptcha);
+
+                // Take action based on the score returned:
+                if ($recaptcha->score >= 0.5) {
+                    $em->persist($booking);
+                    $em->flush();
+
+                      //send mail to administration for make reservation
+                    mail("elizaldebarrestaurante@gmail.com",
+                        $booking->getId(). "- Reservación mediante la Web ElizaldeHabana",
+                        $this->renderView("emails/ReservaNotificacion.txt.twig", array(
+                            "booking" => $booking)
+                        ),
+                       $this->headers.'CC: josmiguel92@gmail.com'
+                    );
+
+                    //send mail to client for confirm reservation
+                    $subject = $_locale == 'es' ? "Confirme su reserva en Restaurante Elizalde" : "Confirming reservation in ElizaldeHabana Restaurant";
+                    mail($booking->getEmail(), $subject,
+                        $this->renderView("emails/ReservationClientNotification.html.twig", array(
+                            "subject" => $subject,
+                            "booking" => $booking
+                            ))
+                        , $this->headers);
 
 
-        $fb = $em->getRepository('AppBundle:Config')->findByName("social.fb");
-        $tripadv = $em->getRepository('AppBundle:Config')->findByName("social.tripadvisor");
-        return $this->render("default/booking.html.twig", array(
-            "fb" => $fb[0],
-            "tripadv" => $tripadv[0],
-            "locale" => $_locale
-        ));
+                    $fb = $em->getRepository('AppBundle:Config')->findByName("social.fb");
+                    $tripadv = $em->getRepository('AppBundle:Config')->findByName("social.tripadvisor");
+                    return $this->render("default/booking.html.twig", array(
+                        "fb" => $fb[0],
+                        "tripadv" => $tripadv[0],
+                        "locale" => $_locale
+                    ));
+                } 
+                else 
+                {
+                    echo "<!-- No Valid score ".$recaptcha->score ."-->";
+                }
+
+            
+        }    
+        return new RedirectResponse($_SERVER['HTTP_REFERER']); 
 
     }
 

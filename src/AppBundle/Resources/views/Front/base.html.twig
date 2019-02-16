@@ -111,7 +111,22 @@
     <script src="{{ asset("js/main_newyeartheme.js") }}?v=0.26"></script>
     <script src="{{ asset("js/nlform.js") }}?v=0.26"></script>
 
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lcv75EUAAAAAF-MznMJGhBXF4xUIMFzGge0pbsi"></script>
+  
+    <script>
+  grecaptcha.ready(function() {
+      grecaptcha.execute('6Lcv75EUAAAAAF-MznMJGhBXF4xUIMFzGge0pbsi', {action: 'homepage'}).then(function(token) {
+         var recaptchaResponse = document.getElementById('appbundle_booking_recaptchaResponse');
+                recaptchaResponse.value = token;
+      });
+  });
+  </script>
 {% endblock javascripts %}
+<style type="text/css">
+    .grecaptcha-badge{
+        visibility: hidden;
+    }
+</style>
 </body>
 </html>
 
