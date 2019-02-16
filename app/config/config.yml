@@ -40,6 +40,7 @@ twig:
     form_themes: ['bootstrap_3_layout.html.twig']
     globals:
         utils: "@jaime.utils"
+        google_recaptcha_public_key: %google_recaptcha_public_key%
 
 # Doctrine Configuration
 doctrine:

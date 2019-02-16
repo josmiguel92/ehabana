@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ReservaType extends AbstractType
 {
@@ -23,7 +24,7 @@ class ReservaType extends AbstractType
 
             ->add('time')
             ->add('date')
-
+            ->add('recaptchaResponse', HiddenType::class , ['attr'=>['id'=> 'recaptchaResponse'], "mapped" => false])
 
             ->add('comentario');
     }
