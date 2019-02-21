@@ -30,6 +30,7 @@ security:
       # require ROLA_ADMIN for /admin
       - { path: ^/admin, roles: ROLE_ADMIN }
       - { path: ^/dash, roles: ROLE_ADMIN }
+      - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY , requires_channel: https }
      # - { path: ^/, roles: ROLE_ADMIN }
 
     encoders:
