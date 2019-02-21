@@ -39,13 +39,13 @@
 
             <li class="header_menu_lang offmenu">
                 <a href="{{ path('homepage', {"_locale":"es"}) }}">
-                    <i class="hidden">ESPAÑOL</i><img src="{{ asset("images/spain.png") }}"  height="25em" width="40em">
+                    <i class="hidden">ESPAÑOL</i><img src="{{ asset("images/spain.png") }}"  height="15px" width="25px">
                 </a>
             </li>
 
             <li class="header_menu_lang offmenu">
                 <a href="{{ path("homepage", {"_locale":"en"}) }}">
-                    <i class="hidden">ENGLISH</i><img src="{{ asset("images/uk.png") }}" height="25em" width="40em"></a>
+                    <i class="hidden">ENGLISH</i><img src="{{ asset("images/uk.png") }}" height="15px" width="25px"></a>
             </li>
             <li class="header_menu_toggle"><i class="icon-bars">&nbsp;</i> </li>
 
@@ -70,8 +70,13 @@
                     <div></div>
 
                     <div>
-                    <!--    <h1>Elizalde<br> Bar-Restaurante</h1> -->
-                    <img id="logo-1402" src="{{ asset('images/logo-1402.png') }}" style="height: 150%;top: -50%;position: relative;float: left;">
+                       <h1 style="line-height: 1.1em;
+font-variant: petite-caps;
+text-shadow: none;"><span style="background: #000000d0;">{%trans%}Welcome to Elizalde{%endtrans%}</span><br>
+                        <span style="background: #000000d0;">Bar-Restaurante</span></h1>
+                   
+                   <!--  <img id="logo-1402" src="{{ asset('images/logo-1402.png') }}" style="height: 150%;top: -50%;position: relative;float: left;">
+                     -->
                     </div>
                     <div></div>
                 </div>
