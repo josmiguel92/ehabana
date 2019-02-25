@@ -1,21 +1,22 @@
 <div class="section drinks_section" id="section3" style="background:url({{ asset("/images/drinks-wide.jpg") }}) 100% /100%">
     <div class="intro">
-        {% for category in categories %}
-
-            <div class="slide" id="slide{{ loop.index }}">
-                <h1 class="drinks_category_name">{{category.getTransName(locale)}}</h1>
-                <div class="drinks_category">
-                    {% for drink in category.drinks %}
-                        <p>{{drink.getTransName(locale)}}{#<span class="price-box">${{drink.price}}</span>#}</p>
+        <h1 class="drinks_category_name">{% trans %}Drinks{% endtrans %}</h1>
+        <div class="slide" id="slide1">
+            <div class="drinks_category">
+                    {% for category in categories %}
+                        <p>{{category.getTransName(locale)}}</p>
+                  {#  {% for drink in category.drinks %}
+                        <p>{{drink.getTransName(locale)}}</p>
                     {% else %}
+
                         <p>Nada que mostrar aquí</p>
+                         #}
                     {% endfor %}
                 </div>
 
             </div>
 
 
-        {% endfor %}
 
 
     </div>

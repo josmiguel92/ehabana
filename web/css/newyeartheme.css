@@ -491,6 +491,7 @@ overflow: hidden;
 .circle img{
     border-radius: 50%;
     height: 25vh;
+    width: auto !important;
 }
 /*
 .food_tapa_item:nth-of-type(1) {
@@ -1247,4 +1248,9 @@ and (max-device-width: 480px) {
         flex: 1 0 50% !important;
         justify-content: center;
     }
+}
+#section1 .fp-controlArrow,
+#section3 .fp-controlArrow
+{
+    display: none;
 }

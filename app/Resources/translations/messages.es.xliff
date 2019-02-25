@@ -196,7 +196,7 @@
         </trans-unit>
         <trans-unit id="some.day">
             <source>some day</source>
-            <target>un día</target>
+            <target>algún día</target>
         </trans-unit>
         <trans-unit id="We.are.open.from.12h.to.24h">
             <source>We are open from 12h to 24h</source>
