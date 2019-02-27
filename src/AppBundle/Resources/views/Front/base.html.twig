@@ -43,38 +43,31 @@
     <!--<link href="{{ asset("css/raleway.css") }}" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,700" rel="stylesheet">
 
-    <!-- Google analytics script -->
-    {% if app.Environment != "dev" %}
-        <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-            ga('create', 'UA-110642164-1', 'auto');
-            ga('send', 'pageview');
-        </script>
-    {% endif %}
+    <script defer src="{{ asset("js/cooking.min.js") }}"></script>
+    <!-- Google analytics script -->
+    <script defer src="{{ asset('js/g-analytics.js') }}"></script>
+
+    <script src="{{ asset("js/fullpage.min.js") }}"></script>
+
+    <script src="{{ asset("js/main_newyeartheme.js") }}?v=0.26"></script>
+    <script src="{{ asset("js/nlform.js") }}?v=0.26"></script>
+
+    <script defer src="https://www.google.com/recaptcha/api.js?render={{ google_recaptcha_public_key }}"></script>
+
+    <script defer src="{{ asset('js/g-recaptcha.js') }}"></script>
+
 
     {% set asset_version_custom = '20181225' %}
     {% block stylesheets %}
-        {% if app.Environment == "dev" %}
-    <link rel="stylesheet" href="{{ asset("css/animate.min.css") }}">
-    <script src="{{ asset("js/modernizr-2.6.2.min.js") }}"></script>
-        {% else %}
+
 
         <!-- Animate.css -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
          <!-- Modernizr JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-        {% endif %}
 
         <!--<link href="{{ asset("css/raleway.css") }}" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,700" rel="stylesheet">
@@ -85,6 +78,7 @@
         <link rel="stylesheet" href="{{ asset("css/newyeartheme.css") }}?v={{ asset_version_custom }}">
 
         <link rel="stylesheet" type="text/css" href="{{ asset("css/fullpage.min.css") }}" />
+
 
         <!-- FOR IE9 below -->
         <!--[if lt IE 9]>
@@ -100,27 +94,9 @@
 {% endblock body %}
 
 {% block javascripts %}
-    <!-- jQuery -->
-    <script src="{{ asset("js/jquery.min.js") }}"></script>
-    <!-- MAIN JS -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc1Eww2qOjFe_L4sAGS3Wkp_gZFw4Dqhk"
-            xmlns="http://www.w3.org/1999/html"></script>
-    <script src="{{ asset("js/google_map.js") }}"></script>
-    <script src="{{ asset("js/fullpage.min.js") }}"></script>
-    <script src="{{ asset("js/cooking.js") }}"></script>
-    <script src="{{ asset("js/main_newyeartheme.js") }}?v=0.26"></script>
-    <script src="{{ asset("js/nlform.js") }}?v=0.26"></script>
 
-    <script src="https://www.google.com/recaptcha/api.js?render={{ google_recaptcha_public_key }}"></script>
-  
-    <script>
-  grecaptcha.ready(function() {
-      grecaptcha.execute('{{ google_recaptcha_public_key }}', {action: 'homepage'}).then(function(token) {
-         var recaptchaResponse = document.getElementById('appbundle_booking_recaptchaResponse');
-                recaptchaResponse.value = token;
-      });
-  });
-  </script>
+    <!-- MAIN JS -->
+
 {% endblock javascripts %}
 <style type="text/css">
     .grecaptcha-badge{

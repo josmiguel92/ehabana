@@ -239,6 +239,11 @@
             <target>unos tragos</target>
         </trans-unit>
 
+        <trans-unit id="googlemaps">
+            <source>See in Google Maps</source>
+            <target>Ver en Google Maps</target>
+        </trans-unit>
+
 
         </body>
     </file>

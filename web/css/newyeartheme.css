@@ -917,7 +917,7 @@ input:focus::-ms-input-placeholder {
     margin-top: 0.4em;
 }
 
-.nl-form .nl-submit {
+.nl-submit {
     line-height: 3;
     text-transform: uppercase;
     cursor: pointer;

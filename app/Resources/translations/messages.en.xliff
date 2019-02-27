@@ -273,6 +273,12 @@
             <target>and</target>
         </trans-unit>
 
+        <trans-unit id="googlemaps">
+            <source>See in Google Maps</source>
+            <target>See in Google Maps</target>
+        </trans-unit>
+
+
         </body>
     </file>
 </xliff>
